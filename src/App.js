@@ -3,7 +3,7 @@ import "./App.css";
 
 import axios from "./axios";
 
-import { BrowserRouter, Route, withRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, withRouter } from "react-router-dom";
 import { Suspense } from "react";
 import Layout from "./componenet/Layout/Layout";
 import LiveEvents from "./container/LiveEvents/LiveEvents";
@@ -18,7 +18,7 @@ function App() {
         <p>It is all about OSM</p>
       </header>
 
-      <BrowserRouter>
+      <HashRouter>
           <Layout>
             <Suspense fallback="Loading">
             <Route path="/live-events" render={(props)=> <LiveEvents {...props} />} ></Route>
@@ -28,7 +28,7 @@ function App() {
            
 
           </Layout>
-        </BrowserRouter>
+        </HashRouter>
     </div>
   );
 }

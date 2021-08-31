@@ -7,9 +7,9 @@ const layout = props => {
       <React.Fragment>
        
         <div>
-            <span> <a href="/live-events"> Live Events</a></span>
+            <span> <a href="#/live-events"> Live Events</a></span>
             <span> || </span>
-            <span> <a href="/org-contribution"> Org Contribution </a></span>
+            <span> <a href="#/org-contribution"> Org Contribution </a></span>
         </div>
         {/* <div class="w3-sidebar w3-light-grey w3-bar-block" >
           <h3 class="w3-bar-item">Menu</h3>
