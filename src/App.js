@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+import axios from "./axios";
+
+import { BrowserRouter, Route, withRouter } from "react-router-dom";
+import { Suspense } from "react";
+import Layout from "./componenet/Layout/Layout";
+import LiveEvents from "./container/LiveEvents/LiveEvents";
+import OrgContribution from "./container/OrgContribution";
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>OSM Insights</h1>
+        <p>It is all about OSM</p>
       </header>
+
+      <BrowserRouter>
+          <Layout>
+            <Suspense fallback="Loading">
+            <Route path="/live-events" render={(props)=> <LiveEvents {...props} />} ></Route>
+            <Route path="/org-contribution" render={(props)=> <OrgContribution {...props} />} ></Route>
+            
+            </Suspense>
+           
+
+          </Layout>
+        </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

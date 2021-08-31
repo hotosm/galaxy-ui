@@ -1,0 +1,46 @@
+
+
+.live-event-style
+{
+    margin-top: 10px;
+}
+
+
+.live-event-style textarea
+{
+    margin-top: 5px;
+    width: 30%;
+}
+
+.live-event-style input
+{
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+}
+.live-event-style textarea
+{
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+    display: block;
+    margin: auto;
+}
+
+table {
+    margin: auto;
+    border: 1px black solid;
+    margin-top: 20px;
+}
+table td {
+    margin: auto;
+    border: 1px black solid;
+}
+table th {
+    margin: auto;
+    border: 1px black solid;
+}
+
+div > div > p {
+
+    margin: auto;
+    width: 80%;
+}
