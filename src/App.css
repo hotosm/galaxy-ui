@@ -120,3 +120,17 @@
 main{
   /* margin-left: 20%; */
 }
+
+.width80
+{
+  
+}
+
+.table-left{
+  float: left;
+  margin-left: 20%;
+}
+.table-right{
+  float: right;
+  margin-right: 20%;
+}

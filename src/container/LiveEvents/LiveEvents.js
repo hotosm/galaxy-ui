@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import "./LiveEvents.css";
 import axios from "../../axios";
 import { DataGrid } from "@material-ui/data-grid";
+import Table from "../../componenet/Table/Table";
 
 const LiveEvents = (props) => {
   const [startDate, setstartDate] = useState("2021-08-27 09:00:00");
@@ -44,7 +45,6 @@ const LiveEvents = (props) => {
   };
   return (
     <>
-    
       <div className="live-event-style">
         <label>Event between</label>{" "}
         <input
@@ -68,12 +68,30 @@ const LiveEvents = (props) => {
         ></input>
         <div>
           <div>
-            <label> Project Ids {" "}
-            <div className="tooltip"> <a href="#" onClick={(e)=>{e.preventDefault()}} className="help">?</a>
-            <span className="tooltiptext">Project IDs as comma separated values. They will be used to filter the changesets based HOT TM standard hashtags (hotosm-project-PROJECT_ID)
-            <br />
-            <br />Filtering is done on the hashtags or the comment fields of a changeset</span>
-          </div>
+            <label>
+              {" "}
+              Project Ids{" "}
+              <div className="tooltip">
+                {" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                  className="help"
+                >
+                  ?
+                </a>
+                <span className="tooltiptext">
+                  Project IDs as comma separated values. They will be used to
+                  filter the changesets based HOT TM standard hashtags
+                  (hotosm-project-PROJECT_ID)
+                  <br />
+                  <br />
+                  Filtering is done on the hashtags or the comment fields of a
+                  changeset
+                </span>
+              </div>
             </label>
             <textarea
               value={projectsIds}
@@ -84,14 +102,28 @@ const LiveEvents = (props) => {
               placeholder="Project IDs are entered here, ex: 11224,15985"
               rows="8"
             />
-            
           </div>
           <div>
-            <label>Hashtags{" "}
-            <div className="tooltip"> <a href="#" onClick={(e)=>{e.preventDefault()}} className="help">?</a>
-            <span className="tooltiptext">Add here any hashtag that is associated with the event, hashtags will be used to filter the changesets based on the hashtags or comment field
-           </span>
-          </div></label>
+            <label>
+              Hashtags{" "}
+              <div className="tooltip">
+                {" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                  className="help"
+                >
+                  ?
+                </a>
+                <span className="tooltiptext">
+                  Add here any hashtag that is associated with the event,
+                  hashtags will be used to filter the changesets based on the
+                  hashtags or comment field
+                </span>
+              </div>
+            </label>
             <textarea
               value={hashtags}
               disabled={isLoading}
@@ -105,16 +137,29 @@ const LiveEvents = (props) => {
         </div>
         <button
           onClick={getData}
-          disabled={startDate === "" || endDate === "" || projectsIds === "" || isLoading}
+          disabled={
+            startDate === "" ||
+            endDate === "" ||
+            projectsIds === "" ||
+            isLoading
+          }
         >
           Refresh
         </button>
         <div>
-        <p>
-          Refreshing the insights might take ~ 15 seconds based on the event duration, number of projects and hashtags
-        </p>
-        {isLoading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
-      </div>
+          <p>
+            Refreshing the insights might take ~ 15 seconds based on the event
+            duration, number of projects and hashtags
+          </p>
+          {isLoading && (
+            <div className="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
+        </div>
         {liveEventData && !isLoading && (
           <div>
             <div>
@@ -129,61 +174,18 @@ const LiveEvents = (props) => {
                 not counted
               </p>
             </div>
-            <div>
-              <h2>
-                Total Buildings Validated = {liveEventData.buildingsValidated}  out of {liveEventData.mappedFeatures.find(element => element.key === 'building').count} total mapped
-              </h2>
-              <p>
-                {" "}
-                The total number of validated buildings refers to the total
-                buildings which are mapped during the specified time span and
-                <strong> exists in a HOT TM validated task</strong>
-                <br />
-              </p>
-            </div>
-            <div>
-              <h2>
-                Event Mapped Features
-              </h2>
-              <table>
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th>Count</th>
-                </tr>
-                </thead>
-                <tbody>
-                {!showAllTable &&
-                  liveEventData.mappedFeatures.slice(0, 10).map((item) => (
-                    <tr key={item.key}>
-                      <td>{item.key}</td>
-                      <td>{item.count}</td>
-                    </tr>
-                  ))}
-                {showAllTable &&
-                  liveEventData.mappedFeatures.map((item) => (
-                    <tr key={item.key}>
-                      <td>{item.key}</td>
-                      <td>{item.count}</td>
-                    </tr>
-                  ))}
-                  </tbody>
-              </table>
-              
-              <a
-                href="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setshowAllTable(!showAllTable);
-                }}
-              >
-                {showAllTable ? "Show less" : "Show all"}
-              </a>
+            
+            <div>             
+                <div className="table-left">
+                  <Table title="Event Created Features" mappedFeatures={liveEventData.mappedFeatures.filter(item=> (item.action === 'create'))} ></Table>
+                </div>
+                <div className="table-right">
+                 <Table title="Event Modified Features" mappedFeatures={liveEventData.mappedFeatures.filter(item=> (item.action === 'modify'))} ></Table>
+              </div>
             </div>
           </div>
         )}
       </div>
-     
     </>
   );
 };
