@@ -76,7 +76,12 @@ const Country = props =>
               dataKey="building_count"
               stroke="#8884d8"
             />
-
+          <Line
+              type="monotone"
+              dataKey="tm_building_count"
+              stroke="#FF5555"
+              
+            />
             {/* <Line
               type="monotone"
               dataKey="accmulative_total_osm"
