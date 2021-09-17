@@ -15,7 +15,7 @@ const Country = props =>
     const fetchStats = async (country) => {
         try {
           //check api route
-          const res = await axios.get(`/buildings/${country}`);
+          const res = await axios.get(`/country-insights/${country}`);
     
           if (res.error) {
             console.log("Error", res.error);
@@ -56,9 +56,9 @@ const Country = props =>
         </CountrySelect>
 
         {isLoading && <p>loading ..... </p>}
-       {data && data.length > 0 && !isLoading && (
+       {data && data.countryBuildingsByMonth.length > 0 && !isLoading && (
           <LineChart
-            data={data}
+            data={data.countryBuildingsByMonth}
             width={1000}
             height={300}
             margin={{ left: 20, right: 10 }}
@@ -89,10 +89,28 @@ const Country = props =>
             /> */}
           </LineChart>
         )}
-        {data && data.length === 0 && 
+        {data && data.countryBuildingsByMonth.length === 0 && 
         <h3>Buildings are not yet calculated, contact hot tech team over <a href="https://hotosm.atlassian.net/servicedesk/customer/portals" target="_blank"> here </a></h3>
         }
+      
+      
+      <div style={{ textAlign: "left" }}>
+       <p><span style={{color: "#8884d8"}}>building_count</span>: refers to the total mapped ways + relations in OSM that have tag building=*</p>
+
+       <p><span style={{color: "#FF5555"}}>tm_building_count</span>: refers to the total mapped ways + relations in OSM that have tag building=* <strong>and came through HOT TM</strong> through "hotosm" hashtag in the comments or hashtags of the changeset</p>
        </div>
+
+
+       <div>
+       {data && data.countryValidatedBuildings.length === 1 && 
+        <h3>{data.countryValidatedBuildings[0].validated_buildings} Validated buildings</h3>
+        }
+        <p><span>Validated buildings</span>: refers to the total # of OSM elelemts ways + relations in OSM that is intersecting with the boundary of a validated task in HOT TM</p>
+      </div>
+
+
+       </div>
+       
     </>;
 
 
