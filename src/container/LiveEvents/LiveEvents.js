@@ -167,7 +167,7 @@ const LiveEvents = (props) => {
               <p>
                 Total number of contributors who have mapped at least a feature
                 during the specified time span and used one of the projects tags
-                (hostosm-project-PROJECT_ID) or an event hashtag in their
+                (hotosm-project-PROJECT_ID) or an event hashtag in their
                 changeset
                 <br />
                 HOT TM users who have checked/opened TM task and didn't map are
