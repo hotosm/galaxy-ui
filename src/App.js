@@ -1,15 +1,10 @@
 import React from "react";
+import Header from "./components/header/header";
+
 
 function App(){
 
-  return (
-    <div className="App">
-      <header>
-        <h1>OSM Galaxy</h1>
-        <p>It is all about OSM</p>
-      </header>
-    </div>
-  );
+  return <> <Header /> </>
 }
 
 
