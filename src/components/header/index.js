@@ -2,13 +2,15 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 
 import messages from "./messages";
+import { NavBar } from "./navbar";
 
 const Header = () => {
     return (
         <div className="App">
         <header>
           <h1><FormattedMessage {...messages.appHeading}/></h1>
-          <p><FormattedMessage {...messages.appSubHeading}/></p>
+          <NavBar />
+          <hr/>
         </header>
       </div>
     )

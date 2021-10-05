@@ -5,8 +5,12 @@ export default defineMessages({
         id: 'header.heading',
         defaultMessage: "OSM Galaxy"
     },
-    appSubHeading: {
-        id: 'header.subheading',
-        defaultMessage: "It's all about OSM"
+    home: {
+        id: 'navbar.home',
+        defaultMessage: "Home"
+    },
+    exploreData: {
+        id: 'navbar.exploreData',
+        defaultMessage: "Explore Data"
     }
 })
