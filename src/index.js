@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 
-// import './assets/styles/tailwind.generated.css'
+import './assets/styles/tailwind.generated.css'
 import App from './App';
 import store from './app/store';
 import reportWebVitals from './reportWebVitals';

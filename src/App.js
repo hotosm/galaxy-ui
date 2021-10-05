@@ -14,8 +14,8 @@ function App(){
       <Header />
       <div>
       <Switch>
-        <Route exact path="/reports" component={Reports} />
-        <Route path="/" component={Home} />
+        <Route path="/explore" component={Reports} />
+        <Route exact path="/" component={Home} />
       </Switch>
     </div>
     </Router>

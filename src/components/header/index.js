@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div className="App">
         <header>
-          <h1><FormattedMessage {...messages.appHeading}/></h1>
+          <h1 className="text-3xl"><FormattedMessage {...messages.appHeading}/></h1>
           <NavBar />
           <hr/>
         </header>

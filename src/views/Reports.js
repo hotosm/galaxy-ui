@@ -1,8 +1,11 @@
 import React from "react";
 
 export function Reports() {
-    console.log("on the reports page now")
     return (
-        <h2>Reports Page</h2>
+        <div>
+            <p>Mapathon Reports</p>
+            <p>Country Reports</p>
+            <p>Organisation Reports</p>
+        </div>
     )
 }

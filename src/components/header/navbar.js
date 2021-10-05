@@ -6,13 +6,13 @@ import messages from "./messages";
 export function NavBar() {
     return (
         <ul>
-          <li>
+          <li className="inline-block mr-6">
             <Link to="/">
                 <FormattedMessage {...messages.home} />
             </Link>
           </li>
-          <li>
-            <Link to="/reports">
+          <li className="inline-block mr-6">
+            <Link to="/explore">
                 <FormattedMessage {...messages.exploreData} />
             </Link>
           </li>
