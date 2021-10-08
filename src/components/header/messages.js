@@ -5,12 +5,16 @@ export default defineMessages({
         id: 'header.heading',
         defaultMessage: "OSM Galaxy"
     },
-    home: {
-        id: 'navbar.home',
-        defaultMessage: "Home"
+    about: {
+        id: 'navbar.about',
+        defaultMessage: "About"
     },
     exploreData: {
         id: 'navbar.exploreData',
         defaultMessage: "Explore Data"
+    },
+    tagline: {
+        id: 'header.tagline',
+        defaultMessage: "Mapping our world together"
     }
 })

@@ -2,7 +2,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import messages from "./messages";
-import logo from '../../assets/img/hot-logo.svg'
+import logo from '../assets/img/hot-logo.svg'
 
 export function NavBar() {
   return (
@@ -15,10 +15,10 @@ export function NavBar() {
       </Link>
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto mx-12">
         <div class="text-base uppercase lg:flex-grow">
-          <Link to="/explore" className="block mt-4 lg:inline-block lg:mt-0 text-blue-dark hover:text-red mr-8">
+          <Link to="/explore" className="block mt-4 lg:inline-block lg:mt-0 text-blue-dark mr-8 active:underline">
             <FormattedMessage {...messages.exploreData} />
           </Link>
-          <Link to="/about" className="block mt-4 lg:inline-block lg:mt-0 text-blue-dark hover:text-red ">
+          <Link to="/about" className="block mt-4 lg:inline-block lg:mt-0 text-blue-dark active:underline ">
             <FormattedMessage {...messages.about} />
           </Link>
         </div>

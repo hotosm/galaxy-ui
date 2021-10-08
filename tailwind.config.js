@@ -24,7 +24,10 @@ module.exports = {
         'grey-light': '#e1e0e0',
         'tan': '#f0efef', 
         'white': '#fff'
-      }
+      },
+      backgroundImage: theme => ({
+        'banner-image': "url('/src/assets/img/banner-image.png')",
+      })
     }
   },
   variants: {

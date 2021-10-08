@@ -6,7 +6,6 @@ import {
  } from "react-router-dom";
  import Header from "./components/header";
 import { Home } from "./views/Home";
-import { Reports } from "./views/Reports";
 
 function App(){
   return (
@@ -14,7 +13,6 @@ function App(){
       <Header />
       <div>
       <Switch>
-        <Route path="/explore" component={Reports} />
         <Route exact path="/" component={Home} />
       </Switch>
     </div>
