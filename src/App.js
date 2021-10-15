@@ -7,6 +7,7 @@ import {
  import Header from "./components/header";
 import { About } from "./views/About";
 import { Home } from "./views/Home";
+import { Reports } from "./views/Reports";
 
 function App(){
   return (
@@ -16,6 +17,7 @@ function App(){
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/explore" component={Reports}/>
       </Switch>
     </div>
     </Router>
