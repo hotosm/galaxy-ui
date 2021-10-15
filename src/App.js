@@ -5,6 +5,7 @@ import {
   Route
  } from "react-router-dom";
  import Header from "./components/header";
+import { About } from "./views/About";
 import { Home } from "./views/Home";
 
 function App(){
@@ -14,6 +15,7 @@ function App(){
       <div>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
       </Switch>
     </div>
     </Router>

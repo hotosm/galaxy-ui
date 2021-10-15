@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .document-link {
+        @apply p-2 border border-grey-light hover:bg-tan;
+    }
+}

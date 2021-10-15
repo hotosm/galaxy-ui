@@ -2,7 +2,7 @@ import React from "react";
 
 export function Footer() {
     return (
-        <footer>
+        <footer className="text-center m-5">
             <span className="p-1 text-blue-dark">
                 This project is under development by 
                 <a className="text-red" href="https://www.hotosm.org/"> Humanitarian OpenStreetMap Team</a>.
