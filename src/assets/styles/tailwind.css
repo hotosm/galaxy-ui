@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-datepicker__day--keyboard-selected{
+    @apply bg-red !important
+}
+
+.react-datepicker__day--selected{
+    @apply bg-red !important !important
+}

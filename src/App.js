@@ -7,6 +7,7 @@ import {
  import Header from "./components/header";
 import { Home } from "./views/Home";
 import { Reports } from "./views/Reports";
+import { MapathonSummaryReport } from "./views/MapathonReport";
 
 function App(){
   return (
@@ -16,6 +17,7 @@ function App(){
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/explore" component={Reports}/>
+        <Route path="/mapathon-summary-report" component={MapathonSummaryReport}/>
       </Switch>
     </div>
     </Router>
