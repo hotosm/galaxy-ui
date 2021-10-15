@@ -6,6 +6,7 @@ import {
  } from "react-router-dom";
  import Header from "./components/header";
 import { Home } from "./views/Home";
+import { Reports } from "./views/Reports";
 
 function App(){
   return (
@@ -14,6 +15,7 @@ function App(){
       <div>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/explore" component={Reports}/>
       </Switch>
     </div>
     </Router>
