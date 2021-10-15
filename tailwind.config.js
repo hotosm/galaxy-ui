@@ -28,7 +28,9 @@ module.exports = {
     }
   },
   variants: {
-    extend: {},
+    extend: {
+      textDecoration: ['active', 'visited'],
+    },
   },
   plugins: [],
 }

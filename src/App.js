@@ -8,6 +8,7 @@ import {
 import { About } from "./views/About";
 import { Home } from "./views/Home";
 import { Reports } from "./views/Reports";
+import { MapathonSummaryReport } from "./views/MapathonReport";
 
 function App(){
   return (
@@ -18,6 +19,7 @@ function App(){
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/explore" component={Reports}/>
+        <Route path="/mapathon-summary-report" component={MapathonSummaryReport}/>
       </Switch>
     </div>
     </Router>

@@ -25,4 +25,5 @@ yarn-error.log*
 .env 
 tailwind.generated.css
 
+# code editor files
 .vscode

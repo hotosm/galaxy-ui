@@ -11,3 +11,11 @@
 .mapbox-improve-map, a[href="https://www.mapbox.com/map-feedback/"] {
     display: none;
 }
+
+.react-datepicker__day--keyboard-selected{
+    @apply bg-red !important
+}
+
+.react-datepicker__day--selected{
+    @apply bg-red !important !important
+}
