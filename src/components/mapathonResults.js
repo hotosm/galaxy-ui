@@ -17,23 +17,30 @@ const FeatureList = ({ title, features }) => {
     )
 }
 
-export const MapathonSummaryResults = (data) => {
+export const MapathonSummaryResults = ({data}) => {
     const { mappedFeatures, contributorsCount } = data;
-
-    let addedFeatures = mappedFeatures ? mappedFeatures.filter((f) => f.action === 'added'): [];
-    let modifiedFeatures = mappedFeatures ? mappedFeatures.filter((f) => f.action === 'modified') : [];
     
     return (
         <div className="flex flex-col place-items-center mt-10 w-3/4 mx-auto">
-            <div className="p-4">
-                <p className="text-lg">
-                    Total Unique Contributors: <span className="font-medium">{contributorsCount}</span>
-                </p>
+            {contributorsCount && (
+                <div className="p-4">
+                    <p className="text-lg">
+                        Total Unique Contributors: <span className="font-medium">{contributorsCount}</span>
+                    </p>
+                </div>
+            )}
+            {mappedFeatures && (
+                <div className="flex justify-between w-1/2">
+                    <FeatureList
+                        title={"Features Added"} 
+                        features={mappedFeatures.filter((f) => f.action === 'added')} 
+                    />
+                    <FeatureList
+                        title={"Features Modified"}
+                        features={mappedFeatures.filter((f) => f.action === 'modified')} 
+                    />
             </div>
-            <div className="flex justify-between w-1/2">
-                <FeatureList title={"Features Added"} features={addedFeatures} />
-                <FeatureList title={"Features Modified"} features={modifiedFeatures} />
-            </div>
+            )} 
         </div>
     )
 }

@@ -1,8 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { addHours, differenceInHours } from "date-fns";
 import { ReportForm } from "../components/forms";
-import { MapathonSummaryResults } from '../components/mapathonResults'
-import { Error } from '../components/formResponse'
+import { MapathonSummaryResults } from '../components/mapathonResults';
+import { Error } from '../components/formResponse';
+
+const sampleData = {
+    "contributorsCount": 15,
+    "mappedFeatures": [
+        {
+          "key": 'building',
+          "action": 'modified',
+          "count": 20
+        },
+        {
+            "key": 'highway',
+            "action": 'modified',
+            "count": 2
+        },
+        {
+            "key": 'building',
+            "action": 'added',
+            "count": 200
+        },
+        {
+            "key": 'amenity',
+            "action": 'amenity',
+            "count": 11
+        },
+        {
+            "key": 'waterway',
+            "action": 'added',
+            "count": 2
+        },
+    ]
+}
+
 
 export const MapathonSummaryReport = () => {
     const [formData, setFormData] = useState({
@@ -13,12 +45,14 @@ export const MapathonSummaryReport = () => {
     });
 
     // to be sent via API call
-    const [requestData, setRequestData] = useState({
-        fromTimestamp: "",
-        toTimestamp: "",
-        TMProjectIds: [],
-        mapathonHashtags: []
-    });
+    // const [requestData, setRequestData] = useState({
+    //     fromTimestamp: "",
+    //     toTimestamp: "",
+    //     TMProjectIds: [],
+    //     mapathonHashtags: []
+    // });
+
+    const [data, setData] = useState(null)
 
     const [formError, setFormError] = useState(null)
 
@@ -91,9 +125,11 @@ export const MapathonSummaryReport = () => {
         if (isValid) {
              // API call
              setFormError(null)
+             setData(sampleData)
              console.log("submitted")
         } else {
-            setFormError("Server Error")
+            // setFormError("Server Error")
+            console.log("error")
             return
         }
     }
@@ -109,7 +145,9 @@ export const MapathonSummaryReport = () => {
             />
             {formError && <Error error={formError} />}
             {/* {status === 'loading' && (<div className="mx-auto">Loading...</div>)} */}
-            <MapathonSummaryResults />
+            {data && (
+                <MapathonSummaryResults data={data}/>
+            )}
         </div>
     )
 }

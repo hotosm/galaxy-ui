@@ -27,6 +27,7 @@ module.exports = {
       },
       backgroundImage: theme => ({
         'banner-image': "url('/src/assets/img/banner-image.png')",
+        'mapathon-image': "url('/src/assets/img/mapathon-report-image.jpeg')"
       })
     }
   },
