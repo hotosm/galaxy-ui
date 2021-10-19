@@ -1,32 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import { Provider } from 'react-redux';
-// import {
-//   QueryClient,
-//   QueryClientProvider,
-// } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
 import { IntlProvider } from 'react-intl';
-// import { ReactQueryDevtools } from "react-query/devtools";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import './assets/styles/tailwind.generated.css'
 import App from './App';
 // import store from './app/store';
 import reportWebVitals from './reportWebVitals';
 
-
-
 // Create a client
-// const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
-    {/* <QueryClientProvider client={queryClient}> */}
+    <QueryClientProvider client={queryClient}>
       <IntlProvider locale={navigator.language}>
         <App />
       </IntlProvider>
-      {/* <ReactQueryDevtools initialIsOpen />
-    </QueryClientProvider> */}
+      <ReactQueryDevtools initialIsOpen />
+    </QueryClientProvider>
     {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
