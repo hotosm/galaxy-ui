@@ -3,8 +3,8 @@ import axios from "axios";
 export const getMapathonSummaryReport = async (requestData) => {
     const { startDate, endDate, TMProjectIds, mapathonHashtags } = requestData;
     let body = {
-        fromTimestamp: startDate,
-        toTimestamp: endDate,
+        fromTimestamp: startDate.toISOString(),
+        toTimestamp: endDate.toISOString(),
     }
 
     if (TMProjectIds.length > 0){
