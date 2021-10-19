@@ -11,7 +11,7 @@ module.exports = {
       '2xl': '1536px',
     },
     fontFamily: {
-        sans: ['"Barlow Condensed"', 'Archivo', '"Open Sans"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif']
+        sans: ['"Barlow Condensed"', 'Archivo', 'sans-serif']
     },
     extend: {
       colors: {
@@ -31,7 +31,9 @@ module.exports = {
     }
   },
   variants: {
-    extend: {},
+    extend: {
+      textDecoration: ['active', 'visited'],
+    },
   },
   plugins: [],
 }

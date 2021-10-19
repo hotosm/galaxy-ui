@@ -7,3 +7,10 @@
         @apply p-2 border border-grey-light hover:bg-tan;
     }
 }
+.react-datepicker__day--keyboard-selected{
+    @apply bg-red !important;
+}
+
+.react-datepicker__day--selected{
+    @apply bg-red !important !important;
+}
