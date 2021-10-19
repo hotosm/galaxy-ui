@@ -8,26 +8,29 @@ export const ReportForm = ({
     formData,
     setFormData, 
     onSubmit, 
-    onChange 
+    onChange,
+    setFormError
 }) => {
     return (
       <form onSubmit={onSubmit} className="mt-4 px-4">
         <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-14 p-2">
+            <div className="space-y-14 py-2">
                 <div>
                     <label><span className="text-red">* </span>Start Date:</label>
                     <DatePicker
                         selected={formData.startDate}
                         onChange={(date) => {
+                            // setFormError(null);
                             setFormData({
                                 ...formData,
                                 startDate: date
-                            })
+                            });
                         }}
                         // timeInputLabel="Time:"
                         // dateFormat="MM/dd/yyyy h:mm aa"
                         // showTimeInput
                         showTimeSelect
+                        // minDate={Date.parse(new Date(5, 9, 2021))}
                         timeFormat="HH:mm"
                         timeIntervals={15}
                         timeCaption="Time"
@@ -40,12 +43,13 @@ export const ReportForm = ({
                     <DatePicker
                         selected={formData.endDate}
                         onChange={(date) => {
+                            // setFormError(null);
                             setFormData({
                                 ...formData,
                                 endDate: date
-                            })
+                            });
                         }}
-                        // dateFormat="dd/MM/yyyy"
+                        minDate={formData.startDate}
                         showTimeSelect
                         timeFormat="HH:mm"
                         timeIntervals={15}
@@ -55,7 +59,7 @@ export const ReportForm = ({
                     />
                 </div>
             </div>
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col py-2">
                 <label>Tasking Manager Project IDs</label>
                 <textarea
                     name="TMProjectIds"
@@ -66,7 +70,7 @@ export const ReportForm = ({
                     className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
                 /> 
             </div>
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col py-2">
                 <label>Mapathon Hashtags</label>
                 <textarea
                     name="mapathonHashtags"
@@ -79,11 +83,11 @@ export const ReportForm = ({
             </div>
         </div>
  
-            {/* <div className="mx-auto"> */}
-                <SubmitButton styles="py-2 px-8">
+            <div className="text-center mt-4">
+                <SubmitButton styles="py-3 px-10">
                     Submit Your Query
                 </SubmitButton>
-            {/* </div> */}
+            </div>
       </form>
     )
 }
