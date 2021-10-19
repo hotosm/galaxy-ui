@@ -64,7 +64,6 @@ export const MapathonSummaryReport = () => {
         // }
       });
 
- 
     const handleSubmit = (event) => {
         event.preventDefault();
         let isValid = handleValidation()

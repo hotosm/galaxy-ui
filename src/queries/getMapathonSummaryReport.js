@@ -3,12 +3,14 @@ import axios from "axios";
 export const getMapathonSummaryReport = async (requestData) => {
     const { startDate, endDate, TMProjectIds, mapathonHashtags } = requestData;
     let body = {
-        fromTimestamp: startDate.toISOString(),
-        toTimestamp: endDate.toISOString(),
+        "fromTimestamp": startDate.toISOString(),
+        "toTimestamp": endDate.toISOString(),
+        "projectIds": [],
+        "hashtags": []
     }
 
     if (TMProjectIds.length > 0){
-        body.projectsIds = TMProjectIds.split(',').map((i) => Number(i)).filter((x) => x !== 0);
+        body["projectIds"] = TMProjectIds.split(',').map((i) => Number(i)).filter((x) => x !== 0);
     }
 
     if (mapathonHashtags.length > 0) {
@@ -20,9 +22,17 @@ export const getMapathonSummaryReport = async (requestData) => {
                 return i  
             })
         let pattern = /([a-zA-Z0-9])\w+/gi
-        body.hashtags = arr.filter((j) => j.match(pattern))
+        body["hashtags"] = arr.filter((j) => j.match(pattern))
     }
+    // let body = {
+    //         "projectIds": [
+    //           111
+    //         ],
+    //         "fromTimestamp": "2021-09-01T00:00:00",
+    //         "toTimestamp": "2021-09-01T01:00:00",
+    //         "hashtags": []
+    //     }
     
-    const { data: response } = await axios.post('https://osm-stats.hotosm.org/mapathon/summary', body);
-    return response.data;
+    const { data } = await axios.post('https://osm-stats.hotosm.org/mapathon/summary', body);
+    return data;
 };

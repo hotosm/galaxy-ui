@@ -19,6 +19,7 @@ const FeatureList = ({ title, features }) => {
 
 export const MapathonSummaryResults = ({data}) => {
     const { mappedFeatures, totalContributors } = data;
+    console.log(data)
     
     return (
         <div className="flex flex-col place-items-center mt-10 w-3/4 mx-auto">
