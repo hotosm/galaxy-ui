@@ -1,13 +1,13 @@
 import React from "react";
 import { Card } from "../components/card";
 import messages from "./messages";
+// import mapathonImage from "../assets/img/mapathon-report-image.jpeg"
 
 export function Reports() {
     return (
         <div className="flex flex-col h-screen mt-2 mx-auto">
-            <div className="flex justify-evenly h-48 items-center flex-wrap my-4">
-                {/* image div */}
-                <div className="bg-grey-light w-5/12 h-full"></div> 
+            <div className="flex justify-evenly h-72 items-center flex-wrap my-4">
+                <div className="w-5/12 h-full bg-mapathon-image bg-cover" />
                 <div className="h-full w-1/2">
                     <Card 
                         label={messages.mapathonReport}
@@ -16,9 +16,9 @@ export function Reports() {
                     />
                 </div>
             </div>
-            <div className="flex justify-evenly  h-48 items-center flex-wrap my-4">
+            <div className="flex justify-evenly h-72 items-center flex-wrap my-4">
                 {/* image div */}
-                <div className="bg-grey-light h-full w-5/12 pr-4"></div>
+                <div className="border h-full w-5/12"/>
                 <div className="h-full w-1/2">
                     <Card
                         label={messages.userReport}
@@ -27,9 +27,9 @@ export function Reports() {
                     />
                 </div>
             </div>
-            <div className="flex justify-evenly h-48 items-center flex-wrap my-4">
+            <div className="flex justify-evenly h-72 items-center flex-wrap my-4">
                 {/* image div */}
-                <div className="bg-grey-light h-full w-5/12"></div>
+                <div className="border h-full w-5/12"/>
                 <div className="h-full w-1/2">
                     <Card 
                         label={messages.organisationReport} 
@@ -38,17 +38,16 @@ export function Reports() {
                     />
                 </div>
             </div>
-            <div className="flex justify-evenly  h-48 items-center flex-wrap my-4">
+            <div className="flex justify-evenly h-72 items-center flex-wrap my-4">
                 {/* image div */}
-                <div className="bg-grey-light h-full w-5/12 pr-4"></div>
+                <div className="border h-full w-5/12"/>
                 <div className="h-full w-1/2">
                     <Card
                         label={messages.countryReport}
                         summary={messages.countryReportBlurb}
                         route={"/country-report"}
                     />
-                </div>
-               
+                </div>  
             </div>
         </div>
     )

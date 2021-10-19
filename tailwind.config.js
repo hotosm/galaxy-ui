@@ -25,7 +25,10 @@ module.exports = {
         'tan': '#f0efef', 
         'white': '#fff'
       },
-    }
+    },
+    backgroundImage: theme => ({
+      'mapathon-image': "url('/src/assets/img/mapathon-report-image.jpeg')"
+    })
   },
   variants: {
     extend: {

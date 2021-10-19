@@ -26,7 +26,7 @@ export default defineMessages({
     },
     organisationReportBlurb: {
         id: 'exploreData.organisationReport.blurb',
-        defaultMessage: "Get to know the impact created through a mapathon in real-time. You can generate a report of all the mapper contributions covering different types of feature count and the time they spent mapping on Tasking Manager."
+        defaultMessage: "Organisation Report"
     },
     countryReport: {
         id: 'exploreData.countryReport',
