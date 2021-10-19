@@ -9,7 +9,7 @@ const FeatureList = ({ title, features }) => {
             <ul>
                 {features && features.map((item, n) =>
                     <li key={n}>
-                        <p>{item.key}: {item.count}</p>  
+                        <p>{item.feature}: {item.count}</p>  
                     </li>
                 )}
             </ul>
@@ -18,26 +18,26 @@ const FeatureList = ({ title, features }) => {
 }
 
 export const MapathonSummaryResults = ({data}) => {
-    const { mappedFeatures, contributorsCount } = data;
+    const { mappedFeatures, totalContributors } = data;
     
     return (
         <div className="flex flex-col place-items-center mt-10 w-3/4 mx-auto">
-            {contributorsCount && (
+            {totalContributors && (
                 <div className="p-4">
                     <p className="text-lg">
-                        Total Unique Contributors: <span className="font-medium">{contributorsCount}</span>
+                        Total Unique Contributors: <span className="font-medium">{totalContributors}</span>
                     </p>
                 </div>
             )}
             {mappedFeatures && (
                 <div className="flex justify-between w-1/2">
                     <FeatureList
-                        title={"Features Added"} 
-                        features={mappedFeatures.filter((f) => f.action === 'added')} 
+                        title={"Features Created"} 
+                        features={mappedFeatures.filter((f) => f.action === 'create')} 
                     />
                     <FeatureList
                         title={"Features Modified"}
-                        features={mappedFeatures.filter((f) => f.action === 'modified')} 
+                        features={mappedFeatures.filter((f) => f.action === 'modify')} 
                     />
             </div>
             )} 

@@ -1,40 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { addHours, differenceInHours } from "date-fns";
+import { useMutation} from "react-query";
 import { ReportForm } from "../components/forms";
 import { MapathonSummaryResults } from '../components/mapathonResults';
+import { getMapathonSummaryReport } from "../queries/getMapathonSummaryReport";
 import { Error } from '../components/formResponse';
-
-const sampleData = {
-    "contributorsCount": 15,
-    "mappedFeatures": [
-        {
-          "key": 'building',
-          "action": 'modified',
-          "count": 20
-        },
-        {
-            "key": 'highway',
-            "action": 'modified',
-            "count": 2
-        },
-        {
-            "key": 'building',
-            "action": 'added',
-            "count": 200
-        },
-        {
-            "key": 'amenity',
-            "action": 'amenity',
-            "count": 11
-        },
-        {
-            "key": 'waterway',
-            "action": 'added',
-            "count": 2
-        },
-    ]
-}
-
 
 export const MapathonSummaryReport = () => {
     const [formData, setFormData] = useState({
@@ -43,16 +13,6 @@ export const MapathonSummaryReport = () => {
         TMProjectIds: "",
         mapathonHashtags: ""
     });
-
-    // to be sent via API call
-    // const [requestData, setRequestData] = useState({
-    //     fromTimestamp: "",
-    //     toTimestamp: "",
-    //     TMProjectIds: [],
-    //     mapathonHashtags: []
-    // });
-
-    const [data, setData] = useState(null)
 
     const [formError, setFormError] = useState(null)
 
@@ -64,7 +24,7 @@ export const MapathonSummaryReport = () => {
     };
 
     useEffect(() => {
-        setFormError(null)
+        setFormError(null);
     }, [formData])
 
     const handleValidation = () => {
@@ -74,11 +34,6 @@ export const MapathonSummaryReport = () => {
         
         if ((differenceInHours(endDate, startDate) <= 24) && differenceInHours(endDate, startDate) > 0){
             validDate = true;
-            // setRequestData({
-            //     ...requestData,
-            //     fromTimestamp: startDate,
-            //     toTimestamp: endDate
-            // });
         } else {
             setFormError("Invalid Time")
         }
@@ -86,51 +41,37 @@ export const MapathonSummaryReport = () => {
             setFormError("Missing fields")
         }
         if (TMProjectIds.length > 0) {
-            let arr = TMProjectIds.split(',')
-            if (arr.every(i => Number.isInteger(Number(i)))) {
-                // setRequestData({
-                //     ...requestData,
-                //     TMProjectIds: arr.map((i) => Number(i)).filter((x) => x !== 0)
-                // })
+            if (TMProjectIds.split(',').every(i => Number.isInteger(Number(i)))) {
                 validIdsOrHashtags = true;
             }      
             else {
                 setFormError("Invalid IDs")
             }
         }
-        
         if (mapathonHashtags.length > 0) {
-            let arr = mapathonHashtags
-            .split(',')
-            .map((i) => {
-                i = i.toString().trim();
-                if(i.startsWith('#')) i = i.substr(1)
-                return i  
-            })
-            let pattern = /([a-zA-Z0-9])\w+/gi
             validIdsOrHashtags = true;
- 
-            // setRequestData({
-            //     ...requestData,
-            //     mapathonHashtags: arr.filter((j) => j.match(pattern))
-            // })
         }
         return validDate && validIdsOrHashtags;
     }
+
+    const { mutate, data, isLoading } = useMutation(getMapathonSummaryReport, {
+        onError: (error) => {
+            console.log(error);
+            setFormError("Server Error")
+        },
+        // onSettled: () => {
+        //   queryClient.invalidateQueries('create');
+        // }
+      });
+
  
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(handleValidation())
         let isValid = handleValidation()
         if (isValid) {
-             // API call
-             setFormError(null)
-             setData(sampleData)
-             console.log("submitted")
-        } else {
-            // setFormError("Server Error")
-            console.log("error")
-            return
+             mutate(formData); // API call
+             setFormError(null);
+             console.log("submitted");
         }
     }
 
@@ -144,10 +85,8 @@ export const MapathonSummaryReport = () => {
                 setFormError={setFormError}
             />
             {formError && <Error error={formError} />}
-            {/* {status === 'loading' && (<div className="mx-auto">Loading...</div>)} */}
-            {data && (
-                <MapathonSummaryResults data={data}/>
-            )}
+            {isLoading && (<div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>)}
+            {data && (<MapathonSummaryResults data={data}/>)}
         </div>
     )
 }
