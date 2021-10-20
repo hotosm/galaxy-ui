@@ -18,17 +18,17 @@ export function About () {
                     </p>
                 </section>
                 <hr className="w-full"/>
-                <section class="flex space-x-40 justify-center w-full h-3/4">
+                <section className="flex space-x-40 justify-center w-full h-3/4">
                     <iframe
                         title="OSM Galaxy Slides"
                         src="https://docs.google.com/presentation/d/e/2PACX-1vSJFMo-0NBaJpWPGPgDcQGIGAz1xivg47J1gV6uIfET0TQdnhYoMpJgpHGSgOf5100aSK00FgL1J2aR/embed?start=false&loop=false&delayms=3000#slide=14"
-                        allowfullscreen
-                        class="w-4/12 h-full"
+                        allowFullScreen
+                        className="w-4/12 h-full"
                         width="100%" >
                     </iframe>
-                    <div class="w-4/12">
-                        <h5 class="text-center text-lg font-medium p-0">Get started on this project with these documents:</h5>
-                        <div class="pt-3 ">
+                    <div className="w-4/12">
+                        <h5 className="text-center text-lg font-medium p-0">Get started on this project with these documents:</h5>
+                        <div className="pt-3 ">
                             <ul className="w-full text-center">
                                 <li className="document-link">
                                     <Link to={{ pathname:"https://docs.google.com/presentation/d/11Ev80L5CSVIDWtf1JJhfRD6rOgcT0tae1C1ksVF892Y/"}} target="_blank">
