@@ -3,22 +3,23 @@ import { useHistory } from "react-router";
 import { FormattedMessage } from "react-intl";
 
 import { Button } from "./button";
-import messages from './messages'
+import messages from './messages';
 
 export function Banner() {
     let history = useHistory()
     const handleClick = () => {
         history.push("/explore")
     }
+
     return (
-        <div className="h-screen">
-            <main className="w-full h-full my-2 py-40 space-y-12 flex flex-col place-items-center bg-banner-image bg-contain">    
-                <div className="w-1/3 mt-10">
+        <>
+            <main className="w-3/5 h-auto mx-auto p-4 space-y-14 flex flex-col place-items-center">    
+                <div className="w-1/2 mt-2">
                     <h2 className="font-bold text-xl text-center">
                         <FormattedMessage {...messages.galaxyTagline} />
                     </h2>
                 </div>
-                <div className="w-1/3 text-lg text-center">
+                <div className="w-3/4 text-lg text-center">
                     <p>
                         <FormattedMessage {...messages.galaxySummary} />
                     </p>
@@ -29,6 +30,6 @@ export function Banner() {
                     </Button>
                 </div>
             </main>
-        </div> 
+        </> 
     )
 };
