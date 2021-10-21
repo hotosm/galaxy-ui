@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import url('mapbox-gl/dist/mapbox-gl.css'); */
 
 @layer components {
     .document-link {
