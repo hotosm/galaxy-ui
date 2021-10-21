@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Footer } from '../components/footer'
+import { FormattedMessage } from "react-intl";
+import { Footer } from '../components/footer';
+import messages from "./messages";
 
-export function About () {
+export function About() {
     return (
         <div className="h-screen">
-            <main className="w-screen h-5/6 mt-2 mb-5 p-2 space-y-9 flex flex-col">
-                <hr className="w-full"/>
-                <section className="w-9/12 py-10 mx-auto h-1/4">
-                    <p className="text-center">
+            <hr className="w-full"/>
+            <main className="w-screen h-5/6 mt-1 mb-5 p-2 space-y-9 flex flex-col">
+                <section className="w-10/12 flex items-center mx-auto h-1/4">
+                    <p className="text-center text-xl">
                         <Link className="text-red" to={{ pathname:"https://www.openstreetmap.org/"}} target="_blank">
-                            OpenStreetMap(OSM) &nbsp;
+                            OpenStreetMap (OSM) &nbsp;
                         </Link>
-                        Galaxy is a project that the HOT Tech Team launched this mid-April (14th April, 2021) to optimise and improve availability & accessibility of OSM Data outputs for different user groups within the ecosystem.
-                        Through this project we strive to address all the OSM data needs under one umbrella and ensure OSM data is available, accessible and ready to use for all kinds of users.
-                        We are trying to solve the high dependency on different data sources and uncontrolled platforms while focusing on fast queries and process optimisation by accessing data from HOT administered and controlled environment.
+                        <FormattedMessage {...messages.projectOverview} />
                     </p>
                 </section>
                 <hr className="w-full"/>
@@ -27,42 +27,44 @@ export function About () {
                         width="100%" >
                     </iframe>
                     <div className="w-4/12">
-                        <h5 className="text-center text-lg font-medium p-0">Get started on this project with these documents:</h5>
-                        <div className="pt-3 ">
-                            <ul className="w-full text-center">
+                        <h5 className="text-center text-xl font-semibold p-0 mb-1">
+                            <FormattedMessage {...messages.resourcesHeading} />:
+                        </h5>
+                        <div className="pt-3">
+                            <ul className="w-full text-center text-xl">
                                 <li className="document-link">
                                     <Link to={{ pathname:"https://docs.google.com/presentation/d/11Ev80L5CSVIDWtf1JJhfRD6rOgcT0tae1C1ksVF892Y/"}} target="_blank">
-                                        OSM Galaxy Slide Deck
+                                        <FormattedMessage {...messages.galaxySlideDeck} />
                                     </Link>
                                 </li>
                                 <li className="document-link">
                                     <Link to={{ pathname:"https://docs.google.com/spreadsheets/d/1zla1U-l-Va6UftZLn-csejBdfUGzOfj5IcREbsx66Hg"}} target="_blank">
-                                        User Stories for Galaxy
+                                        <FormattedMessage {...messages.galaxyUserStories} />
                                     </Link>
                                 </li>
                                 <li className="document-link">
                                     <Link to={{ pathname:"http://osm-stats.hotosm.org/docs"}} target="_blank">
-                                        OSM Statistics API Access
+                                        <FormattedMessage {...messages.osmStatsDoc} />
                                     </Link>
                                 </li>
                                 <li className="document-link">
                                     <Link to={{ pathname:"https://hotosm.github.io/underpass/"}} target="_blank">
-                                        Underpass Technical Overview
+                                        <FormattedMessage {...messages.underpassOverview} />
                                     </Link>
                                 </li>
                                 <li className="document-link">
                                     <Link to={{ pathname:"http://bit.ly/galaxy-contribution"}} target="_blank">
-                                        Register your interest for Working Group
+                                        <FormattedMessage {...messages.workingGroupRegistration} />
                                     </Link>
                                 </li>
                                 <li className="document-link">
                                     <Link to={{ pathname:"https://osm-stats.hotosm.org/data/download/osmstats"}} target="_blank">
-                                        OSM statistics Data Download
+                                        <FormattedMessage {...messages.osmStatsDownload} />
                                     </Link>
                                 </li>
                                 <li className="document-link">
                                     <Link to={{ pathname:"h#"}} target="_blank">
-                                        FAQ on Galaxy (To be Updated)
+                                        <FormattedMessage {...messages.galaxyFAQ} />
                                     </Link>
                                 </li>
                             </ul>
@@ -70,7 +72,7 @@ export function About () {
                     </div>
                 </section>
             </main>
-            <div className="bg-tan p-2">
+            <div className="p-2">
                 <Footer />
             </div>
         </div>

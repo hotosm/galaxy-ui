@@ -1,6 +1,6 @@
 module.exports = {
-  // purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  purge: [],
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  // purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
@@ -11,7 +11,7 @@ module.exports = {
       '2xl': '1536px',
     },
     fontFamily: {
-        sans: ['"Barlow Condensed"', 'Archivo', '"Open Sans"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif']
+        sans: ['"Barlow Condensed"', 'Archivo', 'sans-serif']
     },
     extend: {
       colors: {
@@ -25,9 +25,6 @@ module.exports = {
         'tan': '#f0efef', 
         'white': '#fff'
       },
-      backgroundImage: theme => ({
-        'banner-image': "url('/src/assets/img/banner-image.png')",
-      })
     }
   },
   variants: {

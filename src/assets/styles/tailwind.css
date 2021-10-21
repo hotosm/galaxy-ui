@@ -1,9 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import url('mapbox-gl/dist/mapbox-gl.css'); */
 
 @layer components {
     .document-link {
         @apply p-2 border border-grey-light hover:bg-tan;
     }
+}
+
+.mapbox-improve-map, a[href="https://www.mapbox.com/map-feedback/"] {
+    display: none;
 }

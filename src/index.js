@@ -2,11 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import WebFont from 'webfontloader';
 
 import './assets/styles/tailwind.generated.css'
 import App from './App';
 import store from './app/store';
 import reportWebVitals from './reportWebVitals';
+
+WebFont.load({
+  google: {
+    families: ['Barlow Condensed:400,600,700', 'Archivo:400,500,600,700', 'sans-serif'],
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

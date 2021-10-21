@@ -1,8 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import { Banner } from "../components/banner";
+ import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaG90IiwiYSI6ImNrMnVscm00YTE3anMzZW1uaGF0bHRrbjIifQ.QcgWgp8-5BljWasaCuATnw';
+import { Banner } from "../components/banner";
+import { MAPBOX_TOKEN } from "../config";
+
+mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export function Home() {
     const mapContainer = useRef(null);
@@ -12,8 +15,8 @@ export function Home() {
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
-            zoom: 0.9,
-            center: [0, 0],
+            zoom: 1.50,
+            center: [0, 45],
             style: 'mapbox://styles/hot/cjepk5hhz5o9w2rozqj353ut4',
             interactive: false
         });
@@ -21,10 +24,10 @@ export function Home() {
 
     return (
         <div className="h-screen w-100">
-            <div className="h-3/5 w-full mt-44 absolute z-5">
+            <div className="h-full w-full absolute z-10 flex items-center">
                 <Banner />
             </div>
-            <div ref={mapContainer} className="h-full w-full" />
+            <div ref={mapContainer} className="h-full w-full absolute opacity-70" />
         </div>
     )
 };
