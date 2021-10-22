@@ -28,12 +28,3 @@ export const getMapathonSummaryReport = async (requestData) => {
     const { data } = await axios.post('https://osm-stats.hotosm.org/mapathon/summary', body);
     return data;
 };
-
-// let body = {
-    //         "projectIds": [
-    //           111
-    //         ],
-    //         "fromTimestamp": "2021-09-01T00:00:00",
-    //         "toTimestamp": "2021-09-01T01:00:00",
-    //         "hashtags": []
-    //     }

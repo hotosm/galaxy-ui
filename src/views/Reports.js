@@ -1,7 +1,6 @@
 import React from "react";
 import { Card } from "../components/card";
 import messages from "./messages";
-// import mapathonImage from "../assets/img/mapathon-report-image.jpeg"
 
 export function Reports() {
     return (

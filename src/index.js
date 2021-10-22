@@ -26,7 +26,7 @@ ReactDOM.render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
     <QueryClientProvider client={queryClient}>
-      <IntlProvider locale={navigator.language}>
+      <IntlProvider locale={'en'}>
         <App />
       </IntlProvider>
       <ReactQueryDevtools initialIsOpen />
