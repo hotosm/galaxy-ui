@@ -1,4 +1,3 @@
-/* eslint-disable no-multi-str */
 import React from 'react';
 import { 
   AppProviders,
@@ -10,6 +9,7 @@ import { Banner } from '../banner';
 afterEach(cleanup);
 
 it('Banner component', () => {
+  // global.URL.createObjectURL = jest.fn();
   const {getByText} = render(
     <AppProviders>
       <Banner />

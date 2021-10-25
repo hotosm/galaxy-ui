@@ -11,7 +11,7 @@ test('Reports View', () => {
     </AppProviders>
   );
   expect(getByText(/Mapathon Reports/i)).toBeInTheDocument();
-  expect(getByText(/Mapathon Reports/i).closest('a').href).toContain('/mapathon-summary-report');
+  expect(getByText(/Mapathon Reports/i).closest('a').href).toContain('/mapathon-report/summary');
   expect(getByText(/Get to know the impact created through a mapathon in real-time/i)).toBeInTheDocument();
   expect(getByText(/User Reports/i)).toBeInTheDocument();
   expect(getByText(/User Reports/i).closest('a').href).toContain('/user-report');

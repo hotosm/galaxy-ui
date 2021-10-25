@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppProviders, render, cleanup } from '../../utils/testUtils';
+import { AppProviders, render, cleanup } from '../../../utils/testUtils';
 import Header from '../header';
 
 afterEach(cleanup);

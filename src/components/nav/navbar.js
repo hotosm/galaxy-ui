@@ -1,22 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link, NavLink } from "react-router-dom";
-import { useQuery } from 'react-query';
-import messages from "./messages";
-import logo from '../assets/img/hot-logo.svg';
-import { getLoginURL } from "../queries/index";
-import { Authorisation } from "./auth";
-import { createPopup } from "../utils/popup";
+import messages from "../messages";
+import logo from '../../assets/img/hot-logo.svg';
+import { Authorisation } from "../auth";
 
-export function NavBar(props) {
-  const { data, refetch } = useQuery('loginUrl', getLoginURL, { enabled: false, });
-
-  useEffect(() => {
-    if (data) {
-      createPopup(data.url);
-    }
-  });
-
+export function NavBar() {
   return (
     <nav className="flex items-center justify-between flex-wrap"> 
       <Link to={'/'} className="flex items-center flex-shrink-0 text-blue-dark mr-8 ml-3">
@@ -47,7 +36,7 @@ export function NavBar(props) {
           </NavLink>
         </div>
       </div>
-      <Authorisation login={refetch}/>
+      <Authorisation origin={"login"} />
     </nav>
   )
 };

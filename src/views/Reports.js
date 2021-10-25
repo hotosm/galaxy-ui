@@ -11,7 +11,7 @@ export function Reports() {
                     <Card 
                         label={messages.mapathonReport}
                         summary={messages.mapathonReportBlurb}
-                        route={"/mapathon-summary-report"}
+                        route={"/mapathon-report/summary"}
                     />
                 </div>
             </div>

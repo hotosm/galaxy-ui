@@ -1,7 +1,7 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-import messages from "./messages";
+import messages from "../messages";
 import { NavBar } from "./navbar";
 
 const Header = () => {

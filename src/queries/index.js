@@ -1,2 +1,2 @@
 export  { getLoginURL } from "./getLoginUrl";
-export { getMapathonSummaryReport } from "./getMapathonSummaryReport";
+export { getMapathonSummaryReport, getMapathonDetailedReport } from "./getMapathonReport";

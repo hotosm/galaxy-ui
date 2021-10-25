@@ -20,7 +20,7 @@ WebFont.load({
   },
 });
 // Create a client
-export const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
