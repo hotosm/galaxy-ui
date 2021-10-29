@@ -90,7 +90,7 @@ export const ReportForm = ({
             </div>
         </div>
             <div className="text-center mt-4">
-                <SubmitButton styles="py-3 px-10 text-xl">
+                <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
                     Submit Your Query
                 </SubmitButton>
             </div>
