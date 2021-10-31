@@ -1,23 +1,21 @@
-import React, { useEffect}  from "react";
+import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link, NavLink } from "react-router-dom";
 import { useQuery } from 'react-query';
 import messages from "./messages";
-import logo from '../assets/img/hot-logo.svg'
-
-import { getLoginURL } from "../queries/getMapathonSummaryReport";
+import logo from '../assets/img/hot-logo.svg';
+import { getLoginURL } from "../queries/index";
 import { Authorisation } from "./auth";
+import { createPopup } from "../utils/popup";
 
 export function NavBar(props) {
+  const { data, refetch } = useQuery('loginUrl', getLoginURL, { enabled: false, });
 
-  const { isLoading, isError, data, error, refetch } = useQuery('loginUrl', getLoginURL, { enabled: false, });
-
-  // useEffect(() => {
-  //   if (data) {
-  //     window.open(data.url)
-  //   }
-  // });
-
+  useEffect(() => {
+    if (data) {
+      createPopup(data.url);
+    }
+  });
 
   return (
     <nav className="flex items-center justify-between flex-wrap"> 
@@ -49,7 +47,7 @@ export function NavBar(props) {
           </NavLink>
         </div>
       </div>
-      <Authorisation refetch={refetch}/>
+      <Authorisation login={refetch}/>
     </nav>
   )
-}
+};

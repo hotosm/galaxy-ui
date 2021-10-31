@@ -28,8 +28,3 @@ export const getMapathonSummaryReport = async (requestData) => {
     const { data } = await axios.post('https://osm-stats.hotosm.org/mapathon/summary', body);
     return data;
 };
-
-export const getLoginURL = async () => {
-    const { data } = await axios.get('https://osm-stats.hotosm.org/auth/login');
-    return data;
-}

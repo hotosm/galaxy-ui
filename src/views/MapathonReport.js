@@ -3,7 +3,7 @@ import { addHours, differenceInHours } from "date-fns";
 import { useMutation} from "react-query";
 import { ReportForm } from "../components/forms";
 import { MapathonSummaryResults } from '../components/mapathonResults';
-import { getMapathonSummaryReport } from "../queries/getMapathonSummaryReport";
+import { getMapathonSummaryReport } from "../queries/index";
 import { Error } from '../components/formResponse';
 
 export const MapathonSummaryReport = () => {

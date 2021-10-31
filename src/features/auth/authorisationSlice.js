@@ -4,20 +4,17 @@ export const AuthorisationSlice = createSlice({
   name: 'auth',
   initialState: {
     loggedIn: false,
-    accessToken: ''
+    accessToken: null
   },
   reducers: {
     setLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
     },
-    // setAccessToken: (state, action) => {
-    //   state.accessToken = action.payload;
-    // },
-    setToken: (state) => {
-      state.accessToken = 'qwrtafgtg'
+    setToken: (state, action) => {
+      state.accessToken = action.payload["access_token"];
     },
     removeToken: (state) => {
-      state.accessToken = ''
+      state.accessToken = null;
     }
   }
 });
