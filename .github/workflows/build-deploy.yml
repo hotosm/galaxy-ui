@@ -56,6 +56,11 @@ jobs:
       with:
         name: production-files
         path: ./build
+        
+    - name: Create CNAME
+      run: |
+        touch CNAME
+        echo ${{ secrets.HOST }} >> ./build/CNAME
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
