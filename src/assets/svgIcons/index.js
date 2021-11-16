@@ -1,0 +1,1 @@
+export { BanIcon } from "./ban";
