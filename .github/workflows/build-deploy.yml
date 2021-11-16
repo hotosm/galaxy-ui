@@ -20,13 +20,17 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 13.x
+        node-version: 14.x
     
     - name: Install NPM packages
       run: npm ci
     
     - name: Build project
       run: CI=false npm run build
+      env:
+        REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        REACT_APP_MAPBOX_TOKEN: ${{ secrets.REACT_APP_MAPBOX_TOKEN }}
+        HOST: ${{ secrets.HOST }}
     
     # - name: Run tests
     #   run: npm run test

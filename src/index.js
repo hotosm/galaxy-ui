@@ -1,21 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import { Provider } from 'react-redux';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
+import { IntlProvider } from 'react-intl';
+import WebFont from 'webfontloader';
+import { ReactQueryDevtools } from "react-query/devtools";
+
+import './assets/styles/tailwind.generated.css'
 import App from './App';
+// import store from './app/store';
 import reportWebVitals from './reportWebVitals';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
 
+WebFont.load({
+  google: {
+    families: ['Barlow Condensed:400,600,700', 'Archivo:400,500,600,700', 'sans-serif'],
+  },
+});
+// Create a client
+export const queryClient = new QueryClient()
 
-const queryClient = new QueryClient()
 ReactDOM.render(
   <React.StrictMode>
+    {/* <Provider store={store}> */}
     <QueryClientProvider client={queryClient}>
-    <BrowserRouter >
-      <App></App>
-    </BrowserRouter>
+      <IntlProvider locale={'en'}>
+        <App />
+      </IntlProvider>
+      <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
-    
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
