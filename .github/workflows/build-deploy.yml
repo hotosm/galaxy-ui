@@ -24,13 +24,16 @@ jobs:
     
     - name: Install NPM packages
       run: npm ci
+      
+    - name: Create env file
+      run: |
+        touch .env
+        echo REACT_APP_API_URL =${{ secrets.REACT_APP_API_URL }} >> .env
+        echo REACT_APP_MAPBOX_TOKEN =${{ secrets.REACT_APP_MAPBOX_TOKEN }} >> .env
+        echo HOST =${{ secrets.HOST }} >> .env
     
     - name: Build project
       run: CI=false npm run build
-      env:
-        REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-        REACT_APP_MAPBOX_TOKEN: ${{ secrets.REACT_APP_MAPBOX_TOKEN }}
-        HOST: ${{ secrets.HOST }}
     
     # - name: Run tests
     #   run: npm run test
