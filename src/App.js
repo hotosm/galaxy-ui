@@ -10,6 +10,7 @@ import { About } from "./views/About";
 import { Home } from "./views/Home";
 import { Reports } from "./views/Reports";
 import { MapathonSummaryReport, MapathonDetailedReport } from "./views/MapathonReports";
+import { UserGroupReport } from "./views/UserGroupReport";
 
 function App(){
   return (
@@ -23,6 +24,7 @@ function App(){
           <Route path="/explore" component={Reports}/>
           <Route path="/mapathon-report/summary" component={MapathonSummaryReport}/>
           <Route path="/mapathon-report/detailed" component={MapathonDetailedReport} />
+          <Route path="/user-report" component={UserGroupReport} />
         </Switch>
       </div>
     </Router>

@@ -8,7 +8,7 @@ import messages from './messages';
 export function Banner() {
     let history = useHistory()
     const handleClick = () => {
-        history.push("/explore")
+        history.push("/reports")
     }
 
     return (
