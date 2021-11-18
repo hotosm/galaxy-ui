@@ -33,7 +33,7 @@ export function About() {
                         <div className="pt-3">
                             <ul className="w-full text-center text-xl">
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/embed?start=false&loop=false&delayms=3000#slide=9"}} target="_blank">
+                                    <Link to={{ pathname:"https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/edit#"}} target="_blank">
                                         <FormattedMessage {...messages.galaxySlideDeck} />
                                     </Link>
                                 </li>
