@@ -43,7 +43,7 @@ export function About() {
                                     </Link>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"http://osm-stats.hotosm.org/docs"}} target="_blank">
+                                    <Link to={{ pathname:"https://osm-stats.hotosm.org/docs"}} target="_blank">
                                         <FormattedMessage {...messages.osmStatsDoc} />
                                     </Link>
                                 </li>
@@ -53,7 +53,7 @@ export function About() {
                                     </Link>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"http://bit.ly/galaxy-contribution"}} target="_blank">
+                                    <Link to={{ pathname:"https://bit.ly/galaxy-contribution"}} target="_blank">
                                         <FormattedMessage {...messages.workingGroupRegistration} />
                                     </Link>
                                 </li>
