@@ -21,7 +21,7 @@ export function About() {
                 <section className="flex space-x-40 justify-center w-full h-3/4">
                     <iframe
                         title="OSM Galaxy Slides"
-                        src="https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/edit#slide=id.gde0d3d7c29_0_729#slide=9"
+                        src="https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/embed?start=false&loop=false&delayms=3000#slide=9"
                         allowFullScreen
                         className="w-4/12 h-full"
                         width="100%" >
