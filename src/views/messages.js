@@ -60,6 +60,18 @@ export default defineMessages({
       id: 'about.galaxy.resources.underpass.overview',
       defaultMessage: "Underpass Technical Overview"
     },
+    wireframesAccess: {
+      id: 'about.galaxy.resources.wireframes',
+      defaultMessage: "Website Wireframes on Figma"
+    },
+    apiRequirements: {
+      id: 'about.galaxy.resources.api.requirements',
+      defaultMessage: "API Functional Requirements"
+    },
+    websiteAcceptanceCriteria: {
+      id: 'about.galaxy.resources.website.documentation',
+      defaultMessage: "Website Requirements"
+    },
     workingGroupRegistration: {
       id: 'about.galaxy.resources.workingGroup.registration',
       defaultMessage: "Register your interest for Working Group"
