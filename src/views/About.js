@@ -53,6 +53,21 @@ export function About() {
                                     </Link>
                                 </li>
                                 <li className="document-link">
+                                    <Link to={{ pathname:"https://bit.ly/galaxy-wireframes"}} target="_blank">
+                                        <FormattedMessage {...messages.wireframesAccess} />
+                                    </Link>
+                                </li>
+                                <li className="document-link">
+                                    <Link to={{ pathname:"https://docs.google.com/document/d/1pry1_5al7PZOFN0awI5Fe_n1m-smb655su1yltkA5a8/edit#"}} target="_blank">
+                                        <FormattedMessage {...messages.apiRequirements} />
+                                    </Link>
+                                </li>
+                                <li className="document-link">
+                                    <Link to={{ pathname:"https://docs.google.com/document/d/1M3gaP_vlQzvmVepkc1-xRmvh2Jrsfi8WiFcdFggLLpQ/edit"}} target="_blank">
+                                        <FormattedMessage {...messages.websiteAcceptanceCriteria} />
+                                    </Link>
+                                </li>
+                                <li className="document-link">
                                     <Link to={{ pathname:"https://bit.ly/galaxy-contribution"}} target="_blank">
                                         <FormattedMessage {...messages.workingGroupRegistration} />
                                     </Link>
