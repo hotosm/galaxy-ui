@@ -1,6 +1,6 @@
 import React from "react";
-import { 
-  BrowserRouter as Router,
+import {
+  HashRouter,
   Switch,
   Route
  } from "react-router-dom";
@@ -12,7 +12,7 @@ import { MapathonSummaryReport } from "./views/MapathonReport";
 
 function App(){
   return (
-    <Router>
+    <HashRouter>
       <Header />
       <div>
       <Switch>
@@ -22,7 +22,7 @@ function App(){
         <Route path="/mapathon-summary-report" component={MapathonSummaryReport}/>
       </Switch>
     </div>
-    </Router>
+    </HashRouter>
   )
 }
 
