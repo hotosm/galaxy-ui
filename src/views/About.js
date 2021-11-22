@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { Footer } from '../components/footer';
 import messages from "./messages";
@@ -11,9 +10,9 @@ export function About() {
             <main className="w-screen h-5/6 mt-1 mb-5 p-2 space-y-9 flex flex-col">
                 <section className="w-10/12 flex items-center mx-auto h-1/4">
                     <p className="text-center text-xl">
-                        <Link className="text-red" to={{ pathname:"https://www.openstreetmap.org/"}} target="_blank">
+                        <a className="text-red" href="https://www.openstreetmap.org/" rel="noreferrer" target="_blank">
                             OpenStreetMap (OSM) &nbsp;
-                        </Link>
+                        </a>
                         <FormattedMessage {...messages.projectOverview} />
                     </p>
                 </section>
@@ -33,54 +32,94 @@ export function About() {
                         <div className="pt-3">
                             <ul className="w-full text-center text-xl">
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/edit#"}} target="_blank">
+                                    <a
+                                     href="https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/edit#" 
+                                     target="_blank"
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.galaxySlideDeck} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://docs.google.com/spreadsheets/d/1zla1U-l-Va6UftZLn-csejBdfUGzOfj5IcREbsx66Hg"}} target="_blank">
+                                    <a
+                                     href="https://docs.google.com/spreadsheets/d/1zla1U-l-Va6UftZLn-csejBdfUGzOfj5IcREbsx66Hg"
+                                     target="_blank"
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.galaxyUserStories} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://osm-stats.hotosm.org/docs"}} target="_blank">
+                                    <a
+                                     href="https://osm-stats.hotosm.org/docs"
+                                     target="_blank"
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.osmStatsDoc} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://hotosm.github.io/underpass/"}} target="_blank">
+                                    <a
+                                     href="https://hotosm.github.io/underpass/"
+                                     target="_blank"
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.underpassOverview} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://bit.ly/galaxy-wireframes"}} target="_blank">
+                                    <a 
+                                     href="https://bit.ly/galaxy-wireframes"
+                                     target="_blank"
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.wireframesAccess} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://docs.google.com/document/d/1pry1_5al7PZOFN0awI5Fe_n1m-smb655su1yltkA5a8/edit#"}} target="_blank">
+                                    <a 
+                                     href="https://docs.google.com/document/d/1pry1_5al7PZOFN0awI5Fe_n1m-smb655su1yltkA5a8/edit#"
+                                     target="_blank"
+                                     rel="noreferrer"
+                                     >
                                         <FormattedMessage {...messages.apiRequirements} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://docs.google.com/document/d/1M3gaP_vlQzvmVepkc1-xRmvh2Jrsfi8WiFcdFggLLpQ/edit"}} target="_blank">
+                                    <a
+                                     href="https://docs.google.com/document/d/1M3gaP_vlQzvmVepkc1-xRmvh2Jrsfi8WiFcdFggLLpQ/edit"
+                                     target="_blank"
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.websiteAcceptanceCriteria} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://bit.ly/galaxy-contribution"}} target="_blank">
+                                    <a
+                                     href="https://bit.ly/galaxy-contribution"
+                                     target="_blank" 
+                                     rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.workingGroupRegistration} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"https://osm-stats.hotosm.org/data/download/osmstats"}} target="_blank">
+                                    <a 
+                                    href="https://osm-stats.hotosm.org/data/download/osmstats"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.osmStatsDownload} />
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="document-link">
-                                    <Link to={{ pathname:"h#"}} target="_blank">
+                                    <a
+                                    href="h#" 
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    >
                                         <FormattedMessage {...messages.galaxyFAQ} />
-                                    </Link>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
