@@ -1,6 +1,5 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
 
 import messages from "./messages";
 import { NavBar } from "./navbar";
@@ -11,9 +10,9 @@ const Header = () => {
         <header>
           <div className="p-4 flex justify-between text-red text-lg">
             <span><FormattedMessage {...messages.tagline} /></span>
-            <Link to={{ pathname:"https://www.hotosm.org"}} target="_blank">
+            <a href="https://www.hotosm.org" rel="noreferrer" target="_blank">
               www.hotosm.org
-            </Link>
+            </a>
           </div>
           <hr/>
           <NavBar />
