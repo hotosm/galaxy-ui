@@ -3,8 +3,8 @@ import axios from "axios";
 export const getMapathonSummaryReport = async (requestData) => {
     const { startDate, endDate, TMProjectIds, mapathonHashtags } = requestData;
     let body = {
-        "fromTimestamp": startDate.toISOString(),
-        "toTimestamp": endDate.toISOString(),
+        "fromTimestamp": startDate.toISOString().replace('Z', ''),
+        "toTimestamp": endDate.toISOString().replace('Z', ''),
         "projectIds": [],
         "hashtags": []
     }
