@@ -88,6 +88,14 @@ export default defineMessages({
     mapathonSummaryServerError: {
         id: 'reports.mapathon.summary.form.error.server',
         defaultMessage: "There was a server error while executing this query. Please try again later."
+    },
+    footerOrganisation: {
+        id: 'about.footer.organisation',
+        defaultMessage: 'This project is under development by {OrganisationLink}.'
+    },
+    footerContact: {
+        id: 'about.footer.contact',
+        defaultMessage: 'Reach out on {GithubLink} or {SlackLink}.'
     }
     
 })

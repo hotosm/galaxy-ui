@@ -8,7 +8,7 @@ export function NavBar() {
   return (
     <nav className="flex items-center justify-between flex-wrap p-1 mx-4">
       <Link to={'/'} className="flex items-center flex-shrink-0 text-blue-dark mr-8 pb-1">
-        <img src={logo} alt="logo" className="w-14 h-14 mr-2"/>
+        <img src={logo} alt="HOT-logo" className="w-14 h-14 mr-2"/>
         <h2 className="font-semibold text-2xl">
           <FormattedMessage {...messages.appHeading}/>
         </h2>
