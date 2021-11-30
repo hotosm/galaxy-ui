@@ -38,7 +38,7 @@ export default defineMessages({
     },
     projectOverview: {
       id: 'about.galaxy.overview',
-      defaultMessage: "Galaxy is a project that the HOT Tech Team launched this mid-April (14th April, 2021) to optimise and improve availability and accessibility of OSM Data outputs for different user groups within the ecosystem. Through this project, we strive to address all the OSM data needs under one umbrella and ensure OSM data is available, accessible and ready to use for all kinds of users. We are trying to solve the high dependency on different data sources and uncontrolled platforms while focusing on fast queries and process optimisation by accessing data from HOT administered and controlled environment."
+      defaultMessage: "{OSMLink} Galaxy is a project that the HOT Tech Team launched this mid-April (14th April, 2021) to optimise and improve availability and accessibility of OSM Data outputs for different user groups within the ecosystem. Through this project, we strive to address all the OSM data needs under one umbrella and ensure OSM data is available, accessible and ready to use for all kinds of users. We are trying to solve the high dependency on different data sources and uncontrolled platforms while focusing on fast queries and process optimisation by accessing data from HOT administered and controlled environment."
     },
     resourcesHeading: {
       id: 'about.galaxy.resources.heading',
