@@ -10,10 +10,16 @@ export function About() {
             <main className="w-screen h-5/6 mt-1 mb-5 p-2 space-y-9 flex flex-col">
                 <section className="w-10/12 flex items-center mx-auto h-1/4">
                     <p className="text-center text-xl">
-                        <a className="text-red" href="https://www.openstreetmap.org/" rel="noreferrer" target="_blank">
-                            OpenStreetMap (OSM) &nbsp;
-                        </a>
-                        <FormattedMessage {...messages.projectOverview} />
+                        <FormattedMessage 
+                            {...messages.projectOverview} 
+                            values={{
+                                OSMLink: (
+                                    <a className="text-red" href="https://www.openstreetmap.org/" rel="noreferrer" target="_blank">
+                                        OpenStreetMap (OSM)
+                                    </a>
+                                )
+                            }}
+                        />
                     </p>
                 </section>
                 <hr className="w-full"/>
@@ -23,7 +29,9 @@ export function About() {
                         src="https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/embed?start=false&loop=false&delayms=3000#slide=8"
                         allowFullScreen
                         className="w-4/12 h-full"
-                        width="100%" >
+                        width="100%"
+                        data-testid="slides-element"
+                    >
                     </iframe>
                     <div className="w-4/12">
                         <h5 className="text-center text-xl font-semibold p-0 mb-1">
