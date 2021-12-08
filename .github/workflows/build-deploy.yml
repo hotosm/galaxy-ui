@@ -49,6 +49,7 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    environment: github-pages
     if: github.ref == 'refs/heads/replace-hosting-deployment'
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
