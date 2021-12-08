@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - replace-hosting-deployment
   pull_request:
     branches:
       - main
