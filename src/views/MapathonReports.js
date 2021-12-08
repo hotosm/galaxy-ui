@@ -17,7 +17,7 @@ export const MapathonSummaryReport = (props) => {
     return (
         <div>
             <MapathonReportForm
-                  error={error ? 'Server Error' : null}
+                  error={error ? error.message : null}
                   fetch={mutate}
               />
             <AuthorisationButton origin={"mapathon"} redirectTo={props.location.pathname}/>
@@ -37,7 +37,7 @@ export const MapathonDetailedReport = () => {
         return (
             <div>
                 <MapathonReportForm
-                    error={error ? 'Server Error' : null}
+                    error={error ? error.message : null}
                     fetch={mutate}
                 />
                 {isLoading && (<div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>)}
@@ -51,4 +51,4 @@ export const MapathonDetailedReport = () => {
             </div>
         )
     }
-  }  
+};

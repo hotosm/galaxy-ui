@@ -3,6 +3,50 @@ import { FormattedMessage } from 'react-intl';
 import { BanIcon } from '../assets/svgIcons';
 import messages from './messages';
 
+const ErrorMessage = ({message}) => {
+    if (message === "Missing fields") {
+        return (
+            <>
+            <FormattedMessage
+                {...messages.mapathonSummaryErrorEmptyFields}
+                values={{
+                    b: chunks => <b>{chunks}</b>
+                }}
+            />
+            <li>
+                <FormattedMessage {...messages.mapathonSummaryFormProjectIds} />
+            </li>
+            <li>
+            <FormattedMessage {...messages.mapathonSummaryFormHashtags} />
+            </li>  
+        </>
+        )
+    } else if(message === 'Invalid IDs') {
+        return (
+            <p>
+                <FormattedMessage {...messages.mapathonSummaryErrorInvalidIds}/>
+            </p>
+        )
+    } else if (message === 'Invalid Time') {
+        return (
+            <p>
+                <FormattedMessage {...messages.mapathonSummaryErrorInvalidTime}/>
+            </p>
+        )
+    } else {
+        return (
+             <FormattedMessage
+                {...messages.mapathonSummaryServerError}
+                values={{
+                    error: (
+                        <span className="text-red">{message}</span>  
+                    )
+                }}
+            />
+        )
+    }
+};
+
 export function Error({error}) {
     return (
         <div className="bg-red-light mt-5 mx-auto w-1/4 text-lg p-4">
@@ -11,37 +55,7 @@ export function Error({error}) {
                 <FormattedMessage {...messages.mapathonSummaryErrorTitle}/>
             </h5>
             <div className="mt-3">
-            {error === "Missing fields" && (
-                <>
-                    <FormattedMessage
-                        {...messages.mapathonSummaryErrorEmptyFields}
-                        values={{
-                            b: chunks => <b>{chunks}</b>
-                        }}
-                    />
-                    <li>
-                        <FormattedMessage {...messages.mapathonSummaryFormProjectIds} />
-                    </li>
-                    <li>
-                    <FormattedMessage {...messages.mapathonSummaryFormHashtags} />
-                    </li>  
-                </>
-            )}
-            {error === 'Invalid IDs' && (
-                <p>
-                    <FormattedMessage {...messages.mapathonSummaryErrorInvalidIds}/>
-                </p>
-            )}
-            {error === 'Invalid Time' && (
-                <p>
-                    <FormattedMessage {...messages.mapathonSummaryErrorInvalidTime}/>
-                </p>
-            )}
-            {error === 'Server Error' && (
-                <p>
-                    <FormattedMessage {...messages.mapathonSummaryServerError}/>
-                </p>
-            )}
+                <ErrorMessage message={error}/>
             </div>
         </div>
     )

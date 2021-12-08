@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import { differenceInHours, addHours } from "date-fns";
+import { addHours } from "date-fns";
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from '../formResponse';
 import messages from "../messages";
+import { validateMapathonFormData } from '../../utils/validationUtils';
 import { setProjectIds, setHashtags } from "../../features/form/formDataSlice";
 
 export const MapathonReportForm = ({fetch, error}) => {
   const intl = useIntl();
   const dispatch = useDispatch();
 
-    const [formData, setFormData] = useState({
-      startDate: addHours(new Date(), -1),
-      endDate: new Date(),
-      TMProjectIds: useSelector((state) => state.form.projectIds),
-      mapathonHashtags: useSelector((state) => state.form.hashtags)
-    });
+  const [formData, setFormData] = useState({
+    startDate: addHours(new Date(), -1),
+    endDate: new Date(),
+    TMProjectIds: useSelector((state) => state.form.projectIds),
+    mapathonHashtags: useSelector((state) => state.form.hashtags)
+  });
 
   const [formError, setFormError] = useState(null);
 
@@ -34,43 +35,21 @@ export const MapathonReportForm = ({fetch, error}) => {
       });
   };
 
-  const handleValidation = () => {
-      const { startDate, endDate, TMProjectIds, mapathonHashtags } = formData;
-      let validDate = false;
-      let validIdsOrHashtags = false;
-      
-      if ((differenceInHours(endDate, startDate) <= 24) && differenceInHours(endDate, startDate) > 0){
-          validDate = true;
-      } else {
-          setFormError("Invalid Time");
-      }
-      if (TMProjectIds.length === 0 && mapathonHashtags.length === 0) {
-          setFormError("Missing fields");
-      }
-      if (TMProjectIds.length > 0) {
-          if (TMProjectIds.split(',').every(i => Number.isInteger(Number(i)))) {
-              validIdsOrHashtags = true;
-          }      
-          else {
-              setFormError("Invalid IDs")
-          }
-      }
-      if (mapathonHashtags.length > 0) {
-          validIdsOrHashtags = true;
-      }
-      return validDate && validIdsOrHashtags;
-  }
-
   const handleSubmit = (event) => {
-      event.preventDefault();
-      let isValid = handleValidation()
-      if (isValid) {
-        dispatch(setProjectIds(formData.TMProjectIds))
-        dispatch(setHashtags(formData.mapathonHashtags))
-        fetch(formData); // API call
-        setFormError(null);
-      }
-  }
+    event.preventDefault();
+    try {
+        let isValid = validateMapathonFormData(formData)
+        if (isValid) {
+            dispatch(setProjectIds(formData.TMProjectIds))
+            dispatch(setHashtags(formData.mapathonHashtags))
+            fetch(formData); // API call
+            setFormError(null);
+        }
+    } catch (e) {
+        setFormError(e.message)
+    }
+   };
+
     return (
       <>
         <form onSubmit={handleSubmit} className="mt-4 px-4">
