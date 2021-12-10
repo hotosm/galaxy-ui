@@ -1,49 +1,39 @@
-import React,  { useEffect, useState }  from "react";
-import axios from "axios";
+import React, { useEffect, useMemo, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from "react-router";
-import { useQuery } from 'react-query';
 import { useHistory } from "react-router";
-import { getLoginURL } from "../queries/index";
 import { Button } from "../components/button";
-import { createPopup } from "../utils/popup";
-import { setToken, setLoggedIn, removeToken, setAuthOrigin } from "../features/auth/authorisationSlice";
+import { createLoginWindow } from '../utils/authUtils'
+import { setToken, setLoggedIn, removeToken } from "../features/auth/authorisationSlice";
 
 export const LoginCallback = ({ location }) => {
-  const authOrigin = useSelector((state) => state.auth.authOrigin);
-  const [redirect, setRedirect] = useState(false);
+  const params = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const [isReadyToRedirect, setIsReadyToRedirect] = useState(false);
   const dispatch = useDispatch();
-  const redirectUrl = authOrigin === "login" ? "/" : "mapathon-report/detailed";
 
   useEffect(() => {
-    const code = (location.search.match(/code=([^&]+)/) || [])[1];
-    const state = (location.search.match(/state=([^&]+)/) || [])[1];
-    let callbackUrl = `http://127.0.0.1:8000/auth/callback/?code=${code}&state=${state}`;
-    axios.get(callbackUrl)
-      .then((res) => {
-        setRedirect(true);
-        dispatch(setToken(res.data));
-        dispatch(setLoggedIn(true));
-      })
-      .catch(console.error);
-  },);
+    const code = params.get('code');
+    if (code !== null) {
+      window.opener.authComplete(code);
+      window.close();
+      return;
+    }
+    const access_token = params.get('access_token');
+    dispatch(setToken(access_token));
+    dispatch(setLoggedIn(true))
+    setIsReadyToRedirect(true);
+  },[dispatch, params]);
 
-  return (
-  <>
-    {redirect && (
-      <Redirect to={redirectUrl} />
-    )}
-  </>
-  );
+  const redirectUrl = params.get('redirect_to') ;
+
+  return <>{isReadyToRedirect && <Redirect to={redirectUrl} noThrow /> }</>;
 };
 
-export const Authorisation = (props) => {
-  const { origin } = props;
-  const loggedIn = useSelector((state) => state.auth.loggedIn);
+export const AuthorisationButton = ({redirectTo, origin }) => {
+  let history = useHistory();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
 
-  const { data, refetch } = useQuery('loginUrl', getLoginURL, { enabled: false, });
   const buttonStyles = origin === "mapathon" ? "underline text-red text-lg" : "text-xl uppercase p-2 mr-1";
   const divStyles = origin === "mapathon" ? "text-center mt-4" : "";
 
@@ -51,29 +41,21 @@ export const Authorisation = (props) => {
     switch(origin) {
       case 'mapathon':
         if (loggedIn) {
-          history.push("/mapathon-report/detailed")
+          history.push("/mapathon-report/detailed");
       } else {
-          refetch();
-          dispatch(setAuthOrigin("mapathon"))
+        createLoginWindow(redirectTo);
       }
         break;
       case 'login':
       default:
         if (!loggedIn) {
-          refetch(); 
-          dispatch(setAuthOrigin("login"));
+          createLoginWindow(redirectTo);
         } else {
           dispatch(setLoggedIn(false));
           dispatch(removeToken());
         }
     } 
   }
-
-  useEffect(() => {
-    if (data) {
-      createPopup(data.url);
-    }
-  });
 
   return (
     <div className={divStyles}>

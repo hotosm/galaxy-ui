@@ -6,7 +6,6 @@ export const AuthorisationSlice = createSlice({
   initialState: {
     loggedIn: false,
     accessToken: null,
-    authOrigin: "login"
   },
   reducers: {
     setLoggedIn: (state, action) => {
@@ -14,7 +13,7 @@ export const AuthorisationSlice = createSlice({
       state.loggedIn = action.payload;
     },
     setToken: (state, action) => {
-      const token = action.payload["access_token"];
+      const token = action.payload;
       safeStorage.setItem("token", token);
       state.accessToken = token;
     },
@@ -22,13 +21,9 @@ export const AuthorisationSlice = createSlice({
       safeStorage.removeItem("token");
       state.accessToken = null;
     },
-    setAuthOrigin: (state, action) => {
-      safeStorage.setItem("authOrigin", action.payload);
-      state.authOrigin = action.payload;
-    }
   }
 });
 
-export const { setToken, removeToken, setLoggedIn, setAuthOrigin } = AuthorisationSlice.actions;
+export const { setToken, removeToken, setLoggedIn } = AuthorisationSlice.actions;
 
 export default AuthorisationSlice.reducer;

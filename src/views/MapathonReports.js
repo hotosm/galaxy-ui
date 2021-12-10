@@ -10,10 +10,9 @@ import {
     MapathonSummaryResults, 
     TableResults as MapathonDetailedResults
 } from '../components/mapathon/mapathonResults';
-import { Authorisation } from "../components/auth";
-// import { sampleData } from '../utils/sortMapathonResultsData';
+import { AuthorisationButton } from "../components/auth";
 
-export const MapathonSummaryReport = () => {
+export const MapathonSummaryReport = (props) => {
     const { mutate, data, isLoading, error } = useMutation(getMapathonSummaryReport);
     return (
         <div>
@@ -21,7 +20,7 @@ export const MapathonSummaryReport = () => {
                   error={error ? 'Server Error' : null}
                   fetch={mutate}
               />
-            <Authorisation origin={"mapathon"}/>
+            <AuthorisationButton origin={"mapathon"} redirectTo={props.location.pathname}/>
             {isLoading && (<div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>)}
             {data && (<MapathonSummaryResults data={data}/>)}
         </div>
@@ -43,7 +42,6 @@ export const MapathonDetailedReport = () => {
                 />
                 {isLoading && (<div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>)}
                 {data && (<MapathonDetailedResults data={data}/>)}
-                {/* <MapathonDetailedResults data={sampleData}/> */}
             </div>
         )
     } else {

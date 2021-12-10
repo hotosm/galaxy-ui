@@ -4,7 +4,6 @@ const initialAppState = {
   auth: {
       loggedIn: safeStorage.getItem("loggedIn"),
       accessToken: safeStorage.getItem("token"),
-      authOrigin: safeStorage.getItem("authOrigin")
   },
   form: {
       projectIds: safeStorage.getItem("projectIds") ? safeStorage.getItem("projectIds") : "",

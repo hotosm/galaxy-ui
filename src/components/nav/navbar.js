@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { Link, NavLink } from "react-router-dom";
 import messages from "../messages";
 import logo from '../../assets/img/hot-logo.svg';
-import { Authorisation } from "../auth";
+import { AuthorisationButton } from "../auth";
 
 export function NavBar() {
   return (
@@ -36,7 +36,7 @@ export function NavBar() {
           </NavLink>
         </div>
       </div>
-      <Authorisation origin={"login"} />
+      <AuthorisationButton origin={"login"} redirectTo={window.location.pathname}/>
     </nav>
   )
 };
