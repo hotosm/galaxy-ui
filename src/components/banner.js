@@ -25,7 +25,7 @@ export function Banner() {
                     </p>
                 </div>
                 <div className="w-1/7 text-base text-2xl">
-                    <Button onClick={handleClick}>
+                    <Button onClick={handleClick} styles={"bg-red text-white py-2 px-4"}>
                         <FormattedMessage {...messages.exploreButton} />
                     </Button>
                 </div>

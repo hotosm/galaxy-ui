@@ -28,3 +28,4 @@ tailwind.generated.css
 
 # code editor files
 .vscode
+src/components/login.js
