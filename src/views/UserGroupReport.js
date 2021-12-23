@@ -8,7 +8,7 @@ import { getUserIds } from "../queries/getUserStats";
 export const UserGroupReport = () => {
   const { mutate, data, isLoading, error } = useMutation(getUserIds);
   const headings = [
-    "Mapper", "Buildings Created", "Buildings Modified", "Kms of Highway Modified" 
+    "Mapper", "Buildings Created", "Buildings Modified", "Kms of Highway Created", "Kms of Highway Modified", "Data Quality Issues"
   ];
     
   return (
