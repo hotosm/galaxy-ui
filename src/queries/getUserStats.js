@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"; 
 import { API_URL } from "../config";
 import { convertStringToArray } from "../utils/formatInputs";
 
@@ -24,13 +24,14 @@ export const getUserIds = async (requestData) => {
     "toTimestamp": endDate.toISOString(),
   }
   const { data } = await axios.post(`${API_URL}/osm-users/ids`, userBody);
+  return data;
 
-  let userResult = [...data];
+  // let userResult = [...data];
 
-  for (let i = 0; i< data.length; i++) {
-      userResult[i].stats = await getUserStats(data[i].userId, requestData)
-  }
+  // for (let i = 0; i< data.length; i++) {
+  //     userResult[i].stats = await getUserStats(data[i].userId, requestData)
+  // }
 
-  return userResult;
+  // return userResult;
 }
 

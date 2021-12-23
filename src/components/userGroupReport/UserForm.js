@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import { differenceInHours, addHours } from "date-fns";
+import { differenceInHours } from "date-fns";
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from '../formResponse';
 import messages from "../messages";
 
-export const UserGroupReportForm = ({fetch, error}) => {
+export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
   const intl = useIntl();
 
-    const [formData, setFormData] = useState({
-      startDate: addHours(new Date(), -1),
-      endDate: new Date(),
-      usernames: "",
-      mapathonHashtags: ""
-    });
+    // const [formData, setFormData] = useState({
+    //   startDate: addHours(new Date(), -1),
+    //   endDate: new Date(),
+    //   usernames: "",
+    //   mapathonHashtags: ""
+    // });
 
   const [formError, setFormError] = useState(null);
 
