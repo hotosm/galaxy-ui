@@ -17,6 +17,26 @@ export default defineMessages({
         id: 'header.tagline',
         defaultMessage: "Mapping our world together"
     },
+    privacyPolicy: {
+        id: 'banner.tracking.privacyPolicy',
+        defaultMessage: 'privacy policy',
+    },
+    aboutInfoCollected: {
+        id: 'banner.tracking.information.collected',
+        defaultMessage: 'About the information we collect',
+    },
+    trackingBannerText: {
+        id: "banner.tracking.text",
+        defaultMessage: 'We use cookies and similar technologies to recognise and analyse your visits, and measure traffic usage and activity. You can learn about how we use the data about your visit or information you provide reading our {link}. By clicking "I Agree", you consent to the use of cookies.'
+    },
+    disagree: {
+        id: 'banner.tracking.button.disagree',
+        defaultMessage: 'I Do Not Agree',
+      },
+      agree: {
+        id: 'banner.tracking.button.agree',
+        defaultMessage: 'I Agree',
+      },
     galaxyTagline: {
         id: 'home.galaxy.tagline',
         defaultMessage: "Access All OSM Data Outputs in One Portal"
