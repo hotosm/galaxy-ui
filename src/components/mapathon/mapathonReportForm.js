@@ -69,7 +69,6 @@ export const MapathonReportForm = ({fetch, error}) => {
                               });
                           }}
                           showTimeSelect
-                          timeFormat="HH:mm"
                           timeIntervals={15}
                           timeCaption="Time"
                           dateFormat="d MMMM, yyyy h:mm aa"
@@ -91,7 +90,6 @@ export const MapathonReportForm = ({fetch, error}) => {
                           }}
                           minDate={formData.startDate}
                           showTimeSelect
-                          timeFormat="HH:mm"
                           timeIntervals={15}
                           timeCaption="Time"
                           dateFormat=" d MMMM, yyyy h:mm aa"
