@@ -10,13 +10,6 @@ import messages from "../messages";
 export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
   const intl = useIntl();
 
-    // const [formData, setFormData] = useState({
-    //   startDate: addHours(new Date(), -1),
-    //   endDate: new Date(),
-    //   usernames: "",
-    //   mapathonHashtags: ""
-    // });
-
   const [formError, setFormError] = useState(null);
 
   useEffect(() => {
@@ -32,16 +25,15 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
   };
 
   const handleValidation = () => {
-      const { startDate, endDate } = formData;
-      let validDate = false;
-      
-      if (differenceInHours(endDate, startDate) > 0){
-          validDate = true;
-      } else {
-          setFormError("Invalid Time");
-      }
-      
-      return validDate;
+    const { startDate, endDate } = formData;
+    let validDate = false;
+    
+    if (differenceInHours(endDate, startDate) > 0){
+        validDate = true;
+    } else {
+        setFormError("Invalid Time");
+    }
+    return validDate;
   }
 
   const handleSubmit = (event) => {
@@ -71,7 +63,6 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
                               });
                           }}
                           showTimeSelect
-                          timeFormat="HH:mm"
                           timeIntervals={15}
                           timeCaption="Time"
                           dateFormat="d MMMM, yyyy h:mm aa"
@@ -93,7 +84,6 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
                           }}
                           minDate={formData.startDate}
                           showTimeSelect
-                          timeFormat="HH:mm"
                           timeIntervals={15}
                           timeCaption="Time"
                           dateFormat=" d MMMM, yyyy h:mm aa"

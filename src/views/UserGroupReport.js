@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 import { addHours } from "date-fns";
 import { useMutation } from 'react-query';
-import { TableResults as UserGroupResults } from "../components/formResults";
-import { UserGroupReportForm } from "../components/userGroupReport/UserForm";
+import { UserGroupResults } from "../components/userGroup/userGroupResults";
+import { UserGroupReportForm } from "../components/userGroup/userGroupForm";
 import { getUserIds, getUserStats } from "../queries/getUserStats";
-
 
 export const UserGroupReport = () => {
   const [users, setUsers] = useState([]);
@@ -19,18 +18,18 @@ export const UserGroupReport = () => {
 
   const { mutate, data, isLoading, error } = useMutation(getUserIds);
 
+  const fetchUserStats = useCallback(() => {
+    data.map((i) => getUserStats(i.userId, formData).then((res) => setUsers(oldUsersArray => [...oldUsersArray, {...i, stats: res}])))
+  }, [data, formData])
+
   useEffect(() => {
     if(data) {
-      data.map((i) => getUserStats(i.userId, formData).then((res) => setUsers(oldUsersArray => [...oldUsersArray, {...i, stats: res}])))
+      fetchUserStats()
     }
-  }, [data])
-  
-  console.log(data)
-
-  console.log(users)
+  }, [data, fetchUserStats])
   
   const headings = [
-    "Mapper", "Buildings Created", "Buildings Modified", "Kms of Highway Created", "Kms of Highway Modified", "Data Quality Issues"
+    "Mapper", "Buildings Created", "Buildings Modified", "Highways Created", "Highways Modified", "Data Quality Issues"
   ];
     
   return (
@@ -42,12 +41,13 @@ export const UserGroupReport = () => {
         error={error ? 'Server Error' : null}
       />
       {isLoading && (<div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>)}
-      {users.length > 0 && <UserGroupResults
-        data={users}
-        headings={headings}
-      />
-}
+      {users.length > 0 && (
+        <UserGroupResults
+          data={users}
+          headings={headings}
+          formData={formData}
+        />
+      )}
     </div>
   )
-
-}
+};
