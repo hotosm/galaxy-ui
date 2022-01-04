@@ -69,27 +69,27 @@ export default defineMessages({
         id: 'reports.mapathon.summary.zero.features',
         defaultMessage: "None"
     },
-    mapathonSummaryFormStartDate: {
+    mapathonFormStartDate: {
         id: 'reports.mapathon.summary.form.input.startDate',
         defaultMessage: "Start Date"
     },
-    mapathonSummaryFormEndDate: {
+    mapathonFormEndDate: {
         id: 'reports.mapathon.summary.form.input.endDate',
         defaultMessage: "End Date"
     },
-    mapathonSummaryFormProjectIds: {
+    mapathonFormProjectIds: {
         id: 'reports.mapathon.summary.form.input.projectIds',
         defaultMessage: "Tasking Manager Project IDs"
     },
-    mapathonSummaryFormIdsPlaceholder: {
+    mapathonFormIdsPlaceholder: {
         id: 'reports.mapathon.summary.form.projectIds.placeholder',
         defaultMessage: "Enter the Tasking Manager Project IDs separated by commas"
     },
-    mapathonSummaryFormHashtags: {
+    mapathonFormHashtags: {
         id: 'reports.mapathon.summary.form.input.hashtags',
         defaultMessage: "Mapathon Hashtags"
     },
-    mapathonSummaryFormHashtagsPlaceholder: {
+    mapathonFormHashtagsPlaceholder: {
         id: 'reports.mapathon.summary.form.hashtags.placeholder',
         defaultMessage: "Enter the hashtags separated by commas"
     },
@@ -97,21 +97,25 @@ export default defineMessages({
         id: 'reports.mapathon.summary.form.error.title',
         defaultMessage: "It was not possible to run this query."
     },
-    mapathonSummaryErrorEmptyFields: {
+    mapathonFormErrorEmptyFields: {
         id: 'reports.mapathon.summary.form.error.empty',
         defaultMessage: "Please fill in <b>one</b> of the following to continue"
     },
-    mapathonSummaryErrorInvalidIds: {
+    mapathonFormErrorInvalidIds: {
         id: 'reports.mapathon.summary.form.error.invalidIds',
         defaultMessage: "Please input numerical values for the TM Project IDs."
     },
-    mapathonSummaryErrorInvalidTime: {
+    mapathonFormErrorInvalidTime: {
         id: 'reports.mapathon.summary.form.error.invalidTime',
         defaultMessage: "Time difference should be less than or equal to 24 hours."
     },
     ServerError: {
         id: 'reports.mapathon.summary.form.error.server',
         defaultMessage: "There was a problem with the server - ({error}) while executing this query. Please try again later."
+    },
+    mapathonSubmitForm: {
+        id: 'reports.mapathon.form.submit.button',
+        defaultMessage: "Submit Your Query"
     },
     footerOrganisation: {
         id: 'about.footer.organisation',
