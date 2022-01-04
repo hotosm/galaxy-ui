@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
-import { addHours } from "date-fns";
-import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
 import messages from "../messages";
-import { validateMapathonFormData } from "../../utils/validationUtils";
-import { setProjectIds, setHashtags } from "../../features/form/formDataSlice";
+import { validateMapathonFormData } from '../../utils/validationUtils';
+import { MapathonContext } from "../../context/mapathonContext";
 
 export const MapathonReportForm = ({ fetch, error }) => {
   const intl = useIntl();
-  const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    startDate: addHours(new Date(), -1),
-    endDate: new Date(),
-    TMProjectIds: useSelector((state) => state.form.projectIds),
-    mapathonHashtags: useSelector((state) => state.form.hashtags),
-  });
+const { formData, setFormData } = useContext(MapathonContext)
 
   const [formError, setFormError] = useState(null);
 
@@ -39,13 +31,11 @@ export const MapathonReportForm = ({ fetch, error }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      let isValid = validateMapathonFormData(formData);
-      if (isValid) {
-        dispatch(setProjectIds(formData.TMProjectIds));
-        dispatch(setHashtags(formData.mapathonHashtags));
-        fetch(formData); // API call
-        setFormError(null);
-      }
+        let isValid = validateMapathonFormData(formData)
+        if (isValid) {
+            fetch(formData); // API call
+            setFormError(null);
+        }
     } catch (e) {
       setFormError(e.message);
     }
@@ -94,7 +84,7 @@ export const MapathonReportForm = ({ fetch, error }) => {
                           timeIntervals={15}
                           timeCaption="Time"
                           dateFormat=" d MMMM, yyyy h:mm aa"
-                          className="w-full p-2 block  border border-grey-light mt-5"
+                          className="w-full p-2 block border border-grey-light mt-5"
                       />
                   </div>
               </div>
@@ -124,14 +114,14 @@ export const MapathonReportForm = ({ fetch, error }) => {
                       className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
                   />
               </div>
-        </div>
-        <div className="text-center mt-4">
-          <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
-            Submit Your Query
-          </SubmitButton>
-        </div>
-      </form>
-      {formError && (
+          </div>
+          <div className="text-center mt-4">
+              <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
+                  <FormattedMessage {...messages.mapathonSubmitForm}/>
+              </SubmitButton>
+          </div>
+        </form>
+        {formError && (
         <Error>
           <MapathonErrorMessage error={formError} />
         </Error>

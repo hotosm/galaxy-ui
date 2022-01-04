@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { saveState, loadState } from "./state";
-import authReducer from "../features/auth/authorisationSlice";
-import formReducer from "../features/form/formDataSlice";
+import authReducer from '../features/auth/authorisationSlice';
 
 const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    form: formReducer,
-  },
-  preloadedState: loadState(),
+    reducer: {
+        auth: authReducer,
+    },
+    preloadedState: loadState(),
 });
 
 store.subscribe(() => {
