@@ -2,17 +2,9 @@ import * as safeStorage from "../utils/safeStorage";
 
 const initialAppState = {
   auth: {
-    loggedIn: safeStorage.getItem("loggedIn"),
-    accessToken: safeStorage.getItem("token"),
-  },
-  form: {
-    projectIds: safeStorage.getItem("projectIds")
-      ? safeStorage.getItem("projectIds")
-      : "",
-    hashtags: safeStorage.getItem("hashtags")
-      ? safeStorage.getItem("hashtags")
-      : "",
-  },
+      loggedIn: safeStorage.getItem("loggedIn"),
+      accessToken: safeStorage.getItem("token"),
+  }
 };
 
 export const saveState = (state) => {
