@@ -4,36 +4,36 @@ import messages from "../messages";
 
 export const MapathonErrorMessage = ({ error }) => {
   if (error === "Missing fields") {
-    return (
-      <>
-        <FormattedMessage
-          {...messages.mapathonSummaryErrorEmptyFields}
-          values={{
-            b: (chunks) => <b>{chunks}</b>,
-          }}
-        />
-        <li>
-          <FormattedMessage {...messages.mapathonSummaryFormProjectIds} />
-        </li>
-        <li>
-          <FormattedMessage {...messages.mapathonSummaryFormHashtags} />
-        </li>
+      return (
+          <>
+          <FormattedMessage
+              {...messages.mapathonFormErrorEmptyFields}
+              values={{
+                  b: chunks => <b>{chunks}</b>
+              }}
+          />
+          <li>
+              <FormattedMessage {...messages.mapathonFormProjectIds} />
+          </li>
+          <li>
+          <FormattedMessage {...messages.mapathonFormHashtags} />
+          </li>  
       </>
-    );
-  } else if (error === "Invalid IDs") {
-    return (
-      <p>
-        <FormattedMessage {...messages.mapathonSummaryErrorInvalidIds} />
-      </p>
-    );
-  } else if (error === "Invalid Time") {
-    return (
-      <p>
-        <FormattedMessage {...messages.mapathonSummaryErrorInvalidTime} />
-      </p>
-    );
+      )
+  } else if(error === 'Invalid IDs') {
+      return (
+          <p>
+              <FormattedMessage {...messages.mapathonFormErrorInvalidIds}/>
+          </p>
+      )
+  } else if (error === 'Invalid Time') {
+      return (
+          <p>
+              <FormattedMessage {...messages.mapathonFormErrorInvalidTime}/>
+          </p>
+      )
   } else {
-    return (
+      return (
       <FormattedMessage
         {...messages.ServerError}
         values={{
