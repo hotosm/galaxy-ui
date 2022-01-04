@@ -1,35 +1,52 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { API_URL } from "../config";
+import { useDownloadFile } from '../hooks/useDownloadFile';
 
-export const DownloadFileLink = ({name, type, formData}) => {
-  const { startDate, endDate } = formData;
-  const [fileData, setFileData] = useState("");
+export const DownloadFileLink = ({username, type, startDate, endDate}) => {
 
-  const fetchFile = useCallback(async () => {
-        const body = {
-            "fromTimestamp": startDate,
-            "toTimestamp": endDate,
-            "osmUsernames": [name],
-            "issueTypes": ["badgeom"],
-            "outputType": type === "json" ? "geojson" : type
-          }
-        const { data } = await  axios.post(`${API_URL}/data-quality/user-reports`, body);
-        setFileData(data);
-  }, [endDate, name, startDate, type])
+  const fetchFile = () => {
+    const body = {
+      "fromTimestamp": startDate,
+      "toTimestamp": endDate,
+      "osmUsernames": [username],
+      "issueTypes": ["badgeom"],
+      "outputType": type === "json" ? "geojson" : type
+    }
+    return axios.post(`${API_URL}/data-quality/user-reports`, body)
+  }
 
-  useEffect(() => {
-    fetchFile();
-  }, [fetchFile])
+  const getFileName = () => {
+    return `${username}.${type}`;
+  };
+
+  const onError = () => {
+    console.log('error')
+  }
+
+  const { ref, fileData, download, fileName } = useDownloadFile({
+    fetchFile,
+    onError,
+    getFileName,
+  });
 
   return (
-      <a
-          href={type === "csv" ? `data:text/csv;charset=utf-8,${escape(fileData)}` :
-          "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fileData))}
-          download={`${name}.${type}`}
-          className="underline text-red"
+    <>
+      <a 
+        href={type === "csv" ? `data:text/csv;charset=utf-8,${escape(fileData)}` :
+          "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fileData))} 
+        download={fileName} 
+        className="hidden" 
+        ref={ref} 
+      />
+      <button
+        name="user-quality-btn "
+        onClick={download} 
+        className="underline text-red"
       >
-          {type === 'csv' ? <span>CSV</span> : <span>JSON</span>}
-      </a>
+        {type === 'csv' ? "CSV" : "JSON"}
+      </button>
+    </>
   )
 };

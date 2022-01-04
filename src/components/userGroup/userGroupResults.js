@@ -37,9 +37,19 @@ export const UserGroupResults = ({data, headings, formData}) => {
                             <td className="py-2 px-7 text-lg">{featureActionCount(i["stats"], "highway", "modify")}</td>
                             <td className="py-2 px-7 text-lg">
                                 Download &nbsp;
-                                <DownloadFileLink name={i["userName"]} type={"csv"} formData={formData}/>
+                                <DownloadFileLink
+                                    username={i["userName"]} 
+                                    type={"csv"} 
+                                    startDate={formData.startDate}
+                                    endDate={formData.endDate}
+                                />
                                 /
-                                <DownloadFileLink name={i["userName"]} type={"json"} formData={formData}/>
+                                <DownloadFileLink
+                                    username={i["userName"]}
+                                    type={"json"} 
+                                    startDate={formData.startDate}
+                                    endDate={formData.endDate}
+                                />
                             </td>
                         </tr>
                   )})}
