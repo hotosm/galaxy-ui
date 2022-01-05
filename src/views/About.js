@@ -113,7 +113,7 @@ export function About() {
                                 </li>
                                 <li className="document-link">
                                     <a 
-                                    href="https://osm-stats.hotosm.org/data/download/osmstats"
+                                    href="https://osm-stats.hotosm.org/data/download/galaxy"
                                     target="_blank"
                                     rel="noreferrer"
                                     >
