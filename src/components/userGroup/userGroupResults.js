@@ -6,7 +6,7 @@ const featureActionCount = (array, feature, action) => {
   return x[0] ? x[0]["count"] : 0;
 };
 
-export const UserGroupResults = ({data, headings, formData}) => {
+export const UserGroupResults = ({data, headings, startDate, endDate}) => {
   if (data.length > 0) {
       return (
           <table className="table-fixed mt-5 mx-auto">
@@ -40,15 +40,15 @@ export const UserGroupResults = ({data, headings, formData}) => {
                                 <DownloadFileLink
                                     username={i["userName"]} 
                                     type={"csv"} 
-                                    startDate={formData.startDate}
-                                    endDate={formData.endDate}
+                                    startDate={startDate}
+                                    endDate={endDate}
                                 />
                                 /
                                 <DownloadFileLink
                                     username={i["userName"]}
                                     type={"json"} 
-                                    startDate={formData.startDate}
-                                    endDate={formData.endDate}
+                                    startDate={startDate}
+                                    endDate={endDate}
                                 />
                             </td>
                         </tr>
@@ -58,9 +58,9 @@ export const UserGroupResults = ({data, headings, formData}) => {
       )
   } else {
       return (
-          <div className="mx-auto text-center w-1/4 p-1 mt-5">
-              <p className="text-lg">No data found!</p>
-          </div>
+        <div className="mx-auto text-center w-1/4 p-1 mt-5">
+        <p className="text-lg">No data found!</p>
+        </div>
       );
   }
 };

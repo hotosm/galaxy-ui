@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import { differenceInHours } from "date-fns";
+import { differenceInMinutes } from "date-fns";
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from '../formResponse';
 import messages from "../messages";
 
-export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
+export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUsers }) => {
   const intl = useIntl();
 
   const [formError, setFormError] = useState(null);
@@ -28,7 +28,7 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
     const { startDate, endDate } = formData;
     let validDate = false;
     
-    if (differenceInHours(endDate, startDate) > 0){
+    if (differenceInMinutes(endDate, startDate) > 0){
         validDate = true;
     } else {
         setFormError("Invalid Time");
@@ -40,6 +40,7 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
       event.preventDefault();
       let isValid = handleValidation()
       if (isValid) {
+          setUsers([]);
         fetch(formData); // API call
         setFormError(null);
       }
@@ -98,7 +99,7 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData}) => {
                   <textarea
                       name="usernames"
                       rows="7"
-                      placeholder={"username-1, username -2,...upto 50 usernames"}
+                      placeholder={"username-1, username-2,...upto 50 usernames"}
                       value={formData.usernames}
                       onChange={handleChange}
                       className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
