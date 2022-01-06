@@ -58,60 +58,44 @@ export const MapathonSummaryResults = ({ data }) => {
   );
 };
 
-export const TableResults = ({ data }) => {
-  const headings = [
-    "Mapper",
-    "Buildings Added",
-    "Buildings Modified",
-    "Highway (Km) Added",
-    "Tasks Mapped",
-    "Tasks Validated",
-  ];
-  const { mappedFeatures, contributors } = data;
-  if (mappedFeatures.length > 0 && contributors.length > 0) {
-    return (
-      <table className="table-fixed mt-5 mx-auto">
-        <thead>
-          <tr>
-            {headings.map((i, n) => (
-              <th
-                key={n}
-                className="w-1/6 text-left font-normal text-xl px-7 py-4"
-              >
-                {i}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sortUserData(data).map((i) => (
-            <tr key={i["userId"]}>
-              <td className="py-2 px-7 text-lg">
-                <NavLink
-                  to={{
-                    pathname: `https://www.openstreetmap.org/user/${i["username"]}`,
-                  }}
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  {i["username"]}
-                </NavLink>
-              </td>
-              <td className="py-2 px-7 text-lg">{i["totalBuildings"]}</td>
-              <td className="py-2 px-7 text-lg">{i["modifiedBuildings"]}</td>
-              <td className="py-2 px-7 text-lg">{i["createdHighways"]}</td>
-              <td className="py-2 px-7 text-lg">{i["mappedTasks"]}</td>
-              <td className="py-2 px-7 text-lg">{i["validatedTasks"]}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  } else {
-    return (
-      <div className="mx-auto text-center w-1/4 p-1 mt-5">
-        <p className="text-lg">No data found!</p>
-      </div>
-    );
-  }
+export const TableResults = ({data}) => {
+    const headings = ["Mapper", "Buildings Added", "Buildings Modified", "Highways Added","Tasks Mapped", "Tasks Validated"];
+    const { mappedFeatures, contributors } = data
+    if (mappedFeatures.length > 0 && contributors.length > 0) {
+        return (
+            <table className="table-fixed mt-5 mx-auto">
+                <thead>
+                    <tr>
+                        {headings.map((i, n) => <th key={n} className="w-1/6 text-left font-normal text-xl px-7 py-4">{i}</th>)}
+                    </tr>
+                </thead>
+                <tbody>
+                    {sortUserData(data).map((i) => (
+                        <tr key={i["userId"]}>
+                            <td className="py-2 px-7 text-lg">
+                                <NavLink
+                                to={{ pathname:`https://www.openstreetmap.org/user/${i["username"]}`}}
+                                target="_blank"
+                                className="hover:underline"
+                                >
+                                    {i["username"]}
+                                </NavLink>
+                            </td>
+                            <td className="py-2 px-7 text-lg">{i["addedBuildings"]}</td>
+                            <td className="py-2 px-7 text-lg">{i["modifiedBuildings"]}</td>
+                            <td className="py-2 px-7 text-lg">{i["createdHighways"]}</td>
+                            <td className="py-2 px-7 text-lg">{i["mappedTasks"]}</td>
+                            <td className="py-2 px-7 text-lg">{i["validatedTasks"]}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        )
+    } else {
+        return (
+            <div className="mx-auto text-center w-1/4 p-1 mt-5">
+                <p className="text-lg">No data found!</p>
+            </div>
+        );
+    }
 };

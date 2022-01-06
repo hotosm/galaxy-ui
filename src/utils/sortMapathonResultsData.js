@@ -11,21 +11,12 @@ const featureActionCount = (array, feature, action, name) => {
 export const sortUserData = (obj) => {
   const arr = [];
   obj.contributors.forEach((i) => {
-    arr.push({
-      ...i,
-      modifiedBuildings: featureActionCount(
-        obj.mappedFeatures,
-        "building",
-        "modify",
-        i["username"]
-      ),
-      createdHighways: featureActionCount(
-        obj.mappedFeatures,
-        "highway",
-        "modify",
-        i["username"]
-      ),
-    });
-  });
+      arr.push({
+          ...i,
+          addedBuildings: featureActionCount(obj.mappedFeatures, "building", "create", i["username"]),
+          modifiedBuildings: featureActionCount(obj.mappedFeatures, "building", "modify", i["username"]),
+          createdHighways: featureActionCount(obj.mappedFeatures, "highway", "create", i["username"])
+      })
+  })
   return arr;
 };
