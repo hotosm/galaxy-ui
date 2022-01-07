@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import { differenceInMinutes } from "date-fns";
+import { differenceInMinutes, getTime } from "date-fns";
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
@@ -24,26 +24,11 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
       });
   };
 
-  const handleValidation = () => {
-    const { startDate, endDate } = formData;
-    let validDate = false;
-    
-    if (differenceInMinutes(endDate, startDate) > 0){
-        validDate = true;
-    } else {
-        setFormError("Invalid Time");
-    }
-    return validDate;
-  }
-
   const handleSubmit = (event) => {
       event.preventDefault();
-      let isValid = handleValidation()
-      if (isValid) {
-          setUsers([]);
+        setUsers([]);
         fetch(formData); // API call
         setFormError(null);
-      }
   }
     return (
       <>
@@ -84,6 +69,7 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
                               });
                           }}
                           minDate={formData.startDate}
+                          filterTime={(time) => getTime(formData.startDate) < getTime(time)}
                           showTimeSelect
                           timeIntervals={15}
                           timeCaption="Time"
