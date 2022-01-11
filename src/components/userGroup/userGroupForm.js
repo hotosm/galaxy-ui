@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import DatePicker from "react-datepicker";
-import { differenceInMinutes, getTime } from "date-fns";
+import { getTime } from "date-fns";
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
-import { Error } from '../formResponse';
-import messages from "../messages";
+import { Error } from '../formResponses';
+import { UserGroupErrorMessage } from './userGroupError'
+import messages from "./messages";
 
-export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUsers }) => {
+export const UserGroupReportForm = ({fetch, formData, setFormData, setUsers, formError, setFormError }) => {
   const intl = useIntl();
 
-  const [formError, setFormError] = useState(null);
-
   useEffect(() => {
-    if (error) setFormError(error)
-    else setFormError(null);
-  }, [formData, error])
+    setFormError(null);
+  }, [formData, setFormError])
 
   const handleChange = (e) => {
       setFormData({ 
@@ -25,10 +23,14 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
   };
 
   const handleSubmit = (event) => {
-      event.preventDefault();
+    event.preventDefault();
+    if (formData.usernames.length > 0) {
         setUsers([]);
         fetch(formData); // API call
         setFormError(null);
+    } else {
+        setFormError("Missing field");
+    }
   }
     return (
       <>
@@ -38,7 +40,7 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
                   <div className="text-xl">
                       <label>
                           <span className="text-red">* </span>
-                          <FormattedMessage {...messages.mapathonSummaryFormStartDate}/>:
+                          <FormattedMessage {...messages.StartDate}/>:
                       </label>
                       <DatePicker
                           selected={formData.startDate}
@@ -52,13 +54,13 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
                           timeIntervals={15}
                           timeCaption="Time"
                           dateFormat="d MMMM, yyyy h:mm aa"
-                          className="w-full p-2 block  border border-grey-light mt-5"
+                          className="w-full p-2 block border border-grey-light mt-5"
                       />
                   </div>
                   <div className="text-xl">
                       <label>
                           <span className="text-red">* </span>
-                          <FormattedMessage {...messages.mapathonSummaryFormEndDate}/>:
+                          <FormattedMessage {...messages.EndDate}/>:
                       </label>
                       <DatePicker
                           selected={formData.endDate}
@@ -80,12 +82,13 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
               </div>
               <div className="flex flex-col py-2 col-span-3 text-xl">
                   <label>
-                  OpenStreetMap Users to Track:
+                    <span className="text-red">* </span>
+                    <FormattedMessage {...messages.UsersToTrack}/>:
                   </label>
                   <textarea
                       name="usernames"
                       rows="7"
-                      placeholder={"username-1, username-2,...upto 50 usernames"}
+                      placeholder={intl.formatMessage(messages.UsernamesPlaceholder)}
                       value={formData.usernames}
                       onChange={handleChange}
                       className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
@@ -93,12 +96,12 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
               </div>
               <div className="flex flex-col py-2 col-span-3 text-xl">
                   <label>
-                      <FormattedMessage {...messages.mapathonSummaryFormHashtags}/>:
+                      <FormattedMessage {...messages.Hashtags}/>:
                   </label>
                   <textarea
                       name="mapathonHashtags"
                       rows="7"
-                      placeholder={intl.formatMessage(messages.mapathonSummaryFormHashtagsPlaceholder)}
+                      placeholder={intl.formatMessage(messages.HashtagsPlaceholder)}
                       value={formData.mapathonHashtags}
                       onChange={handleChange}
                       className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
@@ -107,11 +110,15 @@ export const UserGroupReportForm = ({fetch, error, formData, setFormData, setUse
           </div>
           <div className="text-center mt-4">
               <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
-                  Submit Your Query
+                  <FormattedMessage {...messages.Submit}/>
               </SubmitButton>
           </div>
         </form>
-        {formError && <Error error={formError} />}
+        {formError && (
+        <Error>
+            <UserGroupErrorMessage error={formError} />
+        </Error>
+        )}
       </>
     )
 };

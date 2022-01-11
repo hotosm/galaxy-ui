@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
-import { Error } from '../formResponse';
+import { Error } from '../formResponses';
+import { MapathonErrorMessage } from './mapathonError';
 import messages from "../messages";
 import { validateMapathonFormData } from '../../utils/validationUtils';
 import { setProjectIds, setHashtags } from "../../features/form/formDataSlice";
@@ -130,7 +131,11 @@ export const MapathonReportForm = ({fetch, error}) => {
               </SubmitButton>
           </div>
         </form>
-        {formError && <Error error={formError} />}
+        {formError && (
+        <Error>
+            <MapathonErrorMessage error={formError} />
+        </Error>
+        )}
       </>
     )
 };

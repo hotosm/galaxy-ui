@@ -69,7 +69,7 @@ export default defineMessages({
         id: 'reports.mapathon.summary.form.hashtags.placeholder',
         defaultMessage: "Enter the hashtags separated by commas"
     },
-    mapathonSummaryErrorTitle: {
+    ErrorTitle: {
         id: 'reports.mapathon.summary.form.error.title',
         defaultMessage: "It was not possible to run this query."
     },
@@ -85,9 +85,9 @@ export default defineMessages({
         id: 'reports.mapathon.summary.form.error.invalidTime',
         defaultMessage: "Time difference should be less than or equal to 24 hours."
     },
-    mapathonSummaryServerError: {
+    ServerError: {
         id: 'reports.mapathon.summary.form.error.server',
-        defaultMessage: "There was a problem with the server - {error} while executing this query. Please try again later."
+        defaultMessage: "There was a problem with the server - ({error}) while executing this query. Please try again later."
     },
     footerOrganisation: {
         id: 'about.footer.organisation',
