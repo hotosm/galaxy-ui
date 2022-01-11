@@ -1,24 +1,37 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { DownloadFileLink } from '../downloadLink';
+import messages from "./messages";
 
 const featureActionCount = (array, feature, action) => {
   let x = array.filter((i) => i["feature"] === feature && i["action"] === action);
   return x[0] ? x[0]["count"] : 0;
 };
 
-export const UserGroupResults = ({data, headings, startDate, endDate}) => {
-  if (data.length > 0) {
+const USER_GROUP_COLUMN_HEADINGS = [
+    { title: "Mapper" }, 
+    { title: "CreatedBuildings" }, 
+    { title: "ModifiedBuildings" }, 
+    { title: "CreatedHighways" }, 
+    { title: "ModifiedHighways" },
+    { title: "DataQualityIssues" }
+]
+
+export const UserGroupResults = ({users, startDate, endDate}) => {
+  if (users.length > 0) {
       return (
           <table className="table-fixed mt-5 mx-auto">
               <thead>
                   <tr>
-                      {headings.map((i, n) => (
-                        <th key={n} className="w-1/6 text-left font-bold text-xl px-7 py-4">{i}</th>
+                      {USER_GROUP_COLUMN_HEADINGS.map((i, n) => (
+                        <th key={n} className="w-1/6 text-left font-bold text-xl px-7 py-4">
+                            <FormattedMessage {...messages[i.title]} />
+                        </th>
                       ))}
                   </tr>
               </thead>
               <tbody>
-                  {data.map((i) => {
+                  {users.map((i) => {
                       return (
                         <tr key={i["userId"]}>
                             <td className="py-2 px-7 text-lg">
