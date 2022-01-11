@@ -117,6 +117,30 @@ export default defineMessages({
         id: 'reports.mapathon.form.submit.button',
         defaultMessage: "Submit Your Query"
     },
+    Mapper: {
+        id: 'reports.mapathon.detailed.column.mapper',
+        defaultMessage: 'Mapper'
+    },
+    AddedBuildings: {
+        id: 'reports.mapathon.detailed.column.buildingsAdded',
+        defaultMessage: 'Buildings Added'
+    },
+    ModifiedBuildings: {
+        id: 'reports.mapathon.detailed.column.buildingsModified',
+        defaultMessage: 'Buildings Modified'
+    },
+    AddedHighways: {
+        id: 'reports.mapathon.detailed.column.highwaysAdded',
+        defaultMessage: 'Highways Added'
+    },
+    MappedTasks: {
+        id: 'reports.mapathon.detailed.column.tasksMapped',
+        defaultMessage: 'Tasks Mapped'
+    },
+    ValidatedTasks: {
+        id: 'reports.mapathon.detailed.column.validatedTasks',
+        defaultMessage: 'Tasks Validated'
+    },
     footerOrganisation: {
         id: 'about.footer.organisation',
         defaultMessage: 'This project is under development by {OrganisationLink}.'

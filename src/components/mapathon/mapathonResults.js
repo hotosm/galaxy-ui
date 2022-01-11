@@ -57,16 +57,33 @@ export const MapathonSummaryResults = ({ data }) => {
     </div>
   );
 };
+const MAPATHON_DETAILED_COLUMN_HEADINGS= [
+    { title: "Mapper" }, 
+    { title: "AddedBuildings" }, 
+    { title: "ModifiedBuildings" }, 
+    { title: "AddedHighways" }, 
+    { title: "MappedTasks" },
+    { title: "ValidatedTasks" }
+];
 
-export const TableResults = ({data}) => {
-    const headings = ["Mapper", "Buildings Added", "Buildings Modified", "Highways Added","Tasks Mapped", "Tasks Validated"];
+
+export const MapathonDetailedResults = ({data}) => {
     const { mappedFeatures, contributors } = data
     if (mappedFeatures.length > 0 && contributors.length > 0) {
         return (
             <table className="table-fixed mt-5 mx-auto">
                 <thead>
                     <tr>
-                        {headings.map((i, n) => <th key={n} className="w-1/6 text-left font-normal text-xl px-7 py-4">{i}</th>)}
+                        {MAPATHON_DETAILED_COLUMN_HEADINGS.map((i, n) => {
+                            return(
+                                <th 
+                                    key={n} 
+                                    className="w-1/6 text-left font-normal text-xl px-7 py-4"
+                                >
+                                    <FormattedMessage {...messages[i.title]} />
+                                </th> 
+                            )}
+                        )}
                     </tr>
                 </thead>
                 <tbody>
