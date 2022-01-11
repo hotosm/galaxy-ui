@@ -8,7 +8,7 @@ import {
 } from "../queries/index";
 import {
   MapathonSummaryResults,
-  TableResults as MapathonDetailedResults,
+  MapathonDetailedResults,
 } from "../components/mapathon/mapathonResults";
 import { AuthorisationButton } from "../components/auth";
 
