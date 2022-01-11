@@ -15,7 +15,7 @@ const USER_GROUP_COLUMN_HEADINGS = [
     { title: "CreatedHighways" }, 
     { title: "ModifiedHighways" },
     { title: "DataQualityIssues" }
-]
+];
 
 export const UserGroupResults = ({users, startDate, endDate}) => {
   if (users.length > 0) {
@@ -72,7 +72,9 @@ export const UserGroupResults = ({users, startDate, endDate}) => {
   } else {
       return (
         <div className="mx-auto text-center w-1/4 p-1 mt-5">
-        <p className="text-lg">No data found!</p>
+            <p className="text-lg">
+                <FormattedMessage {...messages.noDataFound} />
+            </p>
         </div>
       );
   }

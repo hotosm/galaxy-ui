@@ -38,27 +38,31 @@ export default defineMessages({
     defaultMessage: "There was a problem with the server - ({error}) while executing this query. Please try again later."
   },
   Mapper: {
-    id: 'reports.mapathon.detailed.column.mapper',
+    id: 'reports.user.group.table.column.mapper',
     defaultMessage: 'Mapper'
   },
   CreatedBuildings: {
-    id: 'reports.mapathon.detailed.column.buildingsAdded',
+    id: 'reports.user.group.table.column.buildingsCreated',
     defaultMessage: 'Buildings Created'
   },
   ModifiedBuildings: {
-    id: 'reports.mapathon.detailed.column.buildingsModified',
+    id: 'reports.user.group.table.column.buildingsModified',
     defaultMessage: 'Buildings Modified'
   },
   CreatedHighways: {
-    id: 'reports.mapathon.detailed.column.highwaysAdded',
+    id: 'reports.user.group.table.column.highwaysCreated',
     defaultMessage: 'Highways Created'
   },
   ModifiedHighways: {
-    id: 'reports.mapathon.detailed.column.tasksMapped',
+    id: 'reports.user.group.table.column.highwaysModified',
     defaultMessage: 'Highways Modified'
   },
   DataQualityIssues: {
-    id: 'reports.mapathon.detailed.column.validatedTasks',
+    id: 'reports.user.group.table.column.dataQualityIssues',
     defaultMessage: 'Data Quality Issues'
   },
+  noDataFound: {
+    id: 'reports.user.group.results.no.data',
+    defaultMessage: 'No Data Found!'
+  }
 })
