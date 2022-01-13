@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import axios from 'axios';
 import React from "react";
+import { useEffect } from "react";
 import { API_URL } from "../config";
 import { useDownloadFile } from '../hooks/useDownloadFile';
 
-export const DownloadFileLink = ({username, type, startDate, endDate}) => {
+export const DownloadFileLink = ({username, type, startDate, endDate, setDownloadError }) => {
 
   const fetchFile = () => {
     const body = {
@@ -21,15 +22,14 @@ export const DownloadFileLink = ({username, type, startDate, endDate}) => {
     return `${username}.${type}`;
   };
 
-  const onError = () => {
-    console.log('error')
-  }
-
-  const { ref, fileData, download, fileName } = useDownloadFile({
+  const { ref, fileData, download, fileName, fileError } = useDownloadFile({
     fetchFile,
-    onError,
     getFileName,
   });
+
+  useEffect(() => {
+    setDownloadError(fileError)
+  }, [fileError, setDownloadError])
 
   return (
     <>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { DownloadFileLink } from '../downloadLink';
 import messages from "./messages";
+import { Error } from '../formResponses';
+import { UserGroupErrorMessage } from "./userGroupError";
 
 const featureActionCount = (array, feature, action) => {
   let x = array.filter((i) => i["feature"] === feature && i["action"] === action);
@@ -18,8 +20,17 @@ const USER_GROUP_COLUMN_HEADINGS = [
 ];
 
 export const UserGroupResults = ({users, startDate, endDate}) => {
+    const [downloadError, setDownloadError] = useState(null)
   if (users.length > 0) {
       return (
+          <>
+            {downloadError && (
+                <Error>
+                    <UserGroupErrorMessage
+                        error={downloadError}
+                    />
+                </Error>
+            )}
           <table className="table-fixed mt-5 mx-auto">
               <thead>
                   <tr>
@@ -55,6 +66,7 @@ export const UserGroupResults = ({users, startDate, endDate}) => {
                                     type={"csv"} 
                                     startDate={startDate}
                                     endDate={endDate}
+                                    setDownloadError={setDownloadError}
                                 />
                                 /
                                 <DownloadFileLink
@@ -62,12 +74,14 @@ export const UserGroupResults = ({users, startDate, endDate}) => {
                                     type={"json"} 
                                     startDate={startDate}
                                     endDate={endDate}
+                                    setDownloadError={setDownloadError}
                                 />
                             </td>
                         </tr>
                   )})}
               </tbody>
           </table>
+          </>
       )
   } else {
       return (

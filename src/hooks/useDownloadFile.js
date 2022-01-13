@@ -2,12 +2,12 @@ import { useRef, useState } from "react";
 
 export const useDownloadFile = ({
   fetchFile,
-  onError,
   getFileName,
 }) => {
   const ref = useRef(null);
-  const [fileData, setFileData] = useState();;
+  const [fileData, setFileData] = useState();
   const [fileName, setFileName] = useState();
+  const [fileError, setFileError] = useState(null)
 
   const download = async () => {
     try {
@@ -16,9 +16,13 @@ export const useDownloadFile = ({
       setFileName(getFileName());
       ref.current?.click();
     } catch (error) {
-      onError();
+      if(error.response.status === 500) {
+        setFileError(error.response.data);
+      } else {
+        setFileError(error.response.data.detail[0]['msg']);
+      }
     }
   };
 
-  return { download, ref, fileData, fileName };
+  return { download, ref, fileData, fileName, fileError };
 };
