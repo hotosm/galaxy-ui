@@ -29,6 +29,10 @@ export default defineMessages({
         id: 'home.galaxy.explore.button',
         defaultMessage: "Start Exploring Data"
     },
+    unauthorised: {
+        id: 'reports.unauthorised.section',
+        defaultMessage: "Please log in first to view the report."
+    },
     mapathonSummaryContributors: {
         id: 'reports.mapathon.summary.contributors',
         defaultMessage: "Total Unique Contributors"

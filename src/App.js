@@ -4,6 +4,7 @@ import {
   Switch,
   Route
  } from "react-router-dom";
+import { ProtectedRoute } from './components/protectedRoute';
 import Header from "./components/nav/header";
 import { LoginCallback } from "./components/auth";
 import { About } from "./views/About";
@@ -24,7 +25,9 @@ function App(){
           <Route path="/explore" component={Reports}/>
           <Route path="/mapathon-report/summary" component={MapathonSummaryReport}/>
           <Route path="/mapathon-report/detailed" component={MapathonDetailedReport} />
-          <Route path="/user-report" component={UserGroupReport} />
+          <ProtectedRoute path={"/user-report"}>
+            <UserGroupReport />
+          </ProtectedRoute>
         </Switch>
       </div>
     </Router>
