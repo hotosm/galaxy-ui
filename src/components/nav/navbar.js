@@ -16,7 +16,7 @@ export function NavBar() {
       </Link>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto mx-12">
         <div className="text-xl uppercase lg:flex-grow">
-          <NavLink
+        <NavLink
             to="/explore"
             activeStyle={{
               borderBottom: "2px solid #2c3038", 
