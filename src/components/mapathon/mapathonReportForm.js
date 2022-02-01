@@ -9,7 +9,7 @@ import messages from "../messages";
 import { validateMapathonFormData } from '../../utils/validationUtils';
 import { MapathonContext } from "../../context/mapathonContext";
 
-export const MapathonReportForm = ({ fetch, error }) => {
+export const MapathonReportForm = ({fetch, error, loading}) => {
   const intl = useIntl();
 
 const { formData, setFormData } = useContext(MapathonContext)
@@ -116,7 +116,7 @@ const { formData, setFormData } = useContext(MapathonContext)
               </div>
           </div>
           <div className="text-center mt-4">
-              <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
+              <SubmitButton styles="bg-red text-white py-3 px-10 text-xl" disabled={loading}>
                   <FormattedMessage {...messages.mapathonSubmitForm}/>
               </SubmitButton>
           </div>
