@@ -141,6 +141,14 @@ export default defineMessages({
         id: 'reports.mapathon.detailed.column.validatedTasks',
         defaultMessage: 'Tasks Validated'
     },
+    DataQualityIssues: {
+        id: 'reports.mapathon.detailed.column.dataQualityIssues',
+        defaultMessage: 'Data Quality Issues'
+    },
+    noDataFound: {
+        id: 'reports.mapathon.detailed.results.no.data',
+        defaultMessage: 'No Data Found!'
+    },
     footerOrganisation: {
         id: 'about.footer.organisation',
         defaultMessage: 'This project is under development by {OrganisationLink}.'
