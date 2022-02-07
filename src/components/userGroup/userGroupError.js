@@ -1,8 +1,8 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import messages from "./messages";
 
-export const UserGroupErrorMessage = ({error}) => {
+export const UserGroupErrorMessage = ({ error }) => {
   if (error === "Missing field") {
     return (
       <>
@@ -13,21 +13,19 @@ export const UserGroupErrorMessage = ({error}) => {
               <span className="text-red">
                 <FormattedMessage {...messages.UsersToTrack} />
               </span>
-            )
+            ),
           }}
         />
-    </>
-    )
+      </>
+    );
   } else {
-      return (
-        <FormattedMessage
-          {...messages.ServerError}
-          values={{
-            error: (
-            <span className="text-red">{error}</span>  
-            )
-          }}
-        />
-      )
+    return (
+      <FormattedMessage
+        {...messages.ServerError}
+        values={{
+          error: <span className="text-red">{error}</span>,
+        }}
+      />
+    );
   }
 };

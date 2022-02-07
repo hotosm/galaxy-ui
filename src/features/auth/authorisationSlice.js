@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as safeStorage from '../../utils/safeStorage';
+import * as safeStorage from "../../utils/safeStorage";
 
 export const AuthorisationSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     loggedIn: false,
     accessToken: null,
   },
   reducers: {
     setLoggedIn: (state, action) => {
-      safeStorage.setItem("loggedIn", action.payload)
+      safeStorage.setItem("loggedIn", action.payload);
       state.loggedIn = action.payload;
     },
     setToken: (state, action) => {
@@ -21,9 +21,10 @@ export const AuthorisationSlice = createSlice({
       safeStorage.removeItem("token");
       state.accessToken = null;
     },
-  }
+  },
 });
 
-export const { setToken, removeToken, setLoggedIn } = AuthorisationSlice.actions;
+export const { setToken, removeToken, setLoggedIn } =
+  AuthorisationSlice.actions;
 
 export default AuthorisationSlice.reducer;

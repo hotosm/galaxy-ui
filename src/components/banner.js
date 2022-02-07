@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { FormattedMessage } from "react-intl";
 import { Button } from "./button";
-import messages from './messages';
+import messages from "./messages";
 
 export function Banner() {
     let history = useHistory()

@@ -1,20 +1,16 @@
-import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react'
-import { IntlProviders } from '../../utils/testUtils';
-import { Button } from '../button';
+import React from "react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
+import { IntlProviders } from "../../utils/testUtils";
+import { Button } from "../button";
 
 afterEach(cleanup);
 
-it('Button component', () => {
+it("Button component", () => {
   const handleTestClick = jest.fn();
 
   const { getByText } = render(
     <IntlProviders>
-      <Button
-        onClick={handleTestClick}
-      >
-        Test Button
-      </Button>
+      <Button onClick={handleTestClick}>Test Button</Button>
     </IntlProviders>
   );
   expect(getByText(/test button/i)).toBeInTheDocument();
