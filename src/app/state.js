@@ -1,28 +1,32 @@
-import * as safeStorage from '../utils/safeStorage'
+import * as safeStorage from "../utils/safeStorage";
 
 const initialAppState = {
   auth: {
-      loggedIn: safeStorage.getItem("loggedIn"),
-      accessToken: safeStorage.getItem("token"),
+    loggedIn: safeStorage.getItem("loggedIn"),
+    accessToken: safeStorage.getItem("token"),
   },
   form: {
-      projectIds: safeStorage.getItem("projectIds") ? safeStorage.getItem("projectIds") : "",
-      hashtags: safeStorage.getItem("hashtags") ? safeStorage.getItem("hashtags") : "",
-  }
+    projectIds: safeStorage.getItem("projectIds")
+      ? safeStorage.getItem("projectIds")
+      : "",
+    hashtags: safeStorage.getItem("hashtags")
+      ? safeStorage.getItem("hashtags")
+      : "",
+  },
 };
 
 export const saveState = (state) => {
-try {
-  const serializedState = JSON.stringify(state);
-  localStorage.setItem('state', serializedState);
-} catch {
-  // log errors
-}
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("state", serializedState);
+  } catch {
+    // log errors
+  }
 };
 
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = localStorage.getItem("state");
     if (serializedState === null) {
       return initialAppState;
     }

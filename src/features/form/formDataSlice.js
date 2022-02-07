@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as safeStorage from '../../utils/safeStorage';
+import * as safeStorage from "../../utils/safeStorage";
 
 const initialState = {
-    projectIds: "",
-    hashtags: ""
-}
+  projectIds: "",
+  hashtags: "",
+};
 
 export const FormDataSlice = createSlice({
-  name: 'form',
+  name: "form",
   initialState,
   reducers: {
     setProjectIds: (state, action) => {
@@ -18,7 +18,7 @@ export const FormDataSlice = createSlice({
       safeStorage.setItem("hashtags", action.payload);
       state.hashtags = action.payload;
     },
-  }
+  },
 });
 
 export const { setProjectIds, setHashtags } = FormDataSlice.actions;

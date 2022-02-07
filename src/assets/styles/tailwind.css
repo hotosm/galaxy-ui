@@ -3,19 +3,20 @@
 @tailwind utilities;
 
 @layer components {
-    .document-link {
-        @apply p-2 border border-grey-light hover:bg-tan;
-    }
+  .document-link {
+    @apply p-2 border border-grey-light hover:bg-tan;
+  }
 }
 
-.mapbox-improve-map, a[href="https://www.mapbox.com/map-feedback/"] {
-    display: none;
+.mapbox-improve-map, a[href="https://www.mapbox.com/map-feedback/"]
+{
+  display: none;
 }
 
-.react-datepicker__day--keyboard-selected{
-    @apply bg-red !important
+.react-datepicker__day--keyboard-selected {
+  @apply bg-red !important;
 }
 
-.react-datepicker__day--selected{
-    @apply bg-red !important !important
+.react-datepicker__day--selected {
+  @apply bg-red !important !important;
 }
