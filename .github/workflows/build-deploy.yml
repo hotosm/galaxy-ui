@@ -31,6 +31,8 @@ jobs:
         echo REACT_APP_API_URL =${{ secrets.REACT_APP_API_URL }} >> .env
         echo REACT_APP_MAPBOX_TOKEN =${{ secrets.REACT_APP_MAPBOX_TOKEN }} >> .env
         echo HOST =${{ secrets.HOST }} >> .env
+        echo REACT_APP_MATOMO_ID=${{ secrets.MATOMO_ID }} >> .env
+        echo REACT_APP_MATOMO_ENDPOINT=${{ secrets.MATOMO_ENDPOINT }} >> .env
     
     - name: Build project
       run: CI=false npm run build
