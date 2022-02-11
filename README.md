@@ -8,7 +8,7 @@ This is the frontend interface for the OSM Galaxy project built using React.
 
 - Create a `.env` file in the base directory.
 
-- Add `REACT_APP_API_URL="https://osm-stats.hotosm.org"` to connect to the production Galaxy API server, and `HOST=127.0.0.1`.
+- Copy the contents of the [sample env file](sample.env) file into your new `.env` file and adjust accordingly.
 
 - In the main directory, run `npm i` to install dependencies.
 
