@@ -1,30 +1,31 @@
-import React, { useContext, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { NavLink } from 'react-router-dom';
-import { sortUserData } from '../../utils/sortMapathonResultsData';
-import messages from '../messages';
+import React, { useContext, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { NavLink } from "react-router-dom";
+import { sortUserData } from "../../utils/sortMapathonResultsData";
+import messages from "../messages";
 import { MapathonContext } from "../../context/mapathonContext";
-import { DownloadFileLink } from '../downloadLink';
-import { Error } from '../formResponses';
-import { MapathonErrorMessage } from './mapathonError';
+import { DownloadFileLink } from "../downloadLink";
+import { Error } from "../formResponses";
+import { MapathonErrorMessage } from "./mapathonError";
 
 const FeatureList = ({ title, features }) => {
-    return (
-        <div className="w-auto">
-            <h2 className="text-2xl py-2 font-bold">
-                {title}:
-            </h2>
-            {features && features.length > 0 ? (
-                <ul>
-                {features && features.map((item, n) =>
-                    <li key={n}>
-                        <p className="text-xl">{item.feature}: {item.count}</p>  
-                    </li>
-                )}
-            </ul>
-            ): (
-                <p>
-                    <FormattedMessage {...messages.mapathonSummaryZeroFeatures}/>
+  return (
+    <div className="w-auto">
+      <h2 className="text-2xl py-2 font-bold">{title}:</h2>
+      {features && features.length > 0 ? (
+        <ul>
+          {features &&
+            features.map((item, n) => (
+              <li key={n}>
+                <p className="text-xl">
+                  {item.feature}: {item.count}
+                </p>
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <p>
+          <FormattedMessage {...messages.mapathonSummaryZeroFeatures} />
         </p>
       )}
     </div>
@@ -60,92 +61,94 @@ export const MapathonSummaryResults = ({ data }) => {
     </div>
   );
 };
-const MAPATHON_DETAILED_COLUMN_HEADINGS= [
-    { title: "Mapper" }, 
-    { title: "AddedBuildings" }, 
-    { title: "ModifiedBuildings" }, 
-    { title: "AddedHighways" }, 
-    { title: "MappedTasks" },
-    { title: "ValidatedTasks" },
-    { title: "DataQualityIssues" }
+const MAPATHON_DETAILED_COLUMN_HEADINGS = [
+  { title: "Mapper" },
+  { title: "AddedBuildings" },
+  { title: "ModifiedBuildings" },
+  { title: "AddedHighways" },
+  { title: "MappedTasks" },
+  { title: "ValidatedTasks" },
+  { title: "DataQualityIssues" },
 ];
 
+export const MapathonDetailedResults = ({ data }) => {
+  const { mappedFeatures, contributors } = data;
+  const { formData } = useContext(MapathonContext);
+  const [downloadError, setDownloadError] = useState(null);
 
-export const MapathonDetailedResults = ({data}) => {
-    const { mappedFeatures, contributors } = data;
-    const { formData } = useContext(MapathonContext);
-    const [downloadError, setDownloadError] = useState(null)
-
-    if (mappedFeatures.length > 0 && contributors.length > 0) {
-        return (
-            <>
-            {downloadError && (
-                <Error>
-                    <MapathonErrorMessage
-                        error={downloadError}
-                    />
-                </Error>
-            )}
-            <table className="table-fixed mt-5 mx-auto">
-                <thead>
-                    <tr>
-                        {MAPATHON_DETAILED_COLUMN_HEADINGS.map((i, n) => {
-                            return(
-                                <th key={n} className="w-1/12 text-left font-bold text-xl px-7 py-4">
-                                    <FormattedMessage {...messages[i.title]} />
-                                </th> 
-                            )}
-                        )}
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortUserData(data).map((i) => (
-                        <tr key={i["userId"]}>
-                            <td className="py-2 px-7 text-lg">
-                                <NavLink
-                                to={{ pathname:`https://www.openstreetmap.org/user/${i["username"]}`}}
-                                target="_blank"
-                                className="hover:underline"
-                                >
-                                    {i["username"]}
-                                </NavLink>
-                            </td>
-                            <td className="py-2 px-7 text-lg">{i["addedBuildings"]}</td>
-                            <td className="py-2 px-7 text-lg">{i["modifiedBuildings"]}</td>
-                            <td className="py-2 px-7 text-lg">{i["createdHighways"]}</td>
-                            <td className="py-2 px-7 text-lg">{i["mappedTasks"]}</td>
-                            <td className="py-2 px-7 text-lg">{i["validatedTasks"]}</td>
-                            <td className="py-2 px-7 text-lg">
-                                Download &nbsp;
-                                <DownloadFileLink
-                                    username={i["username"]} 
-                                    type={"csv"} 
-                                    startDate={formData.startDate}
-                                    endDate={formData.endDate}
-                                    setDownloadError={setDownloadError}
-                                />
-                                /
-                                <DownloadFileLink
-                                    username={i["username"]}
-                                    type={"json"} 
-                                    startDate={formData.startDate}
-                                    endDate={formData.endDate}
-                                    setDownloadError={setDownloadError}
-                                />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            </>
-        )
-    } else {
-        return (
-            <div className="mx-auto text-center w-1/4 p-1 mt-5">
-                <p className="text-lg">
-                    <FormattedMessage {...messages.noDataFound} />
-                </p>
-            </div>
-        );
-    }
+  if (mappedFeatures.length > 0 && contributors.length > 0) {
+    return (
+      <>
+        {downloadError && (
+          <Error>
+            <MapathonErrorMessage error={downloadError} />
+          </Error>
+        )}
+        <table className="table-fixed mt-5 mx-auto">
+          <thead>
+            <tr>
+              {MAPATHON_DETAILED_COLUMN_HEADINGS.map((i, n) => {
+                return (
+                  <th
+                    key={n}
+                    className="w-1/12 text-left font-bold text-xl px-7 py-4"
+                  >
+                    <FormattedMessage {...messages[i.title]} />
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {sortUserData(data).map((i) => (
+              <tr key={i["userId"]}>
+                <td className="py-2 px-7 text-lg">
+                  <NavLink
+                    to={{
+                      pathname: `https://www.openstreetmap.org/user/${i["username"]}`,
+                    }}
+                    target="_blank"
+                    className="hover:underline"
+                  >
+                    {i["username"]}
+                  </NavLink>
+                </td>
+                <td className="py-2 px-7 text-lg">{i["addedBuildings"]}</td>
+                <td className="py-2 px-7 text-lg">{i["modifiedBuildings"]}</td>
+                <td className="py-2 px-7 text-lg">{i["createdHighways"]}</td>
+                <td className="py-2 px-7 text-lg">{i["mappedTasks"]}</td>
+                <td className="py-2 px-7 text-lg">{i["validatedTasks"]}</td>
+                <td className="py-2 px-7 text-lg">
+                  Download &nbsp;
+                  <DownloadFileLink
+                    username={i["username"]}
+                    type={"csv"}
+                    startDate={formData.startDate}
+                    endDate={formData.endDate}
+                    setDownloadError={setDownloadError}
+                  />
+                  /
+                  <DownloadFileLink
+                    username={i["username"]}
+                    type={"json"}
+                    startDate={formData.startDate}
+                    endDate={formData.endDate}
+                    setDownloadError={setDownloadError}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    );
+  } else {
+    return (
+      <div className="mx-auto text-center w-1/4 p-1 mt-5">
+        <p className="text-lg">
+          <FormattedMessage {...messages.noDataFound} />
+        </p>
+      </div>
+    );
+  }
 };
