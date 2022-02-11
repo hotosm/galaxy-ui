@@ -11,6 +11,7 @@ export const useDownloadFile = ({ fetchFile, getFileName }) => {
       const { data } = await fetchFile();
       setFileData(data);
       setFileName(getFileName());
+      setFileError(null);
       ref.current?.click();
     } catch (error) {
       if (error.response.status === 500) {
