@@ -2,9 +2,9 @@ import * as safeStorage from "../utils/safeStorage";
 
 const initialAppState = {
   auth: {
-      loggedIn: safeStorage.getItem("loggedIn"),
-      accessToken: safeStorage.getItem("token"),
-  }
+    loggedIn: safeStorage.getItem("loggedIn"),
+    accessToken: safeStorage.getItem("token"),
+  },
 };
 
 export const saveState = (state) => {

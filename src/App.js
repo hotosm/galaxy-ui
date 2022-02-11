@@ -15,30 +15,35 @@ import {
 import { UserGroupReport } from "./views/UserGroupReport";
 import { MapathonContextProvider } from "./context/mapathonContext";
 
-
-function App(){
+function App() {
   return (
     <>
       <Router>
-      <Header />
-      <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/authorised" component={LoginCallback} />
-          <Route path="/about" component={About} />
-          <Route path="/explore" component={Reports}/>
-          <ProtectedRoute path={"/user-report"}>
-            <UserGroupReport />
-          </ProtectedRoute>
-        </Switch>
-        <Switch>
-          <MapathonContextProvider>
-            <Route path="/mapathon-report/summary" component={MapathonSummaryReport}/>
-            <Route path="/mapathon-report/detailed" component={MapathonDetailedReport} />
-          </MapathonContextProvider>
-        </Switch>
-      </div>
-    </Router>
+        <Header />
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/authorised" component={LoginCallback} />
+            <Route path="/about" component={About} />
+            <Route path="/explore" component={Reports} />
+            <ProtectedRoute path={"/user-report"}>
+              <UserGroupReport />
+            </ProtectedRoute>
+          </Switch>
+          <Switch>
+            <MapathonContextProvider>
+              <Route
+                path="/mapathon-report/summary"
+                component={MapathonSummaryReport}
+              />
+              <Route
+                path="/mapathon-report/detailed"
+                component={MapathonDetailedReport}
+              />
+            </MapathonContextProvider>
+          </Switch>
+        </div>
+      </Router>
       {MATOMO_ID && <TrackingBanner />}
     </>
   );
