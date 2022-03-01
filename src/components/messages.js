@@ -164,6 +164,14 @@ export default defineMessages({
     id: "reports.mapathon.detailed.column.validatedTasks",
     defaultMessage: "Tasks Validated",
   },
+  TimeSpentMapping: {
+    id: "reports.mapathon.detailed.column.timeSpentMapping",
+    defaultMessage: "Time Spent Mapping",
+  },
+  TimeSpentValidating: {
+    id: "reports.mapathon.detailed.column.timeSpentValidating",
+    defaultMessage: "Time Spent Validating",
+  },
   DataQualityIssues: {
     id: "reports.mapathon.detailed.column.dataQualityIssues",
     defaultMessage: "Data Quality Issues",
