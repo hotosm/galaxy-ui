@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { NavLink } from "react-router-dom";
-import { sortUserData } from "../../utils/sortMapathonResultsData";
+import { aggregateUserData } from "../../utils/sortMapathonResultsData";
 import messages from "../messages";
 import { MapathonContext } from "../../context/mapathonContext";
 import { DownloadFileLink } from "../downloadLink";
@@ -68,6 +68,8 @@ const MAPATHON_DETAILED_COLUMN_HEADINGS = [
   { title: "AddedHighways" },
   { title: "MappedTasks" },
   { title: "ValidatedTasks" },
+  { title: "TimeSpentMapping" },
+  { title: "TimeSpentValidating" },
   { title: "DataQualityIssues" },
 ];
 
@@ -100,7 +102,7 @@ export const MapathonDetailedResults = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {sortUserData(data).map((i) => (
+            {aggregateUserData(data).map((i) => (
               <tr key={i["userId"]}>
                 <td className="py-2 px-7 text-lg">
                   <NavLink
@@ -118,6 +120,10 @@ export const MapathonDetailedResults = ({ data }) => {
                 <td className="py-2 px-7 text-lg">{i["createdHighways"]}</td>
                 <td className="py-2 px-7 text-lg">{i["mappedTasks"]}</td>
                 <td className="py-2 px-7 text-lg">{i["validatedTasks"]}</td>
+                <td className="py-2 px-7 text-lg">{i["timeSpentMapping"]}</td>
+                <td className="py-2 px-7 text-lg">
+                  {i["timeSpentValidating"]}
+                </td>
                 <td className="py-2 px-7 text-lg">
                   Download &nbsp;
                   <DownloadFileLink
