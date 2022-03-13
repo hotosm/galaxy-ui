@@ -6,8 +6,7 @@ import messages from "./messages";
 export function About() {
   return (
     <div className="h-screen">
-      <hr className="w-full" />
-      <main className="w-screen h-5/6 mt-1 mb-5 p-2 space-y-9 flex flex-col">
+      <main className="w-screen h-5/6 mt-4 mb-5 pt-4 space-y-9 flex flex-col">
         <section className="w-10/12 flex items-center mx-auto h-1/4">
           <p className="text-center text-xl">
             <FormattedMessage
