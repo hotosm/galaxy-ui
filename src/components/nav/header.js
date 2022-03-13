@@ -18,6 +18,7 @@ const Header = () => {
         <hr />
         <NavBar />
       </header>
+      <hr />
     </div>
   );
 };

@@ -44,7 +44,7 @@ export const AuthorisationButton = ({ redirectTo, origin }) => {
   const buttonStyles =
     origin === "mapathon"
       ? "underline text-red text-lg"
-      : "text-xl uppercase p-2 mr-1";
+      : "text-xl uppercase py-3";
   const divStyles = origin === "mapathon" ? "text-center mt-4" : "";
 
   const handleClick = () => {

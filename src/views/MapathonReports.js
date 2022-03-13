@@ -12,7 +12,16 @@ import {
   MapathonDetailedResults,
 } from "../components/mapathon/mapathonResults";
 import { AuthorisationButton } from "../components/auth";
+import { MiniNavBar } from "../components/nav/navbar";
 import messages from "./messages";
+
+const MAPATHON_PAGES = [
+  { pageTitle: "Mapathon Summary Report", pageURL: "/mapathon-report/summary" },
+  {
+    pageTitle: "Mapathon Detailed Report",
+    pageURL: "/mapathon-report/detailed",
+  },
+];
 
 export const MapathonSummaryReport = (props) => {
   const { mutate, data, isLoading, error } = useMutation(
@@ -20,6 +29,7 @@ export const MapathonSummaryReport = (props) => {
   );
   return (
     <div>
+      <MiniNavBar pages={MAPATHON_PAGES} />
       <MapathonReportForm
         error={
           error
@@ -55,6 +65,7 @@ export const MapathonDetailedReport = () => {
   if (token && loggedIn) {
     return (
       <div>
+        <MiniNavBar pages={MAPATHON_PAGES} />
         <MapathonReportForm
           error={
             error
@@ -74,11 +85,16 @@ export const MapathonDetailedReport = () => {
     );
   } else {
     return (
-      <div className="text-center">
-        <p className="text-red text-xl">
-          <FormattedMessage {...messages.mapathonDetailedReportUnauthorised} />
-        </p>
-      </div>
+      <>
+        <MiniNavBar pages={MAPATHON_PAGES} />
+        <div className="text-center mt-4">
+          <p className="text-red text-xl">
+            <FormattedMessage
+              {...messages.mapathonDetailedReportUnauthorised}
+            />
+          </p>
+        </div>
+      </>
     );
   }
 };

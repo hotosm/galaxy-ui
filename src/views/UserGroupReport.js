@@ -7,9 +7,13 @@ import { useMutation } from "react-query";
 import { UserGroupResults } from "../components/userGroup/userGroupResults";
 import { UserGroupReportForm } from "../components/userGroup/userGroupForm";
 import { getUserIds, getUserStats } from "../queries/getUserStats";
+import { MiniNavBar } from "../components/nav/navbar";
 
 export const UserGroupReport = () => {
   const [users, setUsers] = useState();
+  const userGroupPage = [
+    { pageTitle: "User Group Report", pageURL: "/user-report" },
+  ];
 
   const [formError, setFormError] = useState(null);
   const [userIds, setUserIds] = useState();
@@ -64,6 +68,7 @@ export const UserGroupReport = () => {
 
   return (
     <div>
+      <MiniNavBar pages={userGroupPage} />
       <UserGroupReportForm
         fetch={mutate}
         formData={formData}
