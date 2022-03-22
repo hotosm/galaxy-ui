@@ -166,11 +166,11 @@ export default defineMessages({
   },
   TimeSpentMapping: {
     id: "reports.mapathon.detailed.column.timeSpentMapping",
-    defaultMessage: "Time Spent Mapping",
+    defaultMessage: "Time Spent Mapping (s)",
   },
   TimeSpentValidating: {
     id: "reports.mapathon.detailed.column.timeSpentValidating",
-    defaultMessage: "Time Spent Validating",
+    defaultMessage: "Time Spent Validating (s)",
   },
   DataQualityIssues: {
     id: "reports.mapathon.detailed.column.dataQualityIssues",
