@@ -29,7 +29,10 @@ export const validateMapathonFormData = (formInputs) => {
   let validDate = validateDateDifference(startDate, endDate, 24);
   if (!validDate) throw new Error("Invalid Time");
 
-  if (TMProjectIds.length === 0 && mapathonHashtags.length === 0) {
+  if (
+    TMProjectIds.trim().length === 0 &&
+    mapathonHashtags.trim().length === 0
+  ) {
     throw new Error("Missing fields");
   }
 
