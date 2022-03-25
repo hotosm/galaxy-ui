@@ -36,10 +36,9 @@ function App() {
                 path="/mapathon-report/summary"
                 component={MapathonSummaryReport}
               />
-              <Route
-                path="/mapathon-report/detailed"
-                component={MapathonDetailedReport}
-              />
+              <ProtectedRoute path={"/mapathon-report/detailed"}>
+                <MapathonDetailedReport />
+              </ProtectedRoute>
             </MapathonContextProvider>
           </Switch>
         </div>
