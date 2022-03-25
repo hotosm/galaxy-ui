@@ -43,6 +43,10 @@ export function NavBar() {
           redirectTo={window.location.pathname}
         />
       </div>
+      <AuthorisationButton
+        origin={"nav"}
+        redirectTo={window.location.pathname}
+      />
     </nav>
   );
 }

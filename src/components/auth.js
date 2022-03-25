@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { useHistory } from "react-router";
+import { FormattedMessage } from "react-intl";
 import { Button } from "../components/button";
 import { createLoginWindow } from "../utils/authUtils";
 import {
@@ -9,6 +10,7 @@ import {
   setLoggedIn,
   removeToken,
 } from "../features/auth/authorisationSlice";
+import messages from "./messages";
 
 export const LoginCallback = ({ location }) => {
   const params = useMemo(
@@ -37,15 +39,16 @@ export const LoginCallback = ({ location }) => {
 };
 
 export const AuthorisationButton = ({ redirectTo, origin }) => {
-  let history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.loggedIn);
 
   const buttonStyles =
-    origin === "mapathon"
+    origin === "nav"
+      ? "text-xl uppercase p-2 mr-1"
+      : origin === "mapathon"
       ? "underline text-red text-lg"
-      : "text-xl uppercase py-3";
-  const divStyles = origin === "mapathon" ? "text-center mt-4" : "";
+      : "underline lowercase";
 
   const handleClick = () => {
     switch (origin) {
@@ -56,7 +59,8 @@ export const AuthorisationButton = ({ redirectTo, origin }) => {
           createLoginWindow(redirectTo);
         }
         break;
-      case "login":
+      case "nav":
+      case "other":
       default:
         if (!loggedIn) {
           createLoginWindow(redirectTo);
@@ -68,16 +72,28 @@ export const AuthorisationButton = ({ redirectTo, origin }) => {
   };
 
   return (
-    <div className={divStyles}>
+    <>
       <Button styles={buttonStyles} onClick={handleClick}>
-        {origin === "mapathon" &&
-          (loggedIn ? (
-            <p>View detailed report &gt;&gt;</p>
+        {origin === "nav" &&
+          (!loggedIn ? (
+            <FormattedMessage {...messages.navBarLogin} />
           ) : (
-            <p>Sign in to view detailed report &gt;&gt;</p>
+            <FormattedMessage {...messages.logOut} />
           ))}
-        {origin === "login" && (!loggedIn ? "Login with OSM ID" : "Logout")}
+        {origin === "other" && (
+          <FormattedMessage {...messages.protectedRouteLogin} />
+        )}
+        {origin === "mapathon" &&
+          (!loggedIn ? (
+            <p>
+              <FormattedMessage {...messages.detailedReportSignIn} /> &gt;&gt;
+            </p>
+          ) : (
+            <p>
+              <FormattedMessage {...messages.viewDetailedReport} /> &gt;&gt;
+            </p>
+          ))}
       </Button>
-    </div>
+    </>
   );
 };
