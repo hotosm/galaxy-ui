@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import messages from "./messages";
+import { AuthorisationButton } from "./auth";
 
 // A wrapper for <Route> for protected routes
 export function ProtectedRoute({ children, ...rest }) {
@@ -18,7 +19,17 @@ export function ProtectedRoute({ children, ...rest }) {
         ) : (
           <div className="text-center overflow-hidden p-4 mt-4">
             <p className="text-red text-xl">
-              <FormattedMessage {...messages.unauthorised} />
+              <FormattedMessage
+                {...messages.unauthorised}
+                values={{
+                  LogInButton: (
+                    <AuthorisationButton
+                      origin={"other"}
+                      redirectTo={window.location.pathname}
+                    />
+                  ),
+                }}
+              />
             </p>
           </div>
         )
