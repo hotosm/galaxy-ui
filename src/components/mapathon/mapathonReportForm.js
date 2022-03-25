@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import { getTime } from "date-fns";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -9,18 +10,33 @@ import { MapathonErrorMessage } from "./mapathonError";
 import messages from "../messages";
 import { validateMapathonFormData } from "../../utils/validationUtils";
 import { MapathonContext } from "../../context/mapathonContext";
+import { setLoading, setTriggerSubmit } from "../../features/form/formSlice";
 
 export const MapathonReportForm = ({ fetch, error, loading }) => {
   const intl = useIntl();
+  const dispatch = useDispatch();
 
   const { formData, setFormData } = useContext(MapathonContext);
-
   const [formError, setFormError] = useState(null);
+  const triggerSubmit = useSelector((state) => state.mapathon.triggerSubmit);
 
   useEffect(() => {
     if (error) setFormError(error);
     else setFormError(null);
   }, [formData, error]);
+
+  const fetchData = () => {
+    try {
+      let isValid = validateMapathonFormData(formData);
+      if (!isValid) return;
+      else {
+        fetch(formData); // API call
+        setFormError(null);
+      }
+    } catch (e) {
+      setFormError(e.message);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -31,16 +47,20 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      let isValid = validateMapathonFormData(formData);
-      if (isValid) {
-        fetch(formData); // API call
-        setFormError(null);
-      }
-    } catch (e) {
-      setFormError(e.message);
-    }
+    fetchData();
   };
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (!triggerSubmit) {
+      dispatch(setLoading(false));
+      return;
+    } else {
+      fetchData();
+      dispatch(setTriggerSubmit(false));
+      dispatch(setLoading(true));
+    }
+  }, [triggerSubmit]);
 
   return (
     <>

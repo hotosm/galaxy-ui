@@ -39,35 +39,18 @@ export const LoginCallback = ({ location }) => {
 };
 
 export const AuthorisationButton = ({ redirectTo, origin }) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.loggedIn);
 
   const buttonStyles =
-    origin === "nav"
-      ? "text-xl uppercase p-2 mr-1"
-      : origin === "mapathon"
-      ? "underline text-red text-lg"
-      : "underline lowercase";
+    origin === "nav" ? "text-xl uppercase p-2 mr-1" : "underline lowercase";
 
   const handleClick = () => {
-    switch (origin) {
-      case "mapathon":
-        if (loggedIn) {
-          history.push("/mapathon-report/detailed");
-        } else {
-          createLoginWindow(redirectTo);
-        }
-        break;
-      case "nav":
-      case "other":
-      default:
-        if (!loggedIn) {
-          createLoginWindow(redirectTo);
-        } else {
-          dispatch(setLoggedIn(false));
-          dispatch(removeToken());
-        }
+    if (!loggedIn) {
+      createLoginWindow(redirectTo);
+    } else {
+      dispatch(setLoggedIn(false));
+      dispatch(removeToken());
     }
   };
 
@@ -83,16 +66,38 @@ export const AuthorisationButton = ({ redirectTo, origin }) => {
         {origin === "other" && (
           <FormattedMessage {...messages.protectedRouteLogin} />
         )}
-        {origin === "mapathon" &&
-          (!loggedIn ? (
-            <p>
-              <FormattedMessage {...messages.detailedReportSignIn} /> &gt;&gt;
-            </p>
-          ) : (
-            <p>
-              <FormattedMessage {...messages.viewDetailedReport} /> &gt;&gt;
-            </p>
-          ))}
+      </Button>
+    </>
+  );
+};
+
+export const MapathonRedirectButton = ({ triggerFn }) => {
+  const history = useHistory();
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
+
+  const buttonStyles = "underline text-red text-lg";
+
+  const handleClick = () => {
+    if (loggedIn) {
+      history.push("/mapathon-report/detailed");
+    } else {
+      createLoginWindow("/mapathon-report/detailed");
+    }
+    triggerFn();
+  };
+
+  return (
+    <>
+      <Button styles={buttonStyles} onClick={handleClick}>
+        {!loggedIn ? (
+          <p>
+            <FormattedMessage {...messages.detailedReportSignIn} /> &gt;&gt;
+          </p>
+        ) : (
+          <p>
+            <FormattedMessage {...messages.viewDetailedReport} /> &gt;&gt;
+          </p>
+        )}
       </Button>
     </>
   );

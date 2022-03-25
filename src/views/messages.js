@@ -83,9 +83,5 @@ export default defineMessages({
     galaxyFAQ: {
       id: 'about.galaxy.resources.faq',
       defaultMessage: "FAQ on Galaxy (To be Updated)"
-    },
-    mapathonDetailedReportUnauthorised: {
-      id: 'mapathon.detailed.report.warning',
-      defaultMessage: 'Please log in first to view detailed report.'
     }
 });
