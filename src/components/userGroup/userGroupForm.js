@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from "../formResponses";
 import { UserGroupErrorMessage } from "./userGroupError";
+import { getTimeZone } from "../../utils/timeUtils";
 import messages from "./messages";
 
 export const UserGroupReportForm = ({
@@ -48,6 +49,9 @@ export const UserGroupReportForm = ({
               <label>
                 <span className="text-red">* </span>
                 <FormattedMessage {...messages.StartDate} />:
+                <span className="text-lg">
+                  &nbsp;({getTimeZone(new Date())})
+                </span>
               </label>
               <DatePicker
                 selected={formData.startDate}
@@ -68,6 +72,9 @@ export const UserGroupReportForm = ({
               <label>
                 <span className="text-red">* </span>
                 <FormattedMessage {...messages.EndDate} />:
+                <span className="text-lg">
+                  &nbsp;({getTimeZone(new Date())})
+                </span>
               </label>
               <DatePicker
                 selected={formData.endDate}

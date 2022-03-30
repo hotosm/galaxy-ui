@@ -7,10 +7,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
-import messages from "../messages";
 import { validateMapathonFormData } from "../../utils/validationUtils";
 import { MapathonContext } from "../../context/mapathonContext";
 import { setLoading, setTriggerSubmit } from "../../features/form/formSlice";
+import { getTimeZone } from "../../utils/timeUtils";
+import messages from "../messages";
 
 export const MapathonReportForm = ({ fetch, error, loading }) => {
   const intl = useIntl();
@@ -71,6 +72,9 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
               <label>
                 <span className="text-red">* </span>
                 <FormattedMessage {...messages.mapathonFormStartDate} />:
+                <span className="text-lg">
+                  &nbsp;({getTimeZone(new Date())})
+                </span>
               </label>
               <DatePicker
                 selected={formData.startDate}
@@ -91,6 +95,9 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
               <label>
                 <span className="text-red">* </span>
                 <FormattedMessage {...messages.mapathonFormEndDate} />:
+                <span className="text-lg">
+                  &nbsp;({getTimeZone(new Date())})
+                </span>
               </label>
               <DatePicker
                 selected={formData.endDate}
