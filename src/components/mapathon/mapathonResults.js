@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { NavLink } from "react-router-dom";
-import { aggregateUserData } from "../../utils/sortMapathonResultsData";
+import { aggregateUserData } from "../../utils/mapathonDataUtils";
 import messages from "../messages";
 import { MapathonContext } from "../../context/mapathonContext";
 import { DownloadFileLink } from "../downloadLink";

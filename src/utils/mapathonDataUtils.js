@@ -1,4 +1,4 @@
-const featureActionCount = (array, feature, action, name) => {
+const featureActionCountPerUser = (array, feature, action, name) => {
   let x = array.filter(
     (i) =>
       i["feature"] === feature &&
@@ -8,7 +8,7 @@ const featureActionCount = (array, feature, action, name) => {
   return x[0] ? x[0]["count"] : 0;
 };
 
-const filterUserTMStats = (arr, id) => {
+const filterTMStatsById = (arr, id) => {
   return arr.filter((i) => i["userId"] === id);
 };
 
@@ -26,35 +26,35 @@ export const aggregateUserData = (obj) => {
     timeSpentValidatingStats.length === 0;
 
   obj.contributors.forEach((i) => {
-    let userTasksMapped = filterUserTMStats(tasksMappedStats, i["userId"]);
-    let userTasksValidated = filterUserTMStats(
+    let userTasksMapped = filterTMStatsById(tasksMappedStats, i["userId"]);
+    let userTasksValidated = filterTMStatsById(
       tasksValidatedStats,
       i["userId"]
     );
-    let userTimeSpentMapping = filterUserTMStats(
+    let userTimeSpentMapping = filterTMStatsById(
       timeSpentMappingStats,
       i["userId"]
     );
-    let userTimeSpentValidating = filterUserTMStats(
+    let userTimeSpentValidating = filterTMStatsById(
       timeSpentValidatingStats,
       i["userId"]
     );
 
     arr.push({
       ...i,
-      addedBuildings: featureActionCount(
+      addedBuildings: featureActionCountPerUser(
         obj.mappedFeatures,
         "building",
         "create",
         i["username"]
       ),
-      modifiedBuildings: featureActionCount(
+      modifiedBuildings: featureActionCountPerUser(
         obj.mappedFeatures,
         "building",
         "modify",
         i["username"]
       ),
-      createdHighways: featureActionCount(
+      createdHighways: featureActionCountPerUser(
         obj.mappedFeatures,
         "highway",
         "create",
