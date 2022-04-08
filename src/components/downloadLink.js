@@ -2,23 +2,19 @@
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { API_URL } from "../config";
+import { setDownloadError } from "../features/form/formSlice";
 import { useDownloadFile } from "../hooks/useDownloadFile";
 
-export const DownloadFileLink = ({
-  username,
-  type,
-  startDate,
-  endDate,
-  setDownloadError,
-}) => {
+export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
   const fetchFile = () => {
     const body = {
       fromTimestamp: startDate,
       toTimestamp: endDate,
       osmUsernames: [username],
       issueTypes: ["badgeom"],
-      outputType: type === "json" ? "geojson" : type,
+      outputType: type,
     };
     return axios.post(`${API_URL}/data-quality/user-reports`, body);
   };
@@ -27,14 +23,10 @@ export const DownloadFileLink = ({
     return `${username}.${type}`;
   };
 
-  const { ref, fileData, download, fileName, fileError } = useDownloadFile({
+  const { ref, fileData, download, fileName } = useDownloadFile({
     fetchFile,
     getFileName,
   });
-
-  useEffect(() => {
-    setDownloadError(fileError);
-  }, [fileError, setDownloadError]);
 
   return (
     <>
@@ -42,7 +34,7 @@ export const DownloadFileLink = ({
         href={
           type === "csv"
             ? `data:text/csv;charset=utf-8,${escape(fileData)}`
-            : "data:text/json;charset=utf-8," +
+            : "data:application/geo+json;charset=utf-8," +
               encodeURIComponent(JSON.stringify(fileData))
         }
         download={fileName}

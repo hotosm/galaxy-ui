@@ -9,10 +9,13 @@ import {
 import {
   MapathonSummaryResults,
   MapathonDetailedResults,
+  Table,
 } from "../components/mapathon/mapathonResults";
 import { MapathonRedirectButton } from "../components/auth";
 import { setTriggerSubmit } from "../features/form/formSlice";
 import { MiniNavBar } from "../components/nav/navbar";
+import { aggregateUserData } from "../utils/mapathonDataUtils";
+import { MapathonDetailedTableHeaders } from "../components/mapathon/constants";
 
 const MAPATHON_PAGES = [
   { pageTitle: "Mapathon Summary Report", pageURL: "/mapathon-report/summary" },
@@ -80,7 +83,13 @@ export const MapathonDetailedReport = () => {
       {(isLoading || triggeredLoading) && (
         <div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>
       )}
-      {data && <MapathonDetailedResults data={data} />}
+      {/* {data && <MapathonDetailedResults data={data} />} */}
+      {data && (
+        <Table
+          data={aggregateUserData(data)}
+          columns={MapathonDetailedTableHeaders}
+        />
+      )}
     </div>
   );
 };

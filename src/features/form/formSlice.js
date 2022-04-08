@@ -5,6 +5,7 @@ export const MapathonFormSlice = createSlice({
   initialState: {
     triggerSubmit: false,
     isLoading: false,
+    downloadError: null,
   },
   reducers: {
     setTriggerSubmit: (state, action) => {
@@ -13,9 +14,13 @@ export const MapathonFormSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setDownloadError: (state, action) => {
+      state.downloadError = action.payload;
+    },
   },
 });
 
-export const { setTriggerSubmit, setLoading } = MapathonFormSlice.actions;
+export const { setTriggerSubmit, setLoading, setDownloadError } =
+  MapathonFormSlice.actions;
 
 export default MapathonFormSlice.reducer;
