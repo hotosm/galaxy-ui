@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import messages from "../messages";
 import { DownloadDataCell } from "./mapathonResults";
@@ -6,6 +7,19 @@ export const MapathonDetailedTableHeaders = [
   {
     accessor: "username",
     Header: <FormattedMessage {...messages.Mapper} />,
+    Cell: ({ cell: { value } }) => {
+      return (
+        <NavLink
+          to={{
+            pathname: `https://www.openstreetmap.org/user/${value}`,
+          }}
+          target="_blank"
+          className="hover:underline"
+        >
+          {value}
+        </NavLink>
+      );
+    },
   },
   {
     accessor: "addedBuildings",
