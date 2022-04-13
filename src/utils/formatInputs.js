@@ -3,7 +3,10 @@ export const convertStringToNumberArray = (input) => {
   if (input.length > 0) {
     result = input
       .split(",")
-      .map((i) => Number(i))
+      .map((i) => {
+        i.trim();
+        return Number(i);
+      })
       .filter((x) => x !== 0);
   }
   return result;
