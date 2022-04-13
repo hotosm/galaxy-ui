@@ -8,8 +8,7 @@ import {
 } from "../queries/index";
 import {
   MapathonSummaryResults,
-  MapathonDetailedResults,
-  Table,
+  MapathonDetailedResultsTable,
 } from "../components/mapathon/mapathonResults";
 import { MapathonRedirectButton } from "../components/auth";
 import { setTriggerSubmit } from "../features/form/formSlice";
@@ -83,9 +82,8 @@ export const MapathonDetailedReport = () => {
       {(isLoading || triggeredLoading) && (
         <div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>
       )}
-      {/* {data && <MapathonDetailedResults data={data} />} */}
       {data && (
-        <Table
+        <MapathonDetailedResultsTable
           data={aggregateUserData(data)}
           columns={MapathonDetailedTableHeaders}
         />

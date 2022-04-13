@@ -1,10 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import axios from "axios";
 import React from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { API_URL } from "../config";
-import { setDownloadError } from "../features/form/formSlice";
 import { useDownloadFile } from "../hooks/useDownloadFile";
 
 export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
