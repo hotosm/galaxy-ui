@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
+import React, { useContext } from "react";
 import axios from "axios";
-import React from "react";
 import { API_URL } from "../config";
 import { useDownloadFile } from "../hooks/useDownloadFile";
+import { MapathonContext } from "../context/mapathonContext";
+import { UserGroupContext } from "../context/userGroupContext";
 
 export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
   const fetchFile = () => {
@@ -45,6 +47,30 @@ export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
       >
         {type === "csv" ? "CSV" : "JSON"}
       </button>
+    </>
+  );
+};
+
+export const DownloadDataCell = ({ value, source }) => {
+  const { formData } = useContext(
+    source === "mapathon" ? MapathonContext : UserGroupContext
+  );
+  return (
+    <>
+      Download &nbsp;
+      <DownloadFileLink
+        username={value}
+        type={"csv"}
+        startDate={formData.startDate}
+        endDate={formData.endDate}
+      />
+      /
+      <DownloadFileLink
+        username={value}
+        type={"geojson"}
+        startDate={formData.startDate}
+        endDate={formData.endDate}
+      />
     </>
   );
 };
