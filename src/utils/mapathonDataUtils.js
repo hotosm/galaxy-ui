@@ -12,7 +12,7 @@ const filterTMStatsById = (arr, id) => {
   return arr.filter((i) => i["userId"] === id);
 };
 
-export const aggregateUserData = (obj) => {
+export const aggregateMapathonUserData = (obj) => {
   const arr = [];
   let tasksMappedStats = obj.tmStats[0]["tasksMapped"];
   let tasksValidatedStats = obj.tmStats[0]["tasksValidated"];

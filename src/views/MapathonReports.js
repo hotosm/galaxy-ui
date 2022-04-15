@@ -13,7 +13,7 @@ import {
 import { MapathonRedirectButton } from "../components/auth";
 import { setTriggerSubmit } from "../features/form/formSlice";
 import { MiniNavBar } from "../components/nav/navbar";
-import { aggregateUserData } from "../utils/mapathonDataUtils";
+import { aggregateMapathonUserData } from "../utils/mapathonDataUtils";
 import { MapathonDetailedTableHeaders } from "../components/mapathon/constants";
 
 const MAPATHON_PAGES = [
@@ -84,7 +84,7 @@ export const MapathonDetailedReport = () => {
       )}
       {data && (
         <MapathonDetailedResultsTable
-          data={aggregateUserData(data)}
+          data={aggregateMapathonUserData(data)}
           columns={MapathonDetailedTableHeaders}
         />
       )}
