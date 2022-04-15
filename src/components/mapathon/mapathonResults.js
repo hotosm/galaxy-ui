@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useTable, useSortBy } from "react-table";
 import messages from "../messages";
-import { MapathonContext } from "../../context/mapathonContext";
-import { DownloadFileLink } from "../downloadLink";
 import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
 import { useSelector } from "react-redux";
@@ -60,29 +58,6 @@ export const MapathonSummaryResults = ({ data }) => {
         </div>
       )}
     </div>
-  );
-};
-
-export const DownloadDataCell = ({ value }) => {
-  const { formData } = useContext(MapathonContext);
-
-  return (
-    <>
-      Download &nbsp;
-      <DownloadFileLink
-        username={value}
-        type={"csv"}
-        startDate={formData.startDate}
-        endDate={formData.endDate}
-      />
-      /
-      <DownloadFileLink
-        username={value}
-        type={"geojson"}
-        startDate={formData.startDate}
-        endDate={formData.endDate}
-      />
-    </>
   );
 };
 
