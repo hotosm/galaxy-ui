@@ -40,9 +40,32 @@ export const UserGroupColumnHeadings = [
     accessor: "userName",
     Header: <FormattedMessage {...messages.DataQualityIssues} />,
     Cell: ({ cell: { value } }) => (
-      <DownloadDataCell value={value} source="usergroup" />
+      <DownloadDataCell value={value} source="userGroup" />
     ),
     disableSortBy: true,
     defaultCanSort: false,
+  },
+];
+
+export const UserGroupReportCSVHeaders = [
+  {
+    key: "userName",
+    label: "Mapper",
+  },
+  {
+    key: "createdBuildings",
+    label: "Created Buildings",
+  },
+  {
+    key: "modifiedBuildings",
+    label: "Modified Buildings",
+  },
+  {
+    key: "createdHighways",
+    label: "Added Highways",
+  },
+  {
+    key: "modifiedHighways",
+    label: "Modified Highways",
   },
 ];
