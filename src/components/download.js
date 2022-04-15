@@ -1,10 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useContext } from "react";
 import axios from "axios";
+import { CSVLink } from "react-csv";
+import { format } from "date-fns";
 import { API_URL } from "../config";
 import { useDownloadFile } from "../hooks/useDownloadFile";
 import { MapathonContext } from "../context/mapathonContext";
 import { UserGroupContext } from "../context/userGroupContext";
+import { MapathonReportCSVHeaders } from "./mapathon/constants";
+import { UserGroupReportCSVHeaders } from "./userGroup/constants";
 
 export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
   const fetchFile = () => {
@@ -53,7 +57,11 @@ export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
 
 export const DownloadDataCell = ({ value, source }) => {
   const { formData } = useContext(
-    source === "mapathon" ? MapathonContext : UserGroupContext
+    source === "mapathon"
+      ? MapathonContext
+      : source === "userGroup"
+      ? UserGroupContext
+      : []
   );
   return (
     <>
@@ -72,5 +80,41 @@ export const DownloadDataCell = ({ value, source }) => {
         endDate={formData.endDate}
       />
     </>
+  );
+};
+
+export const DownloadCSVButton = ({ data, source }) => {
+  const { formData } = useContext(
+    source === "mapathon"
+      ? MapathonContext
+      : source === "userGroup"
+      ? UserGroupContext
+      : []
+  );
+
+  const headers =
+    source === "mapathon"
+      ? MapathonReportCSVHeaders
+      : source === "userGroup"
+      ? UserGroupReportCSVHeaders
+      : [];
+
+  const csvDateRange = `${format(formData.startDate, "dd/MM/yyyy")} - ${format(
+    formData.endDate,
+    "dd/MM/yyyy"
+  )}`;
+
+  return (
+    <div className="text-right m-4 text-lg">
+      <CSVLink
+        data={data}
+        headers={headers}
+        filename={`${csvDateRange} ${source} Report.csv`}
+        className="bg-blue-grey text-white py-2 px-4"
+        target="_blank"
+      >
+        Download CSV
+      </CSVLink>
+    </div>
   );
 };

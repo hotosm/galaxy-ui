@@ -6,6 +6,7 @@ import messages from "./messages";
 import { Error } from "../formResponses";
 import { UserGroupErrorMessage } from "./userGroupError";
 import { SortDownIcon, SortIcon, SortUpIcon } from "../../assets/svgIcons";
+import { DownloadCSVButton } from "../download";
 
 export function UserGroupResultsTable({ columns, data, userDataCheck }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -27,6 +28,7 @@ export function UserGroupResultsTable({ columns, data, userDataCheck }) {
             <UserGroupErrorMessage error={downloadError} />
           </Error>
         )}
+        <DownloadCSVButton data={data} source={"userGroup"} />
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">

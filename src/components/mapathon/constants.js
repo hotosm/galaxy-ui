@@ -62,3 +62,38 @@ export const MapathonDetailedTableHeaders = [
     defaultCanSort: false,
   },
 ];
+
+export const MapathonReportCSVHeaders = [
+  {
+    key: "username",
+    label: "Mapper",
+  },
+  {
+    key: "addedBuildings",
+    label: "Added Buildings",
+  },
+  {
+    key: "modifiedBuildings",
+    label: "Modified Buildings",
+  },
+  {
+    key: "createdHighways",
+    label: "Added Highways",
+  },
+  {
+    key: "mappedTasks",
+    label: "Mapped Tasks",
+  },
+  {
+    key: "validatedTasks",
+    label: "Validated Tasks",
+  },
+  {
+    key: "timeSpentMapping",
+    label: "Time Spent Mapping",
+  },
+  {
+    key: "timeSpentValidating",
+    label: "Time Spent Validating",
+  },
+];

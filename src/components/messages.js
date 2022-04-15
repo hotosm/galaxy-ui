@@ -172,6 +172,18 @@ export default defineMessages({
     id: "reports.mapathon.detailed.column.timeSpentValidating",
     defaultMessage: "Time Spent Validating (s)",
   },
+  Editors: {
+    id: "reports.mapathon.detailed.column.editorsUsed",
+    defaultMessage: "Editors used",
+  },
+  userId: {
+    id: "reports.mapathon.detailed.column.userId",
+    defaultMessage: "User Id",
+  },
+  TotalBuildings: {
+    id: "reports.mapathon.detailed.column.buildings.total",
+    defaultMessage: "Total number of buildings",
+  },
   DataQualityIssues: {
     id: "reports.mapathon.detailed.column.dataQualityIssues",
     defaultMessage: "Data Quality Issues",

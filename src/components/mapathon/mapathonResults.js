@@ -6,6 +6,7 @@ import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
 import { useSelector } from "react-redux";
 import { SortDownIcon, SortIcon, SortUpIcon } from "../../assets/svgIcons";
+import { DownloadCSVButton } from "../download";
 
 const FeatureList = ({ title, features }) => {
   return (
@@ -83,6 +84,7 @@ export function MapathonDetailedResultsTable({ columns, data }) {
             <MapathonErrorMessage error={downloadError} />
           </Error>
         )}
+        <DownloadCSVButton data={data} source={"mapathon"} />
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
