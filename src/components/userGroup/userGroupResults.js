@@ -1,29 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useTable, useSortBy } from "react-table";
 import { FormattedMessage } from "react-intl";
-import { DownloadFileLink } from "../downloadLink";
 import messages from "./messages";
 import { Error } from "../formResponses";
 import { UserGroupErrorMessage } from "./userGroupError";
+import { SortDownIcon, SortIcon, SortUpIcon } from "../../assets/svgIcons";
 
-const featureActionCount = (array, feature, action) => {
-  let x = array.filter(
-    (i) => i["feature"] === feature && i["action"] === action
-  );
-  return x[0] ? x[0]["count"] : 0;
-};
+export function UserGroupResultsTable({ columns, data, userDataCheck }) {
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns,
+        data,
+      },
+      useSortBy
+    );
 
-const USER_GROUP_COLUMN_HEADINGS = [
-  { title: "Mapper" },
-  { title: "CreatedBuildings" },
-  { title: "ModifiedBuildings" },
-  { title: "CreatedHighways" },
-  { title: "ModifiedHighways" },
-  { title: "DataQualityIssues" },
-];
+  const downloadError = useSelector((state) => state.mapathon.downloadError);
 
-export const UserGroupResults = ({ users, startDate, endDate }) => {
-  const [downloadError, setDownloadError] = useState(null);
-  if (users.length > 0) {
+  if (userDataCheck) {
     return (
       <>
         {downloadError && (
@@ -31,68 +27,63 @@ export const UserGroupResults = ({ users, startDate, endDate }) => {
             <UserGroupErrorMessage error={downloadError} />
           </Error>
         )}
-        <table className="table-fixed mt-5 mx-auto">
-          <thead>
-            <tr>
-              {USER_GROUP_COLUMN_HEADINGS.map((i, n) => (
-                <th
-                  key={n}
-                  className="w-1/6 text-left font-bold text-xl px-7 py-4"
-                >
-                  <FormattedMessage {...messages[i.title]} />
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((i) => {
-              return (
-                <tr key={i["userId"]}>
-                  <td className="py-2 px-7 text-lg">
-                    <a
-                      href={`https://www.openstreetmap.org/user/${i["userName"]}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="hover:underline"
-                    >
-                      {i["userName"]}
-                    </a>
-                  </td>
-                  <td className="py-2 px-7 text-lg">
-                    {featureActionCount(i["stats"], "building", "create")}
-                  </td>
-                  <td className="py-2 px-7 text-lg">
-                    {featureActionCount(i["stats"], "building", "modify")}
-                  </td>
-                  <td className="py-2 px-7 text-lg">
-                    {featureActionCount(i["stats"], "highway", "create")}
-                  </td>
-                  <td className="py-2 px-7 text-lg">
-                    {featureActionCount(i["stats"], "highway", "modify")}
-                  </td>
-                  <td className="py-2 px-7 text-lg">
-                    Download &nbsp;
-                    <DownloadFileLink
-                      username={i["userName"]}
-                      type={"csv"}
-                      startDate={startDate}
-                      endDate={endDate}
-                      setDownloadError={setDownloadError}
-                    />
-                    /
-                    <DownloadFileLink
-                      username={i["userName"]}
-                      type={"json"}
-                      startDate={startDate}
-                      endDate={endDate}
-                      setDownloadError={setDownloadError}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="flex flex-col">
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="overflow-x-auto"></div>
+              <table {...getTableProps()} className="min-w-full">
+                <thead className="border-b">
+                  {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column) => (
+                        <th
+                          scope="col"
+                          className="text-xl font-semibold px-6 py-4 text-left"
+                          {...column.getHeaderProps(
+                            column.getSortByToggleProps()
+                          )}
+                        >
+                          <span className="inline ">
+                            {column.render("Header")} &nbsp;
+                            {column.canSort &&
+                              (column.isSorted ? (
+                                column.isSortedDesc ? (
+                                  <SortDownIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
+                                ) : (
+                                  <SortUpIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
+                                )
+                              ) : (
+                                <SortIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
+                              ))}
+                          </span>
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                  {rows.map((row, i) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()} className="border-b">
+                        {row.cells.map((cell) => {
+                          return (
+                            <td
+                              className="text-lg font-light px-6 py-4 whitespace-nowrap"
+                              {...cell.getCellProps()}
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </>
     );
   } else {
@@ -104,4 +95,4 @@ export const UserGroupResults = ({ users, startDate, endDate }) => {
       </div>
     );
   }
-};
+}

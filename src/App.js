@@ -14,6 +14,7 @@ import {
 } from "./views/MapathonReports";
 import { UserGroupReport } from "./views/UserGroupReport";
 import { MapathonContextProvider } from "./context/mapathonContext";
+import { UserGroupContextProvider } from "./context/userGroupContext";
 
 function App() {
   return (
@@ -26,9 +27,11 @@ function App() {
             <Route path="/authorised" component={LoginCallback} />
             <Route path="/about" component={About} />
             <Route path="/explore" component={Reports} />
-            <ProtectedRoute path={"/user-report"}>
-              <UserGroupReport />
-            </ProtectedRoute>
+            <UserGroupContextProvider>
+              <ProtectedRoute path={"/user-report"}>
+                <UserGroupReport />
+              </ProtectedRoute>
+            </UserGroupContextProvider>
           </Switch>
           <Switch>
             <MapathonContextProvider>

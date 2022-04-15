@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import messages from "../messages";
-import { DownloadDataCell } from "./mapathonResults";
+import { DownloadDataCell } from "../download";
 
 export const MapathonDetailedTableHeaders = [
   {
@@ -55,7 +55,9 @@ export const MapathonDetailedTableHeaders = [
     id: "userId",
     accessor: "username",
     Header: <FormattedMessage {...messages.DataQualityIssues} />,
-    Cell: ({ cell: { value } }) => <DownloadDataCell value={value} />,
+    Cell: ({ cell: { value } }) => (
+      <DownloadDataCell value={value} source="mapathon" />
+    ),
     disableSortBy: true,
     defaultCanSort: false,
   },
