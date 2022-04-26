@@ -205,4 +205,16 @@ export default defineMessages({
     id: "about.footer.contact",
     defaultMessage: "Reach out on {GithubLink} or {SlackLink}.",
   },
+  fallbackError: {
+    id: "error.fallback.heading",
+    defaultMessage: "It looks like something went wrong",
+  },
+  reportIssue: {
+    id: "error.fallback.link.report",
+    defaultMessage: "Report Issue",
+  },
+  tryAgain: {
+    id: "error.fallback.button.retry",
+    defaultMessage: "Try Again",
+  },
 });
