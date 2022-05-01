@@ -23,7 +23,7 @@ export default defineMessages({
   },
   organisationReport: {
     id: "exploreData.organisationReport",
-    defaultMessage: "Organisation Reports",
+    defaultMessage: "Organisation Reports (TBD)",
   },
   organisationReportBlurb: {
     id: "exploreData.organisationReport.blurb",
@@ -31,7 +31,7 @@ export default defineMessages({
   },
   countryReport: {
     id: "exploreData.countryReport",
-    defaultMessage: "Country Reports",
+    defaultMessage: "Country Reports (TBD)",
   },
   countryReportBlurb: {
     id: "exploreData.countryReport.blurb",
