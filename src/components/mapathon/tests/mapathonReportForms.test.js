@@ -1,41 +1,39 @@
-import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import React from "react";
+import { render, cleanup } from "@testing-library/react";
 import { addHours, format } from "date-fns";
-import { AppProviders } from '../../../utils/testUtils';
-import { MapathonContext } from '../../../context/mapathonContext';
-import { MapathonReportForm } from '../mapathonReportForm';
+import { AppProviders } from "../../../utils/testUtils";
+import { MapathonReportForm } from "../mapathonReportForm";
+import { FormContext } from "../../../context/formContext";
 
-function renderMapathonReportForm(formData, setFormData) {
+function renderMapathonReportForm(mapathonFormData, setMapathonFormData) {
   return render(
     <AppProviders>
-        <MapathonContext.Provider
-          value={{ 
-            formData, 
-            setFormData
-          }}
-        >
-          <MapathonReportForm
-            error={null}
-            fetch={jest.fn()}
-          />
-        </MapathonContext.Provider>
-      </AppProviders>
-    );
+      <FormContext.Provider
+        value={{
+          mapathonFormData,
+          setMapathonFormData,
+        }}
+      >
+        <MapathonReportForm error={null} fetch={jest.fn()} />
+      </FormContext.Provider>
+    </AppProviders>
+  );
 }
 
 describe("Mapathon Report Form Component", () => {
-  const formData = {
+  const mapathonFormData = {
     startDate: addHours(new Date(), -1),
     endDate: new Date(),
     TMProjectIds: "",
-    mapathonHashtags: ""
+    mapathonHashtags: "",
   };
-  const setFormData = jest.fn();
+  const setMapathonFormData = jest.fn();
 
   afterEach(cleanup);
 
-  it('displays all form components', () => {
-    const { getByText, getAllByRole, getByPlaceholderText} = renderMapathonReportForm(formData, setFormData);
+  it("displays all form components", () => {
+    const { getByText, getAllByRole, getByPlaceholderText } =
+      renderMapathonReportForm(mapathonFormData, setMapathonFormData);
     // form input titles
     expect(getByText(/Start Date/i)).toBeInTheDocument();
     expect(getByText(/End Date/i)).toBeInTheDocument();
@@ -74,4 +72,4 @@ describe("Mapathon Report Form Component", () => {
     // Submit button
     expect(getByText(/submit your query/i)).toBeInTheDocument();
   });
-})
+});
