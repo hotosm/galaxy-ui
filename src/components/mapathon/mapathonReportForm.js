@@ -32,8 +32,8 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
     if (today) {
       let startDate = setHours(setMinutes(setSeconds(new Date(), 0), 0), 0);
       let endDate = setHours(setMinutes(setSeconds(new Date(), 59), 59), 23);
-      setFormData({
-        ...formData,
+      setMapathonFormData({
+        ...mapathonFormData,
         startDate,
         endDate,
       });
