@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
-import { getTime } from "date-fns";
+import { getTime, setHours, setMinutes, setSeconds } from "date-fns";
 import { FormattedMessage, useIntl } from "react-intl";
 import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
+import { SwitchToggle } from "../toggle";
 import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
 import { setLoading, setTriggerSubmit } from "../../features/form/formSlice";
@@ -20,11 +21,25 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
   const { mapathonFormData, setMapathonFormData } = useContext(FormContext);
   const [formError, setFormError] = useState(null);
   const triggerSubmit = useSelector((state) => state.mapathon.triggerSubmit);
+  const [today, setToday] = useState(false);
 
   useEffect(() => {
     if (error) setFormError(error);
     else setFormError(null);
   }, [mapathonFormData, error]);
+
+  useEffect(() => {
+    if (today) {
+      let startDate = setHours(setMinutes(setSeconds(new Date(), 0), 0), 0);
+      let endDate = setHours(setMinutes(setSeconds(new Date(), 59), 59), 23);
+      setFormData({
+        ...formData,
+        startDate,
+        endDate,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [today]);
 
   const fetchData = () => {
     try {
@@ -65,6 +80,11 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
 
   return (
     <>
+      <SwitchToggle
+        label="Today"
+        isChecked={today}
+        handleChange={() => setToday(!today)}
+      />
       <form onSubmit={handleSubmit} className="mt-4 px-4">
         <div className="grid grid-cols-8 gap-4">
           <div className="space-y-20 py-2 col-span-2">
@@ -85,6 +105,7 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
                   });
                 }}
                 showTimeSelect
+                readOnly={today}
                 timeIntervals={15}
                 timeCaption="Time"
                 dateFormat="d MMMM, yyyy h:mm aa"
@@ -112,6 +133,7 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
                   getTime(mapathonFormData.startDate) < getTime(time)
                 }
                 showTimeSelect
+                readOnly={today}
                 timeIntervals={15}
                 timeCaption="Time"
                 dateFormat=" d MMMM, yyyy h:mm aa"
