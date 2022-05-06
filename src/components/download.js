@@ -5,8 +5,7 @@ import { CSVLink } from "react-csv";
 import { format } from "date-fns";
 import { API_URL } from "../config";
 import { useDownloadFile } from "../hooks/useDownloadFile";
-import { MapathonContext } from "../context/mapathonContext";
-import { UserGroupContext } from "../context/userGroupContext";
+import { FormContext } from "../context/formContext";
 import { MapathonReportCSVHeaders } from "./mapathon/constants";
 import { UserGroupReportCSVHeaders } from "./userGroup/constants";
 
@@ -56,13 +55,14 @@ export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
 };
 
 export const DownloadDataCell = ({ value, source }) => {
-  const { formData } = useContext(
+  const { mapathonFormData, userGroupFormData } = useContext(FormContext);
+  const formData =
     source === "mapathon"
-      ? MapathonContext
+      ? mapathonFormData
       : source === "userGroup"
-      ? UserGroupContext
-      : []
-  );
+      ? userGroupFormData
+      : [];
+
   return (
     <>
       Download &nbsp;
@@ -84,13 +84,13 @@ export const DownloadDataCell = ({ value, source }) => {
 };
 
 export const DownloadCSVButton = ({ data, source }) => {
-  const { formData } = useContext(
+  const { mapathonFormData, userGroupFormData } = useContext(FormContext);
+  const formData =
     source === "mapathon"
-      ? MapathonContext
+      ? mapathonFormData
       : source === "userGroup"
-      ? UserGroupContext
-      : []
-  );
+      ? userGroupFormData
+      : [];
 
   const headers =
     source === "mapathon"

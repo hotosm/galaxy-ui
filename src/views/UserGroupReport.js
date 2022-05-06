@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { UserGroupResultsTable } from "../components/userGroup/userGroupResults";
 import { UserGroupReportForm } from "../components/userGroup/userGroupForm";
+import { FormContext } from "../context/formContext";
 import { getUserIds, getUserStats } from "../queries/getUserStats";
 import { MiniNavBar } from "../components/nav/navbar";
 import { UserGroupColumnHeadings } from "../components/userGroup/constants";
-import { UserGroupContext } from "../context/userGroupContext";
 import { aggregateUserGroupData } from "../utils/userGroupUtils";
 
 const userGroupPage = [
@@ -15,7 +15,7 @@ const userGroupPage = [
 ];
 
 export const UserGroupReport = () => {
-  const { formData, setFormData } = useContext(UserGroupContext);
+  const { userGroupFormData, setUserGroupFormData } = useContext(FormContext);
   const [formError, setFormError] = useState(null);
   const [userIds, setUserIds] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ export const UserGroupReport = () => {
   const fetchUserStats = useCallback(
     (ids) => {
       ids.map((i) =>
-        getUserStats(i.userId, formData)
+        getUserStats(i.userId, userGroupFormData)
           .then((res) => {
             setUsers((oldUsersArray) => [
               ...oldUsersArray,
@@ -58,7 +58,7 @@ export const UserGroupReport = () => {
           })
       );
     },
-    [formData]
+    [userGroupFormData]
   );
 
   useEffect(() => {
@@ -72,8 +72,8 @@ export const UserGroupReport = () => {
       <MiniNavBar pages={userGroupPage} />
       <UserGroupReportForm
         fetch={mutate}
-        formData={formData}
-        setFormData={setFormData}
+        formData={userGroupFormData}
+        setFormData={setUserGroupFormData}
         setUsers={setUsers}
         formError={formError}
         setFormError={setFormError}

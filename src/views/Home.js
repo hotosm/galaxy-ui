@@ -7,7 +7,7 @@ import { MAPBOX_TOKEN } from "../config";
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
-export function Home() {
+export function DefaultPage({ children }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
@@ -25,7 +25,7 @@ export function Home() {
   return (
     <div className="h-screen w-100">
       <div className="h-full w-full absolute z-10 flex items-center">
-        <Banner />
+        {children}
       </div>
       <div
         ref={mapContainer}
@@ -33,5 +33,13 @@ export function Home() {
         className="h-full w-full absolute opacity-70"
       />
     </div>
+  );
+}
+
+export function Home() {
+  return (
+    <DefaultPage>
+      <Banner />
+    </DefaultPage>
   );
 }

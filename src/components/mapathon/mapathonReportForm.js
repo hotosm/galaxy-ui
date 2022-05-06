@@ -7,31 +7,31 @@ import "react-datepicker/dist/react-datepicker.css";
 import { SubmitButton } from "../button";
 import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
-import { validateMapathonFormData } from "../../utils/validationUtils";
-import { MapathonContext } from "../../context/mapathonContext";
 import { setLoading, setTriggerSubmit } from "../../features/form/formSlice";
+import { FormContext } from "../../context/formContext";
 import { getTimeZone } from "../../utils/timeUtils";
+import { validateMapathonFormData } from "../../utils/validationUtils";
 import messages from "../messages";
 
 export const MapathonReportForm = ({ fetch, error, loading }) => {
   const intl = useIntl();
   const dispatch = useDispatch();
 
-  const { formData, setFormData } = useContext(MapathonContext);
+  const { mapathonFormData, setMapathonFormData } = useContext(FormContext);
   const [formError, setFormError] = useState(null);
   const triggerSubmit = useSelector((state) => state.mapathon.triggerSubmit);
 
   useEffect(() => {
     if (error) setFormError(error);
     else setFormError(null);
-  }, [formData, error]);
+  }, [mapathonFormData, error]);
 
   const fetchData = () => {
     try {
-      let isValid = validateMapathonFormData(formData);
+      let isValid = validateMapathonFormData(mapathonFormData);
       if (!isValid) return;
       else {
-        fetch(formData); // API call
+        fetch(mapathonFormData); // API call
         setFormError(null);
       }
     } catch (e) {
@@ -40,8 +40,8 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setMapathonFormData({
+      ...mapathonFormData,
       [e.target.name]: e.target.value,
     });
   };
@@ -77,10 +77,10 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
                 </span>
               </label>
               <DatePicker
-                selected={formData.startDate}
+                selected={mapathonFormData.startDate}
                 onChange={(date) => {
-                  setFormData({
-                    ...formData,
+                  setMapathonFormData({
+                    ...mapathonFormData,
                     startDate: date,
                   });
                 }}
@@ -100,16 +100,16 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
                 </span>
               </label>
               <DatePicker
-                selected={formData.endDate}
+                selected={mapathonFormData.endDate}
                 onChange={(date) => {
-                  setFormData({
-                    ...formData,
+                  setMapathonFormData({
+                    ...mapathonFormData,
                     endDate: date,
                   });
                 }}
-                minDate={formData.startDate}
+                minDate={mapathonFormData.startDate}
                 filterTime={(time) =>
-                  getTime(formData.startDate) < getTime(time)
+                  getTime(mapathonFormData.startDate) < getTime(time)
                 }
                 showTimeSelect
                 timeIntervals={15}
@@ -129,7 +129,7 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
               placeholder={intl.formatMessage(
                 messages.mapathonFormIdsPlaceholder
               )}
-              value={formData.TMProjectIds}
+              value={mapathonFormData.TMProjectIds}
               onChange={handleChange}
               className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
             />
@@ -144,7 +144,7 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
               placeholder={intl.formatMessage(
                 messages.mapathonFormHashtagsPlaceholder
               )}
-              value={formData.mapathonHashtags}
+              value={mapathonFormData.mapathonHashtags}
               onChange={handleChange}
               className="mt-5 blue-grey w-100 py-3 px-2 border border-grey-light bg-transparent focus:outline-none resize-none"
             />

@@ -1,7 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { MATOMO_ID } from "./config";
+import { FormContextProvider } from "./context/formContext";
 import { TrackingBanner } from "./components/banner";
 import Header from "./components/nav/header";
 import { LoginCallback } from "./components/auth";
@@ -13,8 +19,7 @@ import {
   MapathonDetailedReport,
 } from "./views/MapathonReports";
 import { UserGroupReport } from "./views/UserGroupReport";
-import { MapathonContextProvider } from "./context/mapathonContext";
-import { UserGroupContextProvider } from "./context/userGroupContext";
+import { NotFoundPage } from "./views/NotFound";
 
 function App() {
   return (
@@ -22,19 +27,12 @@ function App() {
       <Router>
         <Header />
         <div>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/authorised" component={LoginCallback} />
-            <Route path="/about" component={About} />
-            <Route path="/explore" component={Reports} />
-            <UserGroupContextProvider>
-              <ProtectedRoute path={"/user-report"}>
-                <UserGroupReport />
-              </ProtectedRoute>
-            </UserGroupContextProvider>
-          </Switch>
-          <Switch>
-            <MapathonContextProvider>
+          <FormContextProvider>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/authorised" component={LoginCallback} />
+              <Route path="/about" component={About} />
+              <Route path="/explore" component={Reports} />
               <Route
                 path="/mapathon-report/summary"
                 component={MapathonSummaryReport}
@@ -42,8 +40,13 @@ function App() {
               <ProtectedRoute path={"/mapathon-report/detailed"}>
                 <MapathonDetailedReport />
               </ProtectedRoute>
-            </MapathonContextProvider>
-          </Switch>
+              <ProtectedRoute exact path={"/user-report"}>
+                <UserGroupReport />
+              </ProtectedRoute>
+              <Route path="/404" component={NotFoundPage} />
+              <Redirect to="/404" />
+            </Switch>
+          </FormContextProvider>
         </div>
       </Router>
       {MATOMO_ID && <TrackingBanner />}
