@@ -9,6 +9,7 @@ import { getUserIds, getUserStats } from "../queries/getUserStats";
 import { MiniNavBar } from "../components/nav/navbar";
 import { UserGroupColumnHeadings } from "../components/userGroup/constants";
 import { aggregateUserGroupData } from "../utils/userGroupUtils";
+import { SpinnerIcon } from "../assets/svgIcons";
 
 const userGroupPage = [
   { pageTitle: "User Group Report", pageURL: "/user-report" },
@@ -79,7 +80,10 @@ export const UserGroupReport = () => {
         setFormError={setFormError}
       />
       {(isLoading || loading) && (
-        <div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>
+        <div className="mx-auto text-center w-1/4 p-1 mt-5">
+          <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
+          Loading...
+        </div>
       )}
       {data && (
         <UserGroupResultsTable
