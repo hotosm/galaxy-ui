@@ -45,21 +45,23 @@ export function UserGroupResultsTable({
             showLoadingAnimation
             ready={rows.length > 0}
             type="text"
-            rows={5}
+            rows={8}
             className="mt-20 mx-4"
           >
-            <DownloadCSVButton data={data} source={"userGroup"} />
+            <div className="w-11/12 mx-auto">
+              <DownloadCSVButton data={data} source={"userGroup"} />
+            </div>
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="overflow-x-auto" />
-                <table {...getTableProps()} className="min-w-full">
+                <table {...getTableProps()} className="w-11/12 mx-auto border">
                   <thead className="border-b">
                     {headerGroups.map((headerGroup) => (
                       <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
                           <th
                             scope="col"
-                            className="text-xl font-semibold px-6 py-4 text-left"
+                            className="text-xl font-semibold p-4 text-center"
                             {...column.getHeaderProps(
                               column.getSortByToggleProps()
                             )}
@@ -90,7 +92,7 @@ export function UserGroupResultsTable({
                           {row.cells.map((cell) => {
                             return (
                               <td
-                                className="text-lg font-light px-6 py-4 whitespace-nowrap"
+                                className="text-lg font-light p-4 text-center whitespace-nowrap"
                                 {...cell.getCellProps()}
                               >
                                 {cell.render("Cell")}
@@ -102,7 +104,15 @@ export function UserGroupResultsTable({
                     })}
                   </tbody>
                 </table>
-                {/* {loading ? (<div className="text-center"><SpinnerIcon className="animate-spin w-5 h-5 my-1 inline text-red" /></div>) : (<div className="w-full bg-tan h-10 text-center">End of Table</div>)} */}
+                {loading ? (
+                  <div className="text-center w-11/12 mx-auto">
+                    <SpinnerIcon className="animate-spin w-5 h-5 mt-2 inline text-red" />
+                  </div>
+                ) : (
+                  <div className="bg-tan w-11/12 text-center mx-auto">
+                    End of Table
+                  </div>
+                )}
               </div>
             </div>
           </ReactPlaceholder>

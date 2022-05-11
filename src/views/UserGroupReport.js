@@ -19,7 +19,6 @@ export const UserGroupReport = () => {
   const { userGroupFormData, setUserGroupFormData } = useContext(FormContext);
   const [formError, setFormError] = useState(null);
   const [userIds, setUserIds] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState();
 
   const { mutate, data, isLoading } = useMutation(getUserIds, {
@@ -45,7 +44,6 @@ export const UserGroupReport = () => {
               ...oldUsersArray,
               { ...i, stats: res },
             ]);
-            setLoading(true);
           })
           .catch((error) => {
             if (error.response.status === 500) {
@@ -53,9 +51,6 @@ export const UserGroupReport = () => {
             } else {
               setFormError(error.response.data.detail[0]["msg"]);
             }
-          })
-          .finally(() => {
-            setLoading(false);
           })
       );
     },
@@ -79,7 +74,7 @@ export const UserGroupReport = () => {
         formError={formError}
         setFormError={setFormError}
       />
-      {(isLoading || loading) && (
+      {isLoading && (
         <div className="mx-auto text-center w-1/4 p-1 mt-5">
           <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
           Loading...
@@ -90,6 +85,7 @@ export const UserGroupReport = () => {
           columns={UserGroupColumnHeadings}
           data={aggregateUserGroupData(users)}
           userDataCheck={userIds && userIds.length > 0}
+          loading={userIds.length !== users.length}
         />
       )}
     </div>
