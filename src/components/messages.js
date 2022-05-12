@@ -192,6 +192,11 @@ export default defineMessages({
     id: "reports.mapathon.detailed.results.no.data",
     defaultMessage: "No Data Found!",
   },
+  mapathonTooltip: {
+    id: "reports.mapathon.detailed.stats.tooltip",
+    defaultMessage:
+      "The following statistics: tasks mapped, tasks validated, time spent mapping, and time spent validating are derived using either Tasking Manager project ids or Tasking Manager specific hashtags, e.g. hotosm-project-1.",
+  },
   footerOrganisation: {
     id: "about.footer.organisation",
     defaultMessage: "This project is under development by {OrganisationLink}.",

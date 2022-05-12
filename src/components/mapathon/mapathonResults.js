@@ -1,12 +1,18 @@
 import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useSelector } from "react-redux";
 import { useTable, useSortBy } from "react-table";
 import messages from "../messages";
 import { Error } from "../formResponses";
 import { MapathonErrorMessage } from "./mapathonError";
-import { useSelector } from "react-redux";
-import { SortDownIcon, SortIcon, SortUpIcon } from "../../assets/svgIcons";
+import {
+  QuestionIcon,
+  SortDownIcon,
+  SortIcon,
+  SortUpIcon,
+} from "../../assets/svgIcons";
 import { DownloadCSVButton } from "../download";
+import { Tooltip } from "../tooltip";
 
 const FeatureList = ({ title, features }) => {
   return (
@@ -63,7 +69,7 @@ export const MapathonSummaryResults = ({ data }) => {
 };
 
 export function MapathonDetailedResultsTable({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
+  const intl = useIntl();
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
       {
@@ -75,7 +81,6 @@ export function MapathonDetailedResultsTable({ columns, data }) {
 
   const downloadError = useSelector((state) => state.mapathon.downloadError);
 
-  // Render the UI for your table
   if (data.length > 0) {
     return (
       <>
@@ -93,29 +98,50 @@ export function MapathonDetailedResultsTable({ columns, data }) {
                 <thead className="border-b">
                   {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
-                      {headerGroup.headers.map((column) => (
-                        <th
-                          scope="col"
-                          className="text-xl font-semibold px-6 py-4 text-left"
-                          {...column.getHeaderProps(
-                            column.getSortByToggleProps()
-                          )}
-                        >
-                          <span className="inline ">
-                            {column.render("Header")} &nbsp;
-                            {column.canSort &&
-                              (column.isSorted ? (
-                                column.isSortedDesc ? (
-                                  <SortDownIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
-                                ) : (
-                                  <SortUpIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
-                                )
+                      {headerGroup.headers.map((column) => {
+                        const tooltipKeys = [
+                          "timeSpentMapping",
+                          "timeSpentValidating",
+                          "validatedTasks",
+                          "mappedTasks",
+                        ];
+                        let showTooltip = tooltipKeys.includes(column.id);
+                        return (
+                          <th
+                            scope="col"
+                            className="text-xl font-semibold px-6 py-4 text-left"
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
+                          >
+                            <span className="inline ">
+                              {column.render("Header")} &nbsp;
+                              {showTooltip ? (
+                                <Tooltip
+                                  position={"top center"}
+                                  content={intl.formatMessage(
+                                    messages.mapathonTooltip
+                                  )}
+                                >
+                                  <QuestionIcon className="w-3 h-3 text-red" />
+                                </Tooltip>
                               ) : (
-                                <SortIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
-                              ))}
-                          </span>
-                        </th>
-                      ))}
+                                ""
+                              )}
+                              {column.canSort &&
+                                (column.isSorted ? (
+                                  column.isSortedDesc ? (
+                                    <SortDownIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
+                                  ) : (
+                                    <SortUpIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
+                                  )
+                                ) : (
+                                  <SortIcon className="w-3 h-3 ml-1 inline text-blue-grey" />
+                                ))}
+                            </span>
+                          </th>
+                        );
+                      })}
                     </tr>
                   ))}
                 </thead>
