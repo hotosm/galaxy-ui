@@ -21,15 +21,17 @@ export const UserGroupReport = () => {
   const [userIds, setUserIds] = useState([]);
   const [users, setUsers] = useState();
 
-  const { mutate, data, isLoading } = useMutation(getUserIds, {
-    onError: (error) => {
+  const { mutate, data, isLoading, error } = useMutation(getUserIds);
+
+  useEffect(() => {
+    if (error) {
       if (error.response.status === 500) {
         setFormError(error.response.data);
       } else {
         setFormError(error.response.data.detail[0]["msg"]);
       }
-    },
-  });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (data) setUserIds(data);
