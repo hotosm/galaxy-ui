@@ -109,7 +109,7 @@ export function MapathonDetailedResultsTable({ columns, data }) {
                         return (
                           <th
                             scope="col"
-                            className="text-xl font-semibold px-6 py-4 text-left"
+                            className="text-lg font-semibold px-6 py-4 text-left"
                             {...column.getHeaderProps(
                               column.getSortByToggleProps()
                             )}

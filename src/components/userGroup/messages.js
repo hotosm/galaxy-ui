@@ -44,19 +44,19 @@ export default defineMessages({
   },
   CreatedBuildings: {
     id: "reports.user.group.table.column.buildingsCreated",
-    defaultMessage: "Buildings Created",
+    defaultMessage: "# Buildings Created",
   },
   ModifiedBuildings: {
     id: "reports.user.group.table.column.buildingsModified",
-    defaultMessage: "Buildings Modified",
+    defaultMessage: "# Buildings Modified",
   },
   CreatedHighways: {
     id: "reports.user.group.table.column.highwaysCreated",
-    defaultMessage: "Highways Created",
+    defaultMessage: "# Highways Created",
   },
   ModifiedHighways: {
     id: "reports.user.group.table.column.highwaysModified",
-    defaultMessage: "Highways Modified",
+    defaultMessage: "# Highways Modified",
   },
   DataQualityIssues: {
     id: "reports.user.group.table.column.dataQualityIssues",
