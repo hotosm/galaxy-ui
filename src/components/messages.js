@@ -146,15 +146,15 @@ export default defineMessages({
   },
   AddedBuildings: {
     id: "reports.mapathon.detailed.column.buildingsAdded",
-    defaultMessage: "Buildings Added",
+    defaultMessage: "# Buildings Added",
   },
   ModifiedBuildings: {
     id: "reports.mapathon.detailed.column.buildingsModified",
-    defaultMessage: "Buildings Modified",
+    defaultMessage: "# Buildings Modified",
   },
   AddedHighways: {
     id: "reports.mapathon.detailed.column.highwaysAdded",
-    defaultMessage: "Highways Added",
+    defaultMessage: "# Highways Added",
   },
   MappedTasks: {
     id: "reports.mapathon.detailed.column.tasksMapped",
