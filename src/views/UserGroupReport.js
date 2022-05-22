@@ -9,6 +9,7 @@ import { getUserIds, getUserStats } from "../queries/getUserStats";
 import { MiniNavBar } from "../components/nav/navbar";
 import { UserGroupColumnHeadings } from "../components/userGroup/constants";
 import { aggregateUserGroupData } from "../utils/userGroupUtils";
+import { SpinnerIcon } from "../assets/svgIcons";
 
 const userGroupPage = [
   { pageTitle: "User Group Report", pageURL: "/user-report" },
@@ -18,18 +19,19 @@ export const UserGroupReport = () => {
   const { userGroupFormData, setUserGroupFormData } = useContext(FormContext);
   const [formError, setFormError] = useState(null);
   const [userIds, setUserIds] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState();
 
-  const { mutate, data, isLoading } = useMutation(getUserIds, {
-    onError: (error) => {
+  const { mutate, data, isLoading, error } = useMutation(getUserIds);
+
+  useEffect(() => {
+    if (error) {
       if (error.response.status === 500) {
         setFormError(error.response.data);
       } else {
         setFormError(error.response.data.detail[0]["msg"]);
       }
-    },
-  });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (data) setUserIds(data);
@@ -44,7 +46,6 @@ export const UserGroupReport = () => {
               ...oldUsersArray,
               { ...i, stats: res },
             ]);
-            setLoading(true);
           })
           .catch((error) => {
             if (error.response.status === 500) {
@@ -52,9 +53,6 @@ export const UserGroupReport = () => {
             } else {
               setFormError(error.response.data.detail[0]["msg"]);
             }
-          })
-          .finally(() => {
-            setLoading(false);
           })
       );
     },
@@ -78,14 +76,18 @@ export const UserGroupReport = () => {
         formError={formError}
         setFormError={setFormError}
       />
-      {(isLoading || loading) && (
-        <div className="mx-auto text-center w-1/4 p-1 mt-5">Loading...</div>
+      {isLoading && (
+        <div className="mx-auto text-center w-1/4 p-1 mt-5">
+          <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
+          Loading...
+        </div>
       )}
       {data && (
         <UserGroupResultsTable
           columns={UserGroupColumnHeadings}
           data={aggregateUserGroupData(users)}
           userDataCheck={userIds && userIds.length > 0}
+          loading={userIds.length !== users.length}
         />
       )}
     </div>

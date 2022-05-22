@@ -105,7 +105,9 @@ export const DownloadCSVButton = ({ data, source }) => {
   )}`;
 
   return (
-    <div className="text-right m-4 text-lg">
+    <div
+      className={`text-right text-lg ${source === "mapathon" ? "m-4" : "my-4"}`}
+    >
       <CSVLink
         data={data}
         headers={headers}
