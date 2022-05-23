@@ -5,12 +5,14 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { MATOMO_ID } from "./config";
 import { FormContextProvider } from "./context/formContext";
 import { TrackingBanner } from "./components/banner";
 import Header from "./components/nav/header";
 import { LoginCallback } from "./components/auth";
+import { FallbackComponent } from "./components/error";
 import { About } from "./views/About";
 import { Home } from "./views/Home";
 import { Reports } from "./views/Reports";
@@ -23,7 +25,7 @@ import { NotFoundPage } from "./views/NotFound";
 
 function App() {
   return (
-    <>
+    <ErrorBoundary FallbackComponent={FallbackComponent}>
       <Router>
         <Header />
         <div>
@@ -50,7 +52,7 @@ function App() {
         </div>
       </Router>
       {MATOMO_ID && <TrackingBanner />}
-    </>
+    </ErrorBoundary>
   );
 }
 
