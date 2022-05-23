@@ -94,7 +94,7 @@ export function MapathonDetailedResultsTable({ columns, data }) {
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div className="overflow-x-auto"></div>
-              <table {...getTableProps()} className="min-w-full">
+              <table {...getTableProps()} className="min-w-full border">
                 <thead className="border-b">
                   {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
