@@ -24,13 +24,13 @@ test("Reports View", () => {
   expect(
     getByText(/Know how specific mappers have contributed to OSM/i)
   ).toBeInTheDocument();
-  expect(getByText("Organisation Reports")).toBeInTheDocument();
-  expect(getByText("Organisation Reports").closest("a").href).toContain(
+  expect(getByText("Organisation Reports (TBD)")).toBeInTheDocument();
+  expect(getByText("Organisation Reports (TBD)").closest("a").href).toContain(
     "/organisation-report"
   );
   expect(getByText("Organisation Report")).toBeInTheDocument();
-  expect(getByText(/Country Reports/i)).toBeInTheDocument();
-  expect(getByText(/Country Reports/i).closest("a").href).toContain(
+  expect(getByText("Country Reports (TBD)")).toBeInTheDocument();
+  expect(getByText("Country Reports (TBD)").closest("a").href).toContain(
     "/country-report"
   );
   expect(
