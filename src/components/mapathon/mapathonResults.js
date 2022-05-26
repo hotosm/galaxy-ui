@@ -14,7 +14,7 @@ import {
 import { DownloadCSVButton } from "../download";
 import { Tooltip } from "../tooltip";
 
-const FeatureList = ({ title, features }) => {
+export const FeatureList = ({ title, features }) => {
   return (
     <div className="w-auto">
       <h2 className="text-2xl py-2 font-bold">{title}:</h2>
