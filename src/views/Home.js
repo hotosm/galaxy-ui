@@ -23,8 +23,8 @@ export function DefaultPage({ children }) {
   });
 
   return (
-    <div className="h-screen w-100">
-      <div className="h-full w-full absolute z-10 flex items-center">
+    <div className=" w-full">
+      <div className="h-full w-full absolute z-10 flex justify-center items-center">
         {children}
       </div>
       <div
