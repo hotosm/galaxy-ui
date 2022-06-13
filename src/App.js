@@ -12,7 +12,7 @@ import { FormContextProvider } from "./context/formContext";
 import { TrackingBanner } from "./components/banner";
 import Header from "./components/nav/header";
 import { LoginCallback } from "./components/auth";
-import { FallbackComponent } from "./components/error";
+import { FallbackComponent } from "./components/fallback";
 import { About } from "./views/About";
 import { Home } from "./views/Home";
 import { Reports } from "./views/Reports";
