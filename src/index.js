@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { IntlProvider } from "react-intl";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+import { SENTRY_DSN, SENTRY_SAMPLE_RATE } from "./config";
 import WebFont from "webfontloader";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -10,6 +13,16 @@ import "./assets/styles/tailwind.generated.css";
 import App from "./App";
 import store from "./app/store";
 import reportWebVitals from "./reportWebVitals";
+
+Sentry.init({
+  dsn: SENTRY_DSN,
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: SENTRY_SAMPLE_RATE,
+});
 
 WebFont.load({
   google: {
