@@ -33,7 +33,7 @@ export function DefaultPage({ children }) {
       <div
         ref={mapContainer}
         data-testid="map-element"
-        className="h-full w-full  bottom-0 opacity-70  bg-yellow-500"
+        className="h-full w-full  bottom-0 opacity-70"
       />
     </div>
   );
