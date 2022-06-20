@@ -23,14 +23,17 @@ export function DefaultPage({ children }) {
   });
 
   return (
-    <div className=" w-full relative h-screen flex flex-col justify-between">
-      <div className="h-1/2 w-full   flex justify-center items-center">
+    <div className=" w-full relative h-screen">
+      <div
+        className=" w-full absolute   flex justify-center items-center z-10"
+        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+      >
         {children}
       </div>
       <div
         ref={mapContainer}
         data-testid="map-element"
-        className="h-1/3 sm:h-1/2 w-full  bottom-0 opacity-70 z-10 "
+        className="h-full w-full  bottom-0 opacity-70  bg-yellow-500"
       />
     </div>
   );
