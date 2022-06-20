@@ -23,14 +23,14 @@ export function DefaultPage({ children }) {
   });
 
   return (
-    <div className=" w-full">
-      <div className="h-full w-full absolute z-10 flex justify-center items-center">
+    <div className=" w-full relative h-screen flex flex-col justify-between">
+      <div className="h-1/2 w-full   flex justify-center items-center">
         {children}
       </div>
       <div
         ref={mapContainer}
         data-testid="map-element"
-        className="h-full w-full absolute opacity-70"
+        className="h-1/3 sm:h-1/2 w-full  bottom-0 opacity-70 z-10 "
       />
     </div>
   );
