@@ -5,9 +5,9 @@ import messages from "./messages";
 
 export function About() {
   return (
-    <div className="h-screen">
-      <main className="w-screen h-5/6 mt-4 mb-5 pt-4 space-y-9 flex flex-col">
-        <section className="w-10/12 flex items-center mx-auto h-1/4">
+    <div className="flex flex-col h-screen ">
+      <main className="w-screen  mb-20 pt-4 mt-4 space-y-9 flex flex-col">
+        <section className=" w-10/12 flex items-center mx-auto md:h-1/4  ">
           <p className="text-center text-xl">
             <FormattedMessage
               {...messages.projectOverview}
@@ -27,16 +27,23 @@ export function About() {
           </p>
         </section>
         <hr className="w-full" />
-        <section className="flex space-x-40 justify-center w-full h-3/4">
-          <iframe
-            title="OSM Galaxy Slides"
-            src="https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/embed?start=false&loop=false&delayms=3000#slide=8"
-            allowFullScreen
-            className="w-4/12 h-full"
-            width="100%"
-            data-testid="slides-element"
-          ></iframe>
-          <div className="w-4/12">
+        <section className=" flex flex-col justify-between md:pl-10 md:pr-10 items-center md:items-start md:flex-row ">
+          <div
+            className="relative overflow-hidden w-full md:w-1/2"
+            style={{
+              paddingTop: "56.25%",
+              height: 0,
+            }}
+          >
+            <iframe
+              title="OSM Galaxy Slides"
+              src="https://docs.google.com/presentation/d/10MWGS3Uf3TL_iwrbjjFh1GJBloXlESxx9G4IH1NqJmo/embed?start=false&loop=false&delayms=3000#slide=8"
+              allowFullScreen
+              className="absolute top-0 bottom-0 left-0 right-0 w-full h-full md:h-1/2"
+              data-testid="slides-element"
+            ></iframe>
+          </div>
+          <div className="  md:w-4/12">
             <h5 className="text-center text-xl font-semibold p-0 mb-1">
               <FormattedMessage {...messages.resourcesHeading} />:
             </h5>
@@ -133,7 +140,7 @@ export function About() {
           </div>
         </section>
       </main>
-      <div className="p-2">
+      <div className=" bottom-2">
         <Footer />
       </div>
     </div>
