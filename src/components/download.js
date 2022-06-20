@@ -8,17 +8,25 @@ import { useDownloadFile } from "../hooks/useDownloadFile";
 import { FormContext } from "../context/formContext";
 import { MapathonReportCSVHeaders } from "./mapathon/constants";
 import { UserGroupReportCSVHeaders } from "./userGroup/constants";
+import { convertStringToArray } from "../utils/formatInputs";
 
-export const DownloadFileLink = ({ username, type, startDate, endDate }) => {
+export const DownloadFileLink = ({
+  username,
+  type,
+  startDate,
+  endDate,
+  hashtags,
+}) => {
   const fetchFile = () => {
     const body = {
       fromTimestamp: startDate,
       toTimestamp: endDate,
       osmUsernames: [username],
-      issueTypes: ["badgeom"],
+      issueTypes: ["all"],
       outputType: type,
+      hashtags: convertStringToArray(hashtags),
     };
-    return axios.post(`${API_URL}/data-quality/user-reports`, body);
+    return axios.post(`${API_URL}/data-quality/user-reports/`, body);
   };
 
   const getFileName = () => {
@@ -71,6 +79,7 @@ export const DownloadDataCell = ({ value, source }) => {
         type={"csv"}
         startDate={formData.startDate}
         endDate={formData.endDate}
+        hashtags={formData.mapathonHashtags}
       />
       /
       <DownloadFileLink
@@ -78,6 +87,7 @@ export const DownloadDataCell = ({ value, source }) => {
         type={"geojson"}
         startDate={formData.startDate}
         endDate={formData.endDate}
+        hashtags={formData.mapathonHashtags}
       />
     </>
   );
