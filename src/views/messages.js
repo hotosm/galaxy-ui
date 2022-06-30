@@ -55,9 +55,9 @@ export default defineMessages({
     id: "about.galaxy.resources.slideDeck",
     defaultMessage: "User Stories for Galaxy",
   },
-  osmStatsDoc: {
+  galaxyAPIDocs: {
     id: "about.galaxy.resources.slideDeck",
-    defaultMessage: "OSM Statistics API Access",
+    defaultMessage: "Galaxy API Access",
   },
   underpassOverview: {
     id: "about.galaxy.resources.underpass.overview",

@@ -69,11 +69,11 @@ export function About() {
                 </li>
                 <li className="document-link">
                   <a
-                    href="https://osm-stats.hotosm.org/docs"
+                    href="https://galaxy-api.hotosm.org/docs"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <FormattedMessage {...messages.osmStatsDoc} />
+                    <FormattedMessage {...messages.galaxyAPIDocs} />
                   </a>
                 </li>
                 <li className="document-link">
