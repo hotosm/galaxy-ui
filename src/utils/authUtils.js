@@ -10,12 +10,12 @@ function createPopup(title: string = "Authentication", location: string) {
 
 export const createLoginWindow = (redirectTo) => {
   const popup = createPopup("OSM Auth", "");
-  let url = `${API_URL}/auth/login`;
+  let url = `${API_URL}/auth/login/`;
   axios.get(url).then((response) => {
     popup.location = response.data.url;
 
     window.authComplete = (code) => {
-      let callbackUrl = `${API_URL}/auth/callback?code=${code}`;
+      let callbackUrl = `${API_URL}/auth/callback/?code=${code}`;
       axios.get(callbackUrl).then((res) => {
         const params = new URLSearchParams({
           access_token: res.data.access_token,

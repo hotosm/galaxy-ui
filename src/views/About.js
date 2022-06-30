@@ -69,11 +69,11 @@ export function About() {
                 </li>
                 <li className="document-link">
                   <a
-                    href="https://osm-stats.hotosm.org/docs"
+                    href="https://galaxy-api.hotosm.org/v1/docs"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <FormattedMessage {...messages.osmStatsDoc} />
+                    <FormattedMessage {...messages.galaxyAPIDocs} />
                   </a>
                 </li>
                 <li className="document-link">
@@ -121,7 +121,8 @@ export function About() {
                     <FormattedMessage {...messages.workingGroupRegistration} />
                   </a>
                 </li>
-                <li className="document-link">
+                {/* Removing the data download link till automatic dumps are worked on */}
+                {/* <li className="document-link">
                   <a
                     href="https://osm-stats.hotosm.org/data/download/galaxy"
                     target="_blank"
@@ -129,7 +130,7 @@ export function About() {
                   >
                     <FormattedMessage {...messages.osmStatsDownload} />
                   </a>
-                </li>
+                </li> */}
                 <li className="document-link">
                   <a href="h#" target="_blank" rel="noreferrer">
                     <FormattedMessage {...messages.galaxyFAQ} />
