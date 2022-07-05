@@ -5,7 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { ErrorBoundary } from "react-error-boundary";
+import * as Sentry from "@sentry/react";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { MATOMO_ID } from "./config";
 import { FormContextProvider } from "./context/formContext";
@@ -25,7 +25,7 @@ import { NotFoundPage } from "./views/NotFound";
 
 function App() {
   return (
-    <ErrorBoundary FallbackComponent={FallbackComponent}>
+    <Sentry.ErrorBoundary fallback={FallbackComponent}>
       <Router>
         <Header />
         <div>
@@ -52,7 +52,7 @@ function App() {
         </div>
       </Router>
       {MATOMO_ID && <TrackingBanner />}
-    </ErrorBoundary>
+    </Sentry.ErrorBoundary>
   );
 }
 
