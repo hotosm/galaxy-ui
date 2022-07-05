@@ -8,7 +8,6 @@ import { FormContext } from "../context/formContext";
 import { getUserIds, getUserStats } from "../queries/getUserStats";
 import { MiniNavBar } from "../components/nav/navbar";
 import { UserGroupColumnHeadings } from "../components/userGroup/constants";
-import { aggregateUserGroupData } from "../utils/userGroupUtils";
 import { SpinnerIcon } from "../assets/svgIcons";
 
 const userGroupPage = [
@@ -44,7 +43,7 @@ export const UserGroupReport = () => {
           .then((res) => {
             setUsers((oldUsersArray) => [
               ...oldUsersArray,
-              { ...i, stats: res },
+              { ...i, ...res[0] },
             ]);
           })
           .catch((error) => {
@@ -85,7 +84,7 @@ export const UserGroupReport = () => {
       {data && (
         <UserGroupResultsTable
           columns={UserGroupColumnHeadings}
-          data={aggregateUserGroupData(users)}
+          data={users}
           userDataCheck={userIds && userIds.length > 0}
           loading={userIds.length !== users.length}
         />
