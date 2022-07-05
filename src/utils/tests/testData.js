@@ -83,3 +83,20 @@ export const validMapathonDetailResponse2 = {
     },
   ],
 };
+
+export const validUserGroupData1 = [
+  {
+    userId: 1001,
+    username: "user1",
+    stats: [
+      {
+        addedBuildings: 1180,
+        modifiedBuildings: 0,
+        addedHighway: 16,
+        modifiedHighway: 11,
+        addedHighwayMeters: 35955.05053289406,
+        modifiedHighwayMeters: 42539.38543911992,
+      },
+    ],
+  },
+];

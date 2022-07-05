@@ -20,7 +20,7 @@ export const UserGroupColumnHeadings = [
     },
   },
   {
-    accessor: "createdBuildings",
+    accessor: "addedBuildings",
     Header: <FormattedMessage {...messages.CreatedBuildings} />,
   },
   {
@@ -28,11 +28,11 @@ export const UserGroupColumnHeadings = [
     Header: <FormattedMessage {...messages.ModifiedBuildings} />,
   },
   {
-    accessor: "createdHighways",
+    accessor: "addedHighway",
     Header: <FormattedMessage {...messages.CreatedHighways} />,
   },
   {
-    accessor: "modifiedHighways",
+    accessor: "modifiedHighway",
     Header: <FormattedMessage {...messages.ModifiedHighways} />,
   },
   {
@@ -53,7 +53,7 @@ export const UserGroupReportCSVHeaders = [
     label: "Mapper",
   },
   {
-    key: "createdBuildings",
+    key: "addedBuildings",
     label: "Created Buildings",
   },
   {
@@ -61,11 +61,11 @@ export const UserGroupReportCSVHeaders = [
     label: "Modified Buildings",
   },
   {
-    key: "createdHighways",
-    label: "Added Highways",
+    key: "addedHighway",
+    label: "Created Highways",
   },
   {
-    key: "modifiedHighways",
+    key: "modifiedHighway",
     label: "Modified Highways",
   },
 ];

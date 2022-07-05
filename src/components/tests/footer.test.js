@@ -6,7 +6,7 @@ import { Footer } from "../footer";
 afterEach(cleanup);
 
 it("Footer component", () => {
-  const { getByText, debug } = render(
+  const { getByText } = render(
     <IntlProviders>
       <Footer />
     </IntlProviders>
