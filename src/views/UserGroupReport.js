@@ -22,7 +22,8 @@ export const UserGroupReport = () => {
   const [formError, setFormError] = useState(null);
   const [userIds, setUserIds] = useState([]);
   const [users, setUsers] = useState();
-  const [lastUpdateTime, setLastUpdateTime] = useState(null);
+  const [userStatsUpdateTime, setUserStatsUpdateTime] = useState(null);
+  const [dataQualityUpdateTime, setDataQualityUpdateTime] = useState(null);
 
   const { mutate, data, isLoading, error } = useMutation(getUserIds);
 
@@ -65,12 +66,20 @@ export const UserGroupReport = () => {
   useEffect(() => {
     if (userIds) {
       fetchUserStats(userIds);
-      const params = {
+
+      const userStatsParams = {
         source: "insight",
         output: "user_statistics",
       };
-      getDataRecency(params).then((res) => {
-        setLastUpdateTime(res["time_difference"]);
+      const dataQualityParams = {
+        source: "underpass",
+        output: "data_quality",
+      };
+      getDataRecency(userStatsParams).then((res) => {
+        setUserStatsUpdateTime(res["time_difference"]);
+      });
+      getDataRecency(dataQualityParams).then((res) => {
+        setDataQualityUpdateTime(res["time_difference"]);
       });
     }
   }, [userIds]);
@@ -98,7 +107,8 @@ export const UserGroupReport = () => {
           data={aggregateUserGroupData(users)}
           userDataCheck={userIds && userIds.length > 0}
           loading={userIds.length !== users.length}
-          lastUpdateTime={formatDurationOutput(lastUpdateTime)}
+          userStatsUpdateTime={formatDurationOutput(userStatsUpdateTime)}
+          dataQualityUpdateTime={formatDurationOutput(dataQualityUpdateTime)}
         />
       )}
     </div>

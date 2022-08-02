@@ -66,7 +66,8 @@ export const MapathonSummaryReport = (props) => {
 };
 
 export const MapathonDetailedReport = () => {
-  const [lastUpdateTime, setLastUpdateTime] = useState(null);
+  const [mapathonUpdateTime, setMapathonUpdateTime] = useState(null);
+  const [dataQualityUpdateTime, setDataQualityUpdateTime] = useState(null);
   const { mutate, data, isLoading, error } = useMutation(
     getMapathonDetailedReport,
     {}
@@ -75,12 +76,19 @@ export const MapathonDetailedReport = () => {
 
   useEffect(() => {
     if (data) {
-      const params = {
+      const mapathonParams = {
         source: "insight",
         output: "mapathon_statistics",
       };
-      getDataRecency(params).then((res) => {
-        setLastUpdateTime(res["time_difference"]);
+      const dataQualityParams = {
+        source: "underpass",
+        output: "data_quality",
+      };
+      getDataRecency(mapathonParams).then((res) => {
+        setMapathonUpdateTime(res["time_difference"]);
+      });
+      getDataRecency(dataQualityParams).then((res) => {
+        setDataQualityUpdateTime(res["time_difference"]);
       });
     }
   }, [data]);
@@ -109,7 +117,8 @@ export const MapathonDetailedReport = () => {
         <MapathonDetailedResultsTable
           data={aggregateMapathonUserData(data)}
           columns={MapathonDetailedTableHeaders}
-          lastUpdateTime={formatDurationOutput(lastUpdateTime)}
+          mapathonUpdateTime={formatDurationOutput(mapathonUpdateTime)}
+          dataQualityUpdateTime={formatDurationOutput(dataQualityUpdateTime)}
         />
       )}
     </div>
