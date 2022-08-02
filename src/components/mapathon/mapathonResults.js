@@ -13,6 +13,7 @@ import {
 } from "../../assets/svgIcons";
 import { DownloadCSVButton } from "../download";
 import { Tooltip } from "../tooltip";
+import { InfoCard } from "../card";
 
 const FeatureList = ({ title, features }) => {
   return (
@@ -68,7 +69,11 @@ export const MapathonSummaryResults = ({ data }) => {
   );
 };
 
-export function MapathonDetailedResultsTable({ columns, data }) {
+export function MapathonDetailedResultsTable({
+  columns,
+  data,
+  lastUpdateTime,
+}) {
   const intl = useIntl();
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -89,7 +94,10 @@ export function MapathonDetailedResultsTable({ columns, data }) {
             <MapathonErrorMessage error={downloadError} />
           </Error>
         )}
-        <DownloadCSVButton data={data} source={"mapathon"} />
+        <div className="flex justify-between">
+          <InfoCard info={lastUpdateTime} styles={"m-4"} />
+          <DownloadCSVButton data={data} source={"mapathon"} />
+        </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">

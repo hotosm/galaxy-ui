@@ -8,3 +8,22 @@ export const getTimeZone = (date) => {
 
   return `UTC${symbol}${hours}:${minutes}`;
 };
+
+const convertToSeconds = (time) => {
+  if (!time) return null;
+  const [hours, minutes, seconds] = time.split(":");
+  const secondsInHour = 60 * 60;
+  const secondsInMinute = 60;
+  const totalSeconds =
+    +hours * secondsInHour + +minutes * secondsInMinute + +seconds;
+  return totalSeconds;
+};
+
+export const formatDurationOutput = (time) => {
+  const timeInSeconds = convertToSeconds(time);
+  if (timeInSeconds > 0) {
+    return `${Number(timeInSeconds).toFixed(2)} seconds ago`;
+  } else {
+    return "less than a second ago";
+  }
+};

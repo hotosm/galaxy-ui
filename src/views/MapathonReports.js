@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "react-query";
 import { MapathonReportForm } from "../components/mapathon/mapathonReportForm";
@@ -16,6 +17,8 @@ import { MiniNavBar } from "../components/nav/navbar";
 import { aggregateMapathonUserData } from "../utils/mapathonDataUtils";
 import { MapathonDetailedTableHeaders } from "../components/mapathon/constants";
 import { SpinnerIcon } from "../assets/svgIcons";
+import { getDataRecency } from "../queries/getDataRecency";
+import { formatDurationOutput } from "../utils/timeUtils";
 
 const MAPATHON_PAGES = [
   { pageTitle: "Mapathon Summary Report", pageURL: "/mapathon-report/summary" },
@@ -63,11 +66,24 @@ export const MapathonSummaryReport = (props) => {
 };
 
 export const MapathonDetailedReport = () => {
+  const [lastUpdateTime, setLastUpdateTime] = useState(null);
   const { mutate, data, isLoading, error } = useMutation(
     getMapathonDetailedReport,
     {}
   );
   const triggeredLoading = useSelector((state) => state.mapathon.isLoading);
+
+  useEffect(() => {
+    if (data) {
+      const params = {
+        source: "insight",
+        output: "mapathon_statistics",
+      };
+      getDataRecency(params).then((res) => {
+        setLastUpdateTime(res["time_difference"]);
+      });
+    }
+  }, [data]);
 
   return (
     <div>
@@ -93,6 +109,7 @@ export const MapathonDetailedReport = () => {
         <MapathonDetailedResultsTable
           data={aggregateMapathonUserData(data)}
           columns={MapathonDetailedTableHeaders}
+          lastUpdateTime={formatDurationOutput(lastUpdateTime)}
         />
       )}
     </div>

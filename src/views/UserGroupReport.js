@@ -10,6 +10,8 @@ import { MiniNavBar } from "../components/nav/navbar";
 import { UserGroupColumnHeadings } from "../components/userGroup/constants";
 import { aggregateUserGroupData } from "../utils/userGroupUtils";
 import { SpinnerIcon } from "../assets/svgIcons";
+import { getDataRecency } from "../queries/getDataRecency";
+import { formatDurationOutput } from "../utils/timeUtils";
 
 const userGroupPage = [
   { pageTitle: "User Group Report", pageURL: "/user-report" },
@@ -20,6 +22,7 @@ export const UserGroupReport = () => {
   const [formError, setFormError] = useState(null);
   const [userIds, setUserIds] = useState([]);
   const [users, setUsers] = useState();
+  const [lastUpdateTime, setLastUpdateTime] = useState(null);
 
   const { mutate, data, isLoading, error } = useMutation(getUserIds);
 
@@ -62,6 +65,13 @@ export const UserGroupReport = () => {
   useEffect(() => {
     if (userIds) {
       fetchUserStats(userIds);
+      const params = {
+        source: "insight",
+        output: "user_statistics",
+      };
+      getDataRecency(params).then((res) => {
+        setLastUpdateTime(res["time_difference"]);
+      });
     }
   }, [userIds]);
 
@@ -88,6 +98,7 @@ export const UserGroupReport = () => {
           data={aggregateUserGroupData(users)}
           userDataCheck={userIds && userIds.length > 0}
           loading={userIds.length !== users.length}
+          lastUpdateTime={formatDurationOutput(lastUpdateTime)}
         />
       )}
     </div>

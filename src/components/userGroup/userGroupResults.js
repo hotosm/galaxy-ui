@@ -13,6 +13,7 @@ import {
   SpinnerIcon,
 } from "../../assets/svgIcons";
 import { DownloadCSVButton } from "../download";
+import { InfoCard } from "../card";
 import "react-placeholder/lib/reactPlaceholder.css";
 
 export function UserGroupResultsTable({
@@ -20,6 +21,7 @@ export function UserGroupResultsTable({
   data,
   userDataCheck,
   loading,
+  lastUpdateTime,
 }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -48,7 +50,8 @@ export function UserGroupResultsTable({
             rows={8}
             className="mt-20 mx-4"
           >
-            <div className="w-11/12 mx-auto">
+            <div className="w-11/12 mx-auto flex justify-between">
+              <InfoCard info={lastUpdateTime} styles={"my-4"} />
               <DownloadCSVButton data={data} source={"userGroup"} />
             </div>
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
