@@ -69,7 +69,7 @@ export function About() {
                 </li>
                 <li className="document-link">
                   <a
-                    href="https://galaxy-api.hotosm.org/v1/docs"
+                    href="https://galaxy-api.hotosm.org/v1/redoc"
                     target="_blank"
                     rel="noreferrer"
                   >
