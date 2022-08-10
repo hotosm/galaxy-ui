@@ -9,7 +9,7 @@ export const getUserIds = async (requestData) => {
     fromTimestamp: startDate.toISOString(),
     toTimestamp: endDate.toISOString(),
   };
-  const { data } = await axios.post(`${API_URL}/osm-users/ids`, userBody);
+  const { data } = await axios.post(`${API_URL}/osm-users/ids/`, userBody);
   return data;
 };
 
@@ -22,6 +22,6 @@ export const getUserStats = async (id, requestData) => {
     projectIds: [],
     hashtags: convertStringToArray(mapathonHashtags),
   };
-  const { data } = await axios.post(`${API_URL}/osm-users/statistics`, body);
+  const { data } = await axios.post(`${API_URL}/osm-users/statistics/`, body);
   return data;
 };

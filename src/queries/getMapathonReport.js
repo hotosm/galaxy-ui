@@ -20,7 +20,7 @@ const formatMapathonRequestData = (requestData) => {
 export const getMapathonSummaryReport = async (requestData) => {
   let body = formatMapathonRequestData(requestData);
 
-  const { data } = await axios.post(`${API_URL}/mapathon/summary`, body);
+  const { data } = await axios.post(`${API_URL}/mapathon/summary/`, body);
   return data;
 };
 
@@ -33,6 +33,10 @@ export const getMapathonDetailedReport = async (requestData) => {
   };
   let body = formatMapathonRequestData(requestData);
 
-  const { data } = await axios.post(`${API_URL}/mapathon/detail`, body, config);
+  const { data } = await axios.post(
+    `${API_URL}/mapathon/detail/`,
+    body,
+    config
+  );
   return data;
 };
