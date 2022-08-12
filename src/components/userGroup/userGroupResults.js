@@ -19,7 +19,7 @@ export function UserGroupResultsTable({
   columns,
   data,
   userDataCheck,
-  loading,
+  tableLoading,
 }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -104,7 +104,7 @@ export function UserGroupResultsTable({
                     })}
                   </tbody>
                 </table>
-                {loading ? (
+                {tableLoading ? (
                   <div className="text-center w-11/12 mx-auto">
                     <SpinnerIcon className="animate-spin w-5 h-5 mt-2 inline text-red" />
                   </div>

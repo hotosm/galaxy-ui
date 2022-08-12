@@ -15,7 +15,6 @@ import { setTriggerSubmit } from "../features/form/formSlice";
 import { MiniNavBar } from "../components/nav/navbar";
 import { aggregateMapathonUserData } from "../utils/mapathonDataUtils";
 import { MapathonDetailedTableHeaders } from "../components/mapathon/constants";
-import { SpinnerIcon } from "../assets/svgIcons";
 
 const MAPATHON_PAGES = [
   { pageTitle: "Mapathon Summary Report", pageURL: "/mapathon-report/summary" },
@@ -51,12 +50,6 @@ export const MapathonSummaryReport = (props) => {
       <div className="text-center mt-4">
         <MapathonRedirectButton triggerFn={triggeredSubmit} />
       </div>
-      {isLoading && (
-        <div className="mx-auto text-center w-1/4 p-1 mt-5">
-          <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
-          Loading...
-        </div>
-      )}
       {data && <MapathonSummaryResults data={data} />}
     </div>
   );
@@ -83,12 +76,6 @@ export const MapathonDetailedReport = () => {
         fetch={mutate}
         loading={isLoading || triggeredLoading}
       />
-      {(isLoading || triggeredLoading) && (
-        <div className="mx-auto text-center w-1/4 p-1 mt-5">
-          <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
-          Loading...
-        </div>
-      )}
       {data && (
         <MapathonDetailedResultsTable
           data={aggregateMapathonUserData(data)}
