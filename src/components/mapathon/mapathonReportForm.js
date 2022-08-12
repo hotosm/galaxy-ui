@@ -12,6 +12,7 @@ import { setLoading, setTriggerSubmit } from "../../features/form/formSlice";
 import { FormContext } from "../../context/formContext";
 import { getTimeZone } from "../../utils/timeUtils";
 import { validateMapathonFormData } from "../../utils/validationUtils";
+import { SpinnerIcon } from "../../assets/svgIcons";
 import messages from "../messages";
 
 export const MapathonReportForm = ({ fetch, error, loading }) => {
@@ -172,14 +173,22 @@ export const MapathonReportForm = ({ fetch, error, loading }) => {
             />
           </div>
         </div>
-        <div className="text-center mt-4">
-          <SubmitButton
-            styles="bg-red text-white py-3 px-10 text-xl"
-            disabled={loading}
-          >
-            <FormattedMessage {...messages.mapathonSubmitForm} />
-          </SubmitButton>
-        </div>
+        {!loading && (
+          <div className="text-center mt-4">
+            <SubmitButton
+              styles="bg-red text-white py-3 px-10 text-xl"
+              disabled={loading}
+            >
+              <FormattedMessage {...messages.mapathonSubmitForm} />
+            </SubmitButton>
+          </div>
+        )}
+        {loading && (
+          <div className="mx-auto text-center w-1/4 p-1 mt-5">
+            <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
+            Loading...
+          </div>
+        )}
       </form>
       {formError && (
         <Error>

@@ -7,6 +7,7 @@ import { SubmitButton } from "../button";
 import { Error } from "../formResponses";
 import { UserGroupErrorMessage } from "./userGroupError";
 import { getTimeZone } from "../../utils/timeUtils";
+import { SpinnerIcon } from "../../assets/svgIcons";
 import messages from "./messages";
 
 export const UserGroupReportForm = ({
@@ -16,6 +17,8 @@ export const UserGroupReportForm = ({
   setUsers,
   formError,
   setFormError,
+  setLoading,
+  loading,
 }) => {
   const intl = useIntl();
 
@@ -34,6 +37,7 @@ export const UserGroupReportForm = ({
     event.preventDefault();
     if (formData.usernames.length > 0) {
       setUsers([]);
+      setLoading(true);
       fetch(formData); // API call
       setFormError(null);
     } else {
@@ -124,11 +128,19 @@ export const UserGroupReportForm = ({
             />
           </div>
         </div>
-        <div className="text-center mt-4">
-          <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
-            <FormattedMessage {...messages.Submit} />
-          </SubmitButton>
-        </div>
+        {!loading && (
+          <div className="text-center mt-4">
+            <SubmitButton styles="bg-red text-white py-3 px-10 text-xl">
+              <FormattedMessage {...messages.Submit} />
+            </SubmitButton>
+          </div>
+        )}
+        {loading && (
+          <div className="mx-auto text-center w-1/4 p-1 mt-5">
+            <SpinnerIcon className="animate-spin w-5 h-5 mr-2 mb-1 inline text-red" />
+            Loading...
+          </div>
+        )}
       </form>
       {formError && (
         <Error>
