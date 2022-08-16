@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useTable, useSortBy } from "react-table";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import ReactPlaceholder from "react-placeholder";
 import messages from "./messages";
 import { Error } from "../formResponses";
@@ -13,6 +13,9 @@ import {
   SpinnerIcon,
 } from "../../assets/svgIcons";
 import { DownloadCSVButton } from "../download";
+import { InfoCard } from "../card";
+import { InfoIcon } from "../../assets/svgIcons/info";
+import { Tooltip } from "../tooltip";
 import "react-placeholder/lib/reactPlaceholder.css";
 
 export function UserGroupResultsTable({
@@ -20,6 +23,8 @@ export function UserGroupResultsTable({
   data,
   userDataCheck,
   loading,
+  userStatsUpdateTime,
+  dataQualityUpdateTime,
 }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -29,7 +34,7 @@ export function UserGroupResultsTable({
       },
       useSortBy
     );
-
+  const intl = useIntl();
   const downloadError = useSelector((state) => state.mapathon.downloadError);
 
   if (userDataCheck) {
@@ -48,7 +53,8 @@ export function UserGroupResultsTable({
             rows={8}
             className="mt-20 mx-4"
           >
-            <div className="w-11/12 mx-auto">
+            <div className="w-11/12 mx-auto flex justify-between">
+              <InfoCard info={userStatsUpdateTime} styles={"my-4"} />
               <DownloadCSVButton data={data} source={"userGroup"} />
             </div>
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -68,6 +74,19 @@ export function UserGroupResultsTable({
                           >
                             <span className="inline ">
                               {column.render("Header")} &nbsp;
+                              {column.id === "userId" ? (
+                                <Tooltip
+                                  position={"top center"}
+                                  content={intl.formatMessage(
+                                    messages.dataQualityTooltip,
+                                    { dataQualityUpdateTime }
+                                  )}
+                                >
+                                  <InfoIcon className="w-3 h-3 text-red" />
+                                </Tooltip>
+                              ) : (
+                                ""
+                              )}
                               {column.canSort &&
                                 (column.isSorted ? (
                                   column.isSortedDesc ? (

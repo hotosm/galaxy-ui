@@ -13,6 +13,8 @@ import {
 } from "../../assets/svgIcons";
 import { DownloadCSVButton } from "../download";
 import { Tooltip } from "../tooltip";
+import { InfoCard } from "../card";
+import { InfoIcon } from "../../assets/svgIcons/info";
 
 const FeatureList = ({ title, features }) => {
   return (
@@ -68,7 +70,12 @@ export const MapathonSummaryResults = ({ data }) => {
   );
 };
 
-export function MapathonDetailedResultsTable({ columns, data }) {
+export function MapathonDetailedResultsTable({
+  columns,
+  data,
+  mapathonUpdateTime,
+  dataQualityUpdateTime,
+}) {
   const intl = useIntl();
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -89,7 +96,10 @@ export function MapathonDetailedResultsTable({ columns, data }) {
             <MapathonErrorMessage error={downloadError} />
           </Error>
         )}
-        <DownloadCSVButton data={data} source={"mapathon"} />
+        <div className="flex justify-between">
+          <InfoCard info={mapathonUpdateTime} styles={"m-4"} />
+          <DownloadCSVButton data={data} source={"mapathon"} />
+        </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -104,6 +114,7 @@ export function MapathonDetailedResultsTable({ columns, data }) {
                           "timeSpentValidating",
                           "validatedTasks",
                           "mappedTasks",
+                          "userId",
                         ];
                         let showTooltip = tooltipKeys.includes(column.id);
                         return (
@@ -119,11 +130,22 @@ export function MapathonDetailedResultsTable({ columns, data }) {
                               {showTooltip ? (
                                 <Tooltip
                                   position={"top center"}
-                                  content={intl.formatMessage(
-                                    messages.mapathonTooltip
-                                  )}
+                                  content={
+                                    column.id === "userId"
+                                      ? intl.formatMessage(
+                                          messages.dataQualityTooltip,
+                                          { dataQualityUpdateTime }
+                                        )
+                                      : intl.formatMessage(
+                                          messages.mapathonTooltip
+                                        )
+                                  }
                                 >
-                                  <QuestionIcon className="w-3 h-3 text-red" />
+                                  {column.id === "userId" ? (
+                                    <InfoIcon className="w-3 h-3 text-red" />
+                                  ) : (
+                                    <QuestionIcon className="w-3 h-3 text-red" />
+                                  )}
                                 </Tooltip>
                               ) : (
                                 ""

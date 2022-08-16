@@ -197,6 +197,10 @@ export default defineMessages({
     defaultMessage:
       "The following statistics: tasks mapped, tasks validated, time spent mapping, and time spent validating are derived using either Tasking Manager project ids or Tasking Manager specific hashtags, e.g. hotosm-project-1.",
   },
+  dataQualityTooltip: {
+    id: "reports.data_quality.tooltip",
+    defaultMessage: "This data was last updated {dataQualityUpdateTime}.",
+  },
   footerOrganisation: {
     id: "about.footer.organisation",
     defaultMessage: "This project is under development by {OrganisationLink}.",

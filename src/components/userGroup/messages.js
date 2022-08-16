@@ -62,6 +62,10 @@ export default defineMessages({
     id: "reports.user.group.table.column.dataQualityIssues",
     defaultMessage: "Data Quality Issues",
   },
+  dataQualityTooltip: {
+    id: "reports.data_quality.tooltip",
+    defaultMessage: "This data was last updated {dataQualityUpdateTime}.",
+  },
   noDataFound: {
     id: "reports.user.group.results.no.data",
     defaultMessage: "No Data Found!",
