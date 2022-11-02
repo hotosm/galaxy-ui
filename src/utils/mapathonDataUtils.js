@@ -14,6 +14,7 @@ const filterTMStatsById = (arr, id) => {
 
 export const aggregateMapathonUserData = (obj) => {
   const arr = [];
+  if (obj === undefined || !Object.keys(obj).length) return;
   let tasksMappedStats = obj.tmStats[0]["tasksMapped"];
   let tasksValidatedStats = obj.tmStats[0]["tasksValidated"];
   let timeSpentMappingStats = obj.tmStats[0]["timeSpentMapping"];

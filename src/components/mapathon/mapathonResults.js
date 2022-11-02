@@ -16,7 +16,7 @@ import { Tooltip } from "../tooltip";
 import { InfoCard } from "../card";
 import { InfoIcon } from "../../assets/svgIcons/info";
 
-const FeatureList = ({ title, features }) => {
+export const FeatureList = ({ title, features }) => {
   return (
     <div className="w-auto">
       <h2 className="text-2xl py-2 font-bold">{title}:</h2>
